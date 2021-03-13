@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-enum RThemes { light, dark }
+enum FFThemes { light, dark }
 
-ThemeData rTheme(RThemes themeType) {
+ThemeData ffTheme(FFThemes themeType) {
   switch (themeType) {
-    case (RThemes.light):
+    case (FFThemes.light):
       return ThemeData.light();
-    case (RThemes.dark):
+    case (FFThemes.dark):
       return ThemeData(
         cardColor: const Color(0xff2e3035),
         textTheme: Typography.whiteCupertino.copyWith(

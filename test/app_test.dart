@@ -6,7 +6,7 @@
 // https://opensource.org/licenses/MIT.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rowdy/app/app.dart';
+import 'package:rowdy/app.dart';
 import 'package:rowdy/counter/counter.dart';
 
 void main() {
