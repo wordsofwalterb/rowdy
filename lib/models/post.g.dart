@@ -6,8 +6,8 @@ part of 'post.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Post _$_$_PostFromJson(Map<String, dynamic> json) {
-  return _$_Post(
+_$_FFPost _$_$_FFPostFromJson(Map<String, dynamic> json) {
+  return _$_FFPost(
     id: json['id'] as String,
     authorId: json['authorId'] as String,
     authorName: json['authorName'] as String,
@@ -20,7 +20,7 @@ _$_Post _$_$_PostFromJson(Map<String, dynamic> json) {
             ?.map((e) => e as String)
             .toList() ??
         [],
-    avatarUrl: json['avatarUrl'] as String?,
+    authorAvatarUrl: json['authorAvatarUrl'] as String,
     likedBy:
         (json['likedBy'] as List<dynamic>?)?.map((e) => e as String).toList() ??
             [],
@@ -30,14 +30,14 @@ _$_Post _$_$_PostFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$_PostToJson(_$_Post instance) => <String, dynamic>{
+Map<String, dynamic> _$_$_FFPostToJson(_$_FFPost instance) => <String, dynamic>{
       'id': instance.id,
       'authorId': instance.authorId,
       'authorName': instance.authorName,
       'postTime': instance.postTime.toIso8601String(),
       'imageUrls': instance.imageUrls,
       'unlikedBy': instance.unlikedBy,
-      'avatarUrl': instance.avatarUrl,
+      'authorAvatarUrl': instance.authorAvatarUrl,
       'likedBy': instance.likedBy,
       'body': instance.body,
       'commentCount': instance.commentCount,

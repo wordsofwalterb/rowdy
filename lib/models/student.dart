@@ -7,7 +7,7 @@ part 'student.freezed.dart';
 part 'student.g.dart';
 
 @freezed
-class Student with _$Student {
+class FFStudent with _$FFStudent {
   /// Creates an object representing public information about
   /// a student user.
   ///
@@ -15,7 +15,7 @@ class Student with _$Student {
   /// it will be available if app is compromised hence public.
   ///
   /// [fullName] and [id] are required and must not be null
-  const factory Student({
+  const factory FFStudent({
     required String id,
     required String fullName,
     required String firstName,
@@ -31,6 +31,6 @@ class Student with _$Student {
   }) = _Student;
 
   /// Converts a map of items with same variable name (key) and type for value
-  factory Student.fromJson(Map<String, dynamic> json) =>
-      _$StudentFromJson(json);
+  factory FFStudent.fromJson(Map<String, dynamic> json) =>
+      _$FFStudentFromJson(json);
 }

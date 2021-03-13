@@ -6,8 +6,8 @@ part 'post.freezed.dart';
 part 'post.g.dart';
 
 @freezed
-class Post with _$Post {
-  const factory Post({
+class FFPost with _$FFPost {
+  const factory FFPost({
     /// ID is generated from Firebase UID
     required String id,
 
@@ -27,7 +27,7 @@ class Post with _$Post {
     /// Once added an ID isn't removed.
     /// It is here so double likes don't send two notications.
     @Default([]) List<String> unlikedBy,
-    String? avatarUrl,
+    required String authorAvatarUrl,
 
     /// Id's of those who liked post
     @Default([]) List<String> likedBy,
@@ -40,8 +40,8 @@ class Post with _$Post {
 
     /// Used to track number of likes
     @Default(0) int likeCount,
-  }) = _Post;
+  }) = _FFPost;
 
   /// Converts a map of items with same variable name (key) and type for value
-  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+  factory FFPost.fromJson(Map<String, dynamic> json) => _$FFPostFromJson(json);
 }

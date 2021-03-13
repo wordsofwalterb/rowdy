@@ -12,34 +12,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Post _$PostFromJson(Map<String, dynamic> json) {
-  return _Post.fromJson(json);
+FFPost _$FFPostFromJson(Map<String, dynamic> json) {
+  return _FFPost.fromJson(json);
 }
 
 /// @nodoc
-class _$PostTearOff {
-  const _$PostTearOff();
+class _$FFPostTearOff {
+  const _$FFPostTearOff();
 
-  _Post call(
+  _FFPost call(
       {required String id,
       required String authorId,
       required String authorName,
       required DateTime postTime,
       List<String> imageUrls = const [],
       List<String> unlikedBy = const [],
-      String? avatarUrl,
+      required String authorAvatarUrl,
       List<String> likedBy = const [],
       String? body,
       int commentCount = 0,
       int likeCount = 0}) {
-    return _Post(
+    return _FFPost(
       id: id,
       authorId: authorId,
       authorName: authorName,
       postTime: postTime,
       imageUrls: imageUrls,
       unlikedBy: unlikedBy,
-      avatarUrl: avatarUrl,
+      authorAvatarUrl: authorAvatarUrl,
       likedBy: likedBy,
       body: body,
       commentCount: commentCount,
@@ -47,16 +47,16 @@ class _$PostTearOff {
     );
   }
 
-  Post fromJson(Map<String, Object> json) {
-    return Post.fromJson(json);
+  FFPost fromJson(Map<String, Object> json) {
+    return FFPost.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Post = _$PostTearOff();
+const $FFPost = _$FFPostTearOff();
 
 /// @nodoc
-mixin _$Post {
+mixin _$FFPost {
   /// ID is generated from Firebase UID
   String get id => throw _privateConstructorUsedError;
 
@@ -70,15 +70,13 @@ mixin _$Post {
   DateTime get postTime => throw _privateConstructorUsedError;
 
   /// Url to an image, if the post has an image.
-  /// TODO: Should be converted to List<String> to
-  /// support multiple images?
   List<String> get imageUrls => throw _privateConstructorUsedError;
 
   /// ID's of those who have liked the post then disliked.
   /// Once added an ID isn't removed.
   /// It is here so double likes don't send two notications.
   List<String> get unlikedBy => throw _privateConstructorUsedError;
-  String? get avatarUrl => throw _privateConstructorUsedError;
+  String get authorAvatarUrl => throw _privateConstructorUsedError;
 
   /// Id's of those who liked post
   List<String> get likedBy => throw _privateConstructorUsedError;
@@ -94,13 +92,13 @@ mixin _$Post {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
+  $FFPostCopyWith<FFPost> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PostCopyWith<$Res> {
-  factory $PostCopyWith(Post value, $Res Function(Post) then) =
-      _$PostCopyWithImpl<$Res>;
+abstract class $FFPostCopyWith<$Res> {
+  factory $FFPostCopyWith(FFPost value, $Res Function(FFPost) then) =
+      _$FFPostCopyWithImpl<$Res>;
   $Res call(
       {String id,
       String authorId,
@@ -108,7 +106,7 @@ abstract class $PostCopyWith<$Res> {
       DateTime postTime,
       List<String> imageUrls,
       List<String> unlikedBy,
-      String? avatarUrl,
+      String authorAvatarUrl,
       List<String> likedBy,
       String? body,
       int commentCount,
@@ -116,12 +114,12 @@ abstract class $PostCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
-  _$PostCopyWithImpl(this._value, this._then);
+class _$FFPostCopyWithImpl<$Res> implements $FFPostCopyWith<$Res> {
+  _$FFPostCopyWithImpl(this._value, this._then);
 
-  final Post _value;
+  final FFPost _value;
   // ignore: unused_field
-  final $Res Function(Post) _then;
+  final $Res Function(FFPost) _then;
 
   @override
   $Res call({
@@ -131,7 +129,7 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
     Object? postTime = freezed,
     Object? imageUrls = freezed,
     Object? unlikedBy = freezed,
-    Object? avatarUrl = freezed,
+    Object? authorAvatarUrl = freezed,
     Object? likedBy = freezed,
     Object? body = freezed,
     Object? commentCount = freezed,
@@ -162,10 +160,10 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
           ? _value.unlikedBy
           : unlikedBy // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      avatarUrl: avatarUrl == freezed
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+      authorAvatarUrl: authorAvatarUrl == freezed
+          ? _value.authorAvatarUrl
+          : authorAvatarUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       likedBy: likedBy == freezed
           ? _value.likedBy
           : likedBy // ignore: cast_nullable_to_non_nullable
@@ -187,9 +185,9 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
-  factory _$PostCopyWith(_Post value, $Res Function(_Post) then) =
-      __$PostCopyWithImpl<$Res>;
+abstract class _$FFPostCopyWith<$Res> implements $FFPostCopyWith<$Res> {
+  factory _$FFPostCopyWith(_FFPost value, $Res Function(_FFPost) then) =
+      __$FFPostCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -198,7 +196,7 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       DateTime postTime,
       List<String> imageUrls,
       List<String> unlikedBy,
-      String? avatarUrl,
+      String authorAvatarUrl,
       List<String> likedBy,
       String? body,
       int commentCount,
@@ -206,13 +204,13 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
-    implements _$PostCopyWith<$Res> {
-  __$PostCopyWithImpl(_Post _value, $Res Function(_Post) _then)
-      : super(_value, (v) => _then(v as _Post));
+class __$FFPostCopyWithImpl<$Res> extends _$FFPostCopyWithImpl<$Res>
+    implements _$FFPostCopyWith<$Res> {
+  __$FFPostCopyWithImpl(_FFPost _value, $Res Function(_FFPost) _then)
+      : super(_value, (v) => _then(v as _FFPost));
 
   @override
-  _Post get _value => super._value as _Post;
+  _FFPost get _value => super._value as _FFPost;
 
   @override
   $Res call({
@@ -222,13 +220,13 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
     Object? postTime = freezed,
     Object? imageUrls = freezed,
     Object? unlikedBy = freezed,
-    Object? avatarUrl = freezed,
+    Object? authorAvatarUrl = freezed,
     Object? likedBy = freezed,
     Object? body = freezed,
     Object? commentCount = freezed,
     Object? likeCount = freezed,
   }) {
-    return _then(_Post(
+    return _then(_FFPost(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -253,10 +251,10 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
           ? _value.unlikedBy
           : unlikedBy // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      avatarUrl: avatarUrl == freezed
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+      authorAvatarUrl: authorAvatarUrl == freezed
+          ? _value.authorAvatarUrl
+          : authorAvatarUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       likedBy: likedBy == freezed
           ? _value.likedBy
           : likedBy // ignore: cast_nullable_to_non_nullable
@@ -280,22 +278,22 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_Post with DiagnosticableTreeMixin implements _Post {
-  const _$_Post(
+class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
+  const _$_FFPost(
       {required this.id,
       required this.authorId,
       required this.authorName,
       required this.postTime,
       this.imageUrls = const [],
       this.unlikedBy = const [],
-      this.avatarUrl,
+      required this.authorAvatarUrl,
       this.likedBy = const [],
       this.body,
       this.commentCount = 0,
       this.likeCount = 0});
 
-  factory _$_Post.fromJson(Map<String, dynamic> json) =>
-      _$_$_PostFromJson(json);
+  factory _$_FFPost.fromJson(Map<String, dynamic> json) =>
+      _$_$_FFPostFromJson(json);
 
   @override
 
@@ -317,8 +315,6 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   @override
 
   /// Url to an image, if the post has an image.
-  /// TODO: Should be converted to List<String> to
-  /// support multiple images?
   final List<String> imageUrls;
   @JsonKey(defaultValue: const [])
   @override
@@ -328,7 +324,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   /// It is here so double likes don't send two notications.
   final List<String> unlikedBy;
   @override
-  final String? avatarUrl;
+  final String authorAvatarUrl;
   @JsonKey(defaultValue: const [])
   @override
 
@@ -351,21 +347,21 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Post(id: $id, authorId: $authorId, authorName: $authorName, postTime: $postTime, imageUrls: $imageUrls, unlikedBy: $unlikedBy, avatarUrl: $avatarUrl, likedBy: $likedBy, body: $body, commentCount: $commentCount, likeCount: $likeCount)';
+    return 'FFPost(id: $id, authorId: $authorId, authorName: $authorName, postTime: $postTime, imageUrls: $imageUrls, unlikedBy: $unlikedBy, authorAvatarUrl: $authorAvatarUrl, likedBy: $likedBy, body: $body, commentCount: $commentCount, likeCount: $likeCount)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Post'))
+      ..add(DiagnosticsProperty('type', 'FFPost'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('authorId', authorId))
       ..add(DiagnosticsProperty('authorName', authorName))
       ..add(DiagnosticsProperty('postTime', postTime))
       ..add(DiagnosticsProperty('imageUrls', imageUrls))
       ..add(DiagnosticsProperty('unlikedBy', unlikedBy))
-      ..add(DiagnosticsProperty('avatarUrl', avatarUrl))
+      ..add(DiagnosticsProperty('authorAvatarUrl', authorAvatarUrl))
       ..add(DiagnosticsProperty('likedBy', likedBy))
       ..add(DiagnosticsProperty('body', body))
       ..add(DiagnosticsProperty('commentCount', commentCount))
@@ -375,7 +371,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Post &&
+        (other is _FFPost &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.authorId, authorId) ||
@@ -393,9 +389,9 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
             (identical(other.unlikedBy, unlikedBy) ||
                 const DeepCollectionEquality()
                     .equals(other.unlikedBy, unlikedBy)) &&
-            (identical(other.avatarUrl, avatarUrl) ||
+            (identical(other.authorAvatarUrl, authorAvatarUrl) ||
                 const DeepCollectionEquality()
-                    .equals(other.avatarUrl, avatarUrl)) &&
+                    .equals(other.authorAvatarUrl, authorAvatarUrl)) &&
             (identical(other.likedBy, likedBy) ||
                 const DeepCollectionEquality()
                     .equals(other.likedBy, likedBy)) &&
@@ -418,7 +414,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       const DeepCollectionEquality().hash(postTime) ^
       const DeepCollectionEquality().hash(imageUrls) ^
       const DeepCollectionEquality().hash(unlikedBy) ^
-      const DeepCollectionEquality().hash(avatarUrl) ^
+      const DeepCollectionEquality().hash(authorAvatarUrl) ^
       const DeepCollectionEquality().hash(likedBy) ^
       const DeepCollectionEquality().hash(body) ^
       const DeepCollectionEquality().hash(commentCount) ^
@@ -426,30 +422,30 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
 
   @JsonKey(ignore: true)
   @override
-  _$PostCopyWith<_Post> get copyWith =>
-      __$PostCopyWithImpl<_Post>(this, _$identity);
+  _$FFPostCopyWith<_FFPost> get copyWith =>
+      __$FFPostCopyWithImpl<_FFPost>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_PostToJson(this);
+    return _$_$_FFPostToJson(this);
   }
 }
 
-abstract class _Post implements Post {
-  const factory _Post(
+abstract class _FFPost implements FFPost {
+  const factory _FFPost(
       {required String id,
       required String authorId,
       required String authorName,
       required DateTime postTime,
       List<String> imageUrls,
       List<String> unlikedBy,
-      String? avatarUrl,
+      required String authorAvatarUrl,
       List<String> likedBy,
       String? body,
       int commentCount,
-      int likeCount}) = _$_Post;
+      int likeCount}) = _$_FFPost;
 
-  factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
+  factory _FFPost.fromJson(Map<String, dynamic> json) = _$_FFPost.fromJson;
 
   @override
 
@@ -470,8 +466,6 @@ abstract class _Post implements Post {
   @override
 
   /// Url to an image, if the post has an image.
-  /// TODO: Should be converted to List<String> to
-  /// support multiple images?
   List<String> get imageUrls => throw _privateConstructorUsedError;
   @override
 
@@ -480,7 +474,7 @@ abstract class _Post implements Post {
   /// It is here so double likes don't send two notications.
   List<String> get unlikedBy => throw _privateConstructorUsedError;
   @override
-  String? get avatarUrl => throw _privateConstructorUsedError;
+  String get authorAvatarUrl => throw _privateConstructorUsedError;
   @override
 
   /// Id's of those who liked post
@@ -499,5 +493,5 @@ abstract class _Post implements Post {
   int get likeCount => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PostCopyWith<_Post> get copyWith => throw _privateConstructorUsedError;
+  _$FFPostCopyWith<_FFPost> get copyWith => throw _privateConstructorUsedError;
 }

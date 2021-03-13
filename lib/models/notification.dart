@@ -1,14 +1,17 @@
-// import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-// part 'notification.freezed.dart';
-// part 'notification.g.dart';
+part 'notification.freezed.dart';
+part 'notification.g.dart';
 
-// @freezed
-// abstract class Notification with _$Notification {
-//   factory Notification(
+@freezed
+class FFNotification with _$FFNotification {
+  factory FFNotification({
+    String? title,
+    String? body,
+    String? imageUrl,
+    required String timestamp,
+  }) = _FFNotification;
 
-//   ) = _Notification;
-
-//   factory Notification.fromJson(Map<String, dynamic> json) =>
-// 			_$NotificationFromJson(json);
-// }
+  factory FFNotification.fromJson(Map<String, dynamic> json) =>
+      _$FFNotificationFromJson(json);
+}

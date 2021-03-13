@@ -12,13 +12,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Student _$StudentFromJson(Map<String, dynamic> json) {
+FFStudent _$FFStudentFromJson(Map<String, dynamic> json) {
   return _Student.fromJson(json);
 }
 
 /// @nodoc
-class _$StudentTearOff {
-  const _$StudentTearOff();
+class _$FFStudentTearOff {
+  const _$FFStudentTearOff();
 
   _Student call(
       {required String id,
@@ -49,16 +49,16 @@ class _$StudentTearOff {
     );
   }
 
-  Student fromJson(Map<String, Object> json) {
-    return Student.fromJson(json);
+  FFStudent fromJson(Map<String, Object> json) {
+    return FFStudent.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Student = _$StudentTearOff();
+const $FFStudent = _$FFStudentTearOff();
 
 /// @nodoc
-mixin _$Student {
+mixin _$FFStudent {
   String get id => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
   String get firstName => throw _privateConstructorUsedError;
@@ -74,13 +74,14 @@ mixin _$Student {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $StudentCopyWith<Student> get copyWith => throw _privateConstructorUsedError;
+  $FFStudentCopyWith<FFStudent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $StudentCopyWith<$Res> {
-  factory $StudentCopyWith(Student value, $Res Function(Student) then) =
-      _$StudentCopyWithImpl<$Res>;
+abstract class $FFStudentCopyWith<$Res> {
+  factory $FFStudentCopyWith(FFStudent value, $Res Function(FFStudent) then) =
+      _$FFStudentCopyWithImpl<$Res>;
   $Res call(
       {String id,
       String fullName,
@@ -97,12 +98,12 @@ abstract class $StudentCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StudentCopyWithImpl<$Res> implements $StudentCopyWith<$Res> {
-  _$StudentCopyWithImpl(this._value, this._then);
+class _$FFStudentCopyWithImpl<$Res> implements $FFStudentCopyWith<$Res> {
+  _$FFStudentCopyWithImpl(this._value, this._then);
 
-  final Student _value;
+  final FFStudent _value;
   // ignore: unused_field
-  final $Res Function(Student) _then;
+  final $Res Function(FFStudent) _then;
 
   @override
   $Res call({
@@ -173,7 +174,7 @@ class _$StudentCopyWithImpl<$Res> implements $StudentCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$StudentCopyWith<$Res> implements $StudentCopyWith<$Res> {
+abstract class _$StudentCopyWith<$Res> implements $FFStudentCopyWith<$Res> {
   factory _$StudentCopyWith(_Student value, $Res Function(_Student) then) =
       __$StudentCopyWithImpl<$Res>;
   @override
@@ -193,7 +194,7 @@ abstract class _$StudentCopyWith<$Res> implements $StudentCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$StudentCopyWithImpl<$Res> extends _$StudentCopyWithImpl<$Res>
+class __$StudentCopyWithImpl<$Res> extends _$FFStudentCopyWithImpl<$Res>
     implements _$StudentCopyWith<$Res> {
   __$StudentCopyWithImpl(_Student _value, $Res Function(_Student) _then)
       : super(_value, (v) => _then(v as _Student));
@@ -321,14 +322,14 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Student(id: $id, fullName: $fullName, firstName: $firstName, lastName: $lastName, channels: $channels, notificationsEnabled: $notificationsEnabled, reportCount: $reportCount, isTester: $isTester, bio: $bio, coverPhotoUrl: $coverPhotoUrl, email: $email, avatarUrl: $avatarUrl)';
+    return 'FFStudent(id: $id, fullName: $fullName, firstName: $firstName, lastName: $lastName, channels: $channels, notificationsEnabled: $notificationsEnabled, reportCount: $reportCount, isTester: $isTester, bio: $bio, coverPhotoUrl: $coverPhotoUrl, email: $email, avatarUrl: $avatarUrl)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Student'))
+      ..add(DiagnosticsProperty('type', 'FFStudent'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('fullName', fullName))
       ..add(DiagnosticsProperty('firstName', firstName))
@@ -409,7 +410,7 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
   }
 }
 
-abstract class _Student implements Student {
+abstract class _Student implements FFStudent {
   const factory _Student(
       {required String id,
       required String fullName,
