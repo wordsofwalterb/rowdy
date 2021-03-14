@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
       create: (_) => FeedCubit(
         repository: BlocProvider.of<EntityListRepository<FFTest>>(context),
         feedId: 'testFeed',
-      ),
+      )..setupFeed(),
       child: HomeView(),
     );
   }
@@ -23,17 +23,19 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<FeedCubit<FFTest>, FeedState<FFTest>>(
-        builder: (context, state) {
-          return state.when(
-            initial: () => Container(child: const Text('initial')),
-            loading: () => Container(),
-            loaded: (list) => Container(),
-            reachedMax: (list) => Container(),
-            empty: (list) => Container(),
-            failure: (list) => Container(),
-          );
-        },
+      body: Center(
+        child: BlocBuilder<FeedCubit<FFTest>, FeedState<FFTest>>(
+          builder: (context, state) {
+            return state.when(
+              initial: () => Container(child: const Text('initial')),
+              loading: () => Container(child: const Text('loading')),
+              loaded: (list) => Text((list[0] as FFTest).body),
+              reachedMax: (list) => Container(child: const Text('max')),
+              empty: (list) => Container(child: const Text('empty')),
+              failure: (list) => Container(child: const Text('failure')),
+            );
+          },
+        ),
       ),
     );
   }

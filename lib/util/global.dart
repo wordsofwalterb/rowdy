@@ -33,5 +33,5 @@ List<T> parseFirestoreQuery<T>(QuerySnapshot queryList) {
 }
 
 List<T>? parseJsonList<T>(List<Map<String, dynamic>> jsonList) {
-  return jsonList?.map((e) => FFGlobal.jsonMapper[T]!(e) as T)?.toList();
+  return jsonList.map((e) => FFGlobal.jsonMapper[T]!(e) as T).toList();
 }

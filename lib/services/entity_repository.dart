@@ -9,14 +9,14 @@ import 'package:rowdy/models/student.dart';
 import 'package:rowdy/util/global.dart';
 
 class Feed<T> {
-  const Feed({
+  Feed({
     this.isDirty = false,
     this.feedData = const [],
     this.filter,
     this.sort,
   });
 
-  final bool isDirty;
+  bool isDirty;
   final List<T> feedData;
   final FeedFilter? filter;
   final FeedSort? sort;
@@ -58,7 +58,7 @@ class EntityListRepository<T> extends Cubit<Map<String, Feed<T>>>
     FeedSort? sort,
     required int limit,
   }) async {
-    final ref = FFGlobal.collectionMapper[FFPost];
+    final ref = FFGlobal.collectionMapper[T];
     Query? query;
     QuerySnapshot snapshot;
 
@@ -93,7 +93,7 @@ class EntityListRepository<T> extends Cubit<Map<String, Feed<T>>>
       CollectionReference ref, int limit, FeedFilter? f, FeedSort? s) {
     var query = ref.limit(limit);
     if (f?.filterField != null && f?.isEqualTo != null) {
-      query = ref.where(f?.filterField, isEqualTo: f?.isEqualTo);
+      query = query.where(f?.filterField, isEqualTo: f?.isEqualTo);
     }
     if (s?.orderBy != null) {
       query = query.orderBy(s?.orderBy, descending: s?.descending ?? false);

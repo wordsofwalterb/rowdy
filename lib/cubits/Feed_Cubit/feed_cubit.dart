@@ -19,12 +19,14 @@ class FeedCubit<T> extends Cubit<FeedState<T>> {
     repoSubscription = repository.listen((repoState) {
       if (repoState.containsKey(feedId)) {
         if (repoState[feedId]!.isDirty) {
+          print(repoState[feedId]!.feedData.toString());
           state.maybeWhen(
               loading: () =>
                   emit(FeedState.loaded(repoState[feedId]!.feedData)),
               loaded: (list) =>
                   emit(FeedState.loaded(repoState[feedId]!.feedData)),
               orElse: () => print('here'));
+          repoState[feedId]!.isDirty = false;
         }
       }
     });
