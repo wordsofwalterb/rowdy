@@ -29,7 +29,8 @@ class HomeView extends StatelessWidget {
             return state.when(
               initial: () => Container(child: const Text('initial')),
               loading: () => Container(child: const Text('loading')),
-              loaded: (list) => Text((list[0] as FFTest).body),
+              loaded: (list) => ListView(
+                  children: list.map((e) => Text((e as FFTest).body)).toList()),
               reachedMax: (list) => Container(child: const Text('max')),
               empty: (list) => Container(child: const Text('empty')),
               failure: (list) => Container(child: const Text('failure')),
