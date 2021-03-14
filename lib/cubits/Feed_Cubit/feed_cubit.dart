@@ -8,15 +8,21 @@ part 'feed_cubit.freezed.dart';
 part 'feed_state.dart';
 
 class FeedCubit<T> extends Cubit<FeedState<T>> {
-  FeedCubit(this.feedId, this.repository,
-      {this.settings = const FeedSettings()})
-      : super(const FeedState.initial()) {
+  FeedCubit({
+    required this.feedId,
+    required this.repository,
+    this.defaultLimit = 20,
+    this.sort,
+    this.filter,
+  }) : super(const FeedState.initial()) {
     repoSubscription = repository.listen((repoState) {});
   }
 
   FFFeedRepository<T> repository;
-  FeedSettings settings;
+  int defaultLimit;
   String feedId;
+  FeedFilter? filter;
+  FeedSort? sort;
   late StreamSubscription repoSubscription;
 
   @override
@@ -39,12 +45,31 @@ class FeedSettings {
   const FeedSettings();
 }
 
-abstract class FFFeedRepository<T> implements Cubit<List<T>> {
-  Future<void> setupFeed();
-  Future<void> closeFeed();
-  Future<void> refreshFeed();
-  Future<void> fetchFeedPage();
+class FeedSort {
+  const FeedSort(this.orderBy, {this.descending = false});
+
+  final String orderBy;
+  final bool descending;
+}
+
+class FeedFilter {
+  const FeedFilter(this.filterField, {this.isEqualTo});
+
+  final String filterField;
+  final dynamic isEqualTo;
+}
+
+abstract class FFFeedRepository<T> implements Cubit<Map<String, Feed<T>>> {
+  Future<void> setupFeed(
+    String feedId, {
+    FeedFilter? filter,
+    FeedSort? sort,
+    required int limit,
+  });
+  Future<void> closeFeed(String feedId);
+  Future<void> refreshFeed(String feedId);
+  Future<void> fetchFeedPage(String feedId);
   // maybe
   Future<void> addItem(T item);
-  Future<void> removeItem();
+  Future<void> removeItem(String itemId);
 }
