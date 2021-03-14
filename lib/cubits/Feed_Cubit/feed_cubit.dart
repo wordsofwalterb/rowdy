@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:rowdy/services/entity_repository.dart';
 import 'package:rowdy/services/post_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,10 +16,21 @@ class FeedCubit<T> extends Cubit<FeedState<T>> {
     this.sort,
     this.filter,
   }) : super(const FeedState.initial()) {
-    repoSubscription = repository.listen((repoState) {});
+    repoSubscription = repository.listen((repoState) {
+      if (repoState.containsKey(feedId)) {
+        if (repoState[feedId]!.isDirty) {
+          state.maybeWhen(
+              loading: () =>
+                  emit(FeedState.loaded(repoState[feedId]!.feedData)),
+              loaded: (list) =>
+                  emit(FeedState.loaded(repoState[feedId]!.feedData)),
+              orElse: () => print('here'));
+        }
+      }
+    });
   }
 
-  FFFeedRepository<T> repository;
+  EntityListRepository<T> repository;
   int defaultLimit;
   String feedId;
   FeedFilter? filter;
@@ -31,7 +43,16 @@ class FeedCubit<T> extends Cubit<FeedState<T>> {
     return super.close();
   }
 
-  Future<void> setupFeed() async {}
+  Future<void> setupFeed() async {
+    emit(const FeedState.loading());
+    await repository.setupFeed(
+      feedId,
+      limit: defaultLimit,
+      filter: filter,
+      sort: sort,
+    );
+  }
+
   Future<void> addItemToFeed(T item) async {}
   Future<void> removeItemFromFeed(String itemId) async {}
   Future<void> refreshFeed() async {}
@@ -41,9 +62,9 @@ class FeedCubit<T> extends Cubit<FeedState<T>> {
   }) async {}
 }
 
-class FeedSettings {
-  const FeedSettings();
-}
+// class FeedSettings {
+//   const FeedSettings();
+// }
 
 class FeedSort {
   const FeedSort(this.orderBy, {this.descending = false});
@@ -59,17 +80,17 @@ class FeedFilter {
   final dynamic isEqualTo;
 }
 
-abstract class FFFeedRepository<T> implements Cubit<Map<String, Feed<T>>> {
-  Future<void> setupFeed(
-    String feedId, {
-    FeedFilter? filter,
-    FeedSort? sort,
-    required int limit,
-  });
-  Future<void> closeFeed(String feedId);
-  Future<void> refreshFeed(String feedId);
-  Future<void> fetchFeedPage(String feedId);
-  // maybe
-  Future<void> addItem(T item);
-  Future<void> removeItem(String itemId);
-}
+// abstract class FFFeedRepository<T> implements Cubit<Map<String, Feed<T>>> {
+//   Future<void> setupFeed(
+//     String feedId, {
+//     FeedFilter? filter,
+//     FeedSort? sort,
+//     required int limit,
+//   });
+//   Future<void> closeFeed(String feedId);
+//   Future<void> refreshFeed(String feedId);
+//   Future<void> fetchFeedPage(String feedId);
+//   // maybe
+//   Future<void> addItem(T item);
+//   Future<void> removeItem(String itemId);
+// }

@@ -1,18 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rowdy/models/post.dart';
+import 'package:rowdy/models/test.dart';
 
 class FFGlobal {
   static final CollectionReference postRef =
       FirebaseFirestore.instance.collection('posts');
 
+  static final CollectionReference testRef =
+      FirebaseFirestore.instance.collection('test');
+
   // static final FirebaseAnalytics analytics = FirebaseAnalytics();
 
   static final collectionMapper = <Type, CollectionReference>{
     FFPost: postRef,
+    FFTest: testRef,
   };
 
   static final jsonMapper = {
     FFPost: (Map<String, dynamic> data) => FFPost.fromJson(data),
+    FFTest: (Map<String, dynamic> data) => FFTest.fromJson(data),
   };
 }
 
