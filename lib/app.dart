@@ -14,7 +14,7 @@ import 'package:rowdy/services/entity_repository.dart';
 import 'package:rowdy/util/theme.dart';
 
 import 'models/test.dart';
-import 'screens/home_screen.dart';
+import 'screens/navigator_screen.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       home: BlocProvider(
         create: (context) => EntityListRepository<FFTest>(),
-        child: HomeScreen(),
+        child: const NavigatorScreen(),
       ),
     );
   }

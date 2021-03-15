@@ -16,6 +16,7 @@ dependencies:
   firebase_auth: ^1.0.1
   firebase_core: ^1.0.1
   flutter_bloc: ^7.0.0-nullsafety.5
+  flutter_launcher_icons: ^0.9.0
   freezed_annotation: ^0.14.0
   intl: ^0.17.0
   json_serializable: ^4.0.2
@@ -31,6 +32,19 @@ dev_dependencies:
   mocktail: 0.1.0
   very_good_analysis: ^2.0.0
 
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/icon/icon_ios.png"
+  image_path_android: "assets/icon/icon_android.png"
+
 flutter:
+  assets:
+    - assets/images/
   uses-material-design: true
   generate: true
+
+  fonts:
+    - family: sficonsets
+      fonts:
+        - asset: packages/flutter_sfsymbols/fonts/sficonsets.ttf
