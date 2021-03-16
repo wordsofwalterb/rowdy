@@ -5,6 +5,7 @@ import 'package:rowdy/cubits/cubit/user_cubit.dart';
 import 'package:rowdy/models/test.dart';
 import 'package:rowdy/services/entity_repository.dart';
 
+import '../services/user/user_cubit.dart';
 import 'splash_screen.dart';
 
 class NavigatorBridge extends StatelessWidget {

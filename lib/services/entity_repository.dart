@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 
 import 'feeds/feed.dart';
-import 'feed_repo_mixin.dart';
+import 'feeds/feed_repo_mixin.dart';
 
 class EntityListRepository<T> extends Cubit<Map<String, Feed<T>>>
     with FeedRepoMixin<T> {

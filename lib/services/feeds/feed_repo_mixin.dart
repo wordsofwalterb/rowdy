@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rowdy/util/global.dart';
 
 import 'feed.dart';
-import 'feeds/feed_filter.dart';
+import 'feed_filter.dart';
 import 'feed_sort.dart';
 
 mixin FeedRepoMixin<T> implements Cubit<Map<String, Feed<T>>> {
@@ -43,8 +43,8 @@ mixin FeedRepoMixin<T> implements Cubit<Map<String, Feed<T>>> {
   Future<void> refreshFeed(String feedId) async {}
   Future<void> fetchFeedPage(String feedId) async {}
   // maybe
-  Future<void> addItem(T item) async {}
-  Future<void> removeItem(String itemId) async {}
+  Future<void> addItemToDb(T item) async {}
+  Future<void> deleteItem(String itemId) async {}
 
   Query _buildFirestoreQuery(
       CollectionReference ref, int limit, FeedFilter? f, FeedSort? s) {

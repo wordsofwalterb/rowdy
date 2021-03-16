@@ -14,8 +14,8 @@ class FFPost with _$FFPost {
     /// The Id of whoever made the post
     required String authorId,
 
-    /// The full name of whoever made the post
-    required String authorName,
+    // /// The full name of whoever made the post
+    // required String authorName,
 
     /// The time that the post was made
     required DateTime postTime,
@@ -27,7 +27,7 @@ class FFPost with _$FFPost {
     /// Once added an ID isn't removed.
     /// It is here so double likes don't send two notications.
     @Default([]) List<String> unlikedBy,
-    required String authorAvatarUrl,
+    // required String authorAvatarUrl,
 
     /// Id's of those who liked post
     @Default([]) List<String> likedBy,

@@ -31,7 +31,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       home: BlocProvider(
         create: (context) => EntityListRepository<FFTest>(),
-        child: const NavigatorScreen(),
+        child: const NavigatorBridge(),
       ),
     );
   }

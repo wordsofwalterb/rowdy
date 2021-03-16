@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rowdy/models/post.dart';
 import 'package:rowdy/models/test.dart';
 
+import '../models/student.dart';
+
 class FFGlobal {
   static final CollectionReference postRef =
       FirebaseFirestore.instance.collection('posts');
@@ -9,16 +11,21 @@ class FFGlobal {
   static final CollectionReference testRef =
       FirebaseFirestore.instance.collection('test');
 
+  static final CollectionReference userRef =
+      FirebaseFirestore.instance.collection('student');
+
   // static final FirebaseAnalytics analytics = FirebaseAnalytics();
 
   static final collectionMapper = <Type, CollectionReference>{
     FFPost: postRef,
     FFTest: testRef,
+    FFStudent: userRef,
   };
 
   static final jsonMapper = {
     FFPost: (Map<String, dynamic> data) => FFPost.fromJson(data),
     FFTest: (Map<String, dynamic> data) => FFTest.fromJson(data),
+    FFStudent: (Map<String, dynamic> data) => FFTest.fromJson(data),
   };
 }
 

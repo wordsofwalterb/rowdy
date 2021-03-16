@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:rowdy/services/entity_repository.dart';
-import 'package:rowdy/services/feeds/feed_filter.dart'.da'package:rowdy/services/feeds/feed_sort.dart'ds/feed_sort.dart';
-import 'package:rowdy/services/post_repository.dart';
-import 'package:freezed_annotation/freezed_'../../cubits/feed_cubit/feed_cubit.freezed.dart'feed_cu'../../cubits/feed_cubit/feed_state.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../feed_filter.dart';
+import '../feed_sort.dart';
+
 part 'feed_state.dart';
+part 'feed_cubit.freezed.dart';
 
 class FeedCubit<T> extends Cubit<FeedState<T>> {
   FeedCubit({

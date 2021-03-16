@@ -1,7 +1,7 @@
-part of '../../services/feeds/feed_cubit.dart';
+part of 'feed_cubit.dart';
 
 @freezed
-abstract class FeedState<T> with _$FeedState {
+abstract class FeedState<T> with _$FeedState<T> {
   const factory FeedState.initial() = _Initial;
   const factory FeedState.loading() = _Loading;
   const factory FeedState.loaded(List<T> items) = _Success;

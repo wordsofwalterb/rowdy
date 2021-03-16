@@ -2,12 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rowdy/models/model.dart';
 
 part 'student.freezed.dart';
 part 'student.g.dart';
 
 @freezed
-class FFStudent with _$FFStudent {
+class FFStudent with _$FFStudent implements Model {
   /// Creates an object representing public information about
   /// a student user.
   ///
