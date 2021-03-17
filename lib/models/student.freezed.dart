@@ -271,6 +271,7 @@ class __$StudentCopyWithImpl<$Res> extends _$FFStudentCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+@Implements(AvatarUser)
 
 /// @nodoc
 class _$_Student with DiagnosticableTreeMixin implements _Student {
@@ -410,7 +411,7 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
   }
 }
 
-abstract class _Student implements FFStudent {
+abstract class _Student implements FFStudent, AvatarUser {
   const factory _Student(
       {required String id,
       required String fullName,

@@ -3,12 +3,13 @@ import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rowdy/models/model.dart';
+import 'package:rowdy/services/mixins/avatar_user_mixin.dart';
 
 part 'student.freezed.dart';
 part 'student.g.dart';
 
 @freezed
-class FFStudent with _$FFStudent implements Model {
+class FFStudent with _$FFStudent implements AvatarUser {
   /// Creates an object representing public information about
   /// a student user.
   ///
@@ -16,6 +17,7 @@ class FFStudent with _$FFStudent implements Model {
   /// it will be available if app is compromised hence public.
   ///
   /// [fullName] and [id] are required and must not be null
+  @Implements(AvatarUser)
   const factory FFStudent({
     required String id,
     required String fullName,

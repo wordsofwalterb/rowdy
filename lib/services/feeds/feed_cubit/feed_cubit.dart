@@ -6,7 +6,7 @@ import 'package:rowdy/models/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../feed_filter.dart';
-import '../feed_repo_mixin.dart';
+import '../../mixins/feed_repo_mixin.dart';
 import '../feed_sort.dart';
 
 part 'feed_state.dart';
@@ -40,6 +40,7 @@ class FeedCubit<T extends Model, R extends FeedRepoMixin>
     emit(FeedState.loaded(data));
   }
 
+  /// Should only be called by repo
   Future<void> updateItemInFeed(T item) async {
     state.maybeWhen(
       loaded: (items) => _replaceInList(items, item),
