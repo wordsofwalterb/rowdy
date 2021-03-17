@@ -1,12 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:flutter/foundation.dart';
+import 'package:rowdy/services/likable/likable.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';
 
 @freezed
-class FFPost with _$FFPost {
+class FFPost with _$FFPost implements Likable {
+  @Implements(Likable)
   const factory FFPost({
     /// ID is generated from Firebase UID
     required String id,

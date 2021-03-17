@@ -23,11 +23,9 @@ class _$FFPostTearOff {
   _FFPost call(
       {required String id,
       required String authorId,
-      required String authorName,
       required DateTime postTime,
       List<String> imageUrls = const [],
       List<String> unlikedBy = const [],
-      required String authorAvatarUrl,
       List<String> likedBy = const [],
       String? body,
       int commentCount = 0,
@@ -35,11 +33,9 @@ class _$FFPostTearOff {
     return _FFPost(
       id: id,
       authorId: authorId,
-      authorName: authorName,
       postTime: postTime,
       imageUrls: imageUrls,
       unlikedBy: unlikedBy,
-      authorAvatarUrl: authorAvatarUrl,
       likedBy: likedBy,
       body: body,
       commentCount: commentCount,
@@ -61,11 +57,9 @@ mixin _$FFPost {
   String get id => throw _privateConstructorUsedError;
 
   /// The Id of whoever made the post
-  String get authorId => throw _privateConstructorUsedError;
-
-  /// The full name of whoever made the post
-  String get authorName => throw _privateConstructorUsedError;
-
+  String get authorId =>
+      throw _privateConstructorUsedError; // /// The full name of whoever made the post
+// required String authorName,
   /// The time that the post was made
   DateTime get postTime => throw _privateConstructorUsedError;
 
@@ -75,9 +69,8 @@ mixin _$FFPost {
   /// ID's of those who have liked the post then disliked.
   /// Once added an ID isn't removed.
   /// It is here so double likes don't send two notications.
-  List<String> get unlikedBy => throw _privateConstructorUsedError;
-  String get authorAvatarUrl => throw _privateConstructorUsedError;
-
+  List<String> get unlikedBy =>
+      throw _privateConstructorUsedError; // required String authorAvatarUrl,
   /// Id's of those who liked post
   List<String> get likedBy => throw _privateConstructorUsedError;
 
@@ -102,11 +95,9 @@ abstract class $FFPostCopyWith<$Res> {
   $Res call(
       {String id,
       String authorId,
-      String authorName,
       DateTime postTime,
       List<String> imageUrls,
       List<String> unlikedBy,
-      String authorAvatarUrl,
       List<String> likedBy,
       String? body,
       int commentCount,
@@ -125,11 +116,9 @@ class _$FFPostCopyWithImpl<$Res> implements $FFPostCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? authorId = freezed,
-    Object? authorName = freezed,
     Object? postTime = freezed,
     Object? imageUrls = freezed,
     Object? unlikedBy = freezed,
-    Object? authorAvatarUrl = freezed,
     Object? likedBy = freezed,
     Object? body = freezed,
     Object? commentCount = freezed,
@@ -144,10 +133,6 @@ class _$FFPostCopyWithImpl<$Res> implements $FFPostCopyWith<$Res> {
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
               as String,
-      authorName: authorName == freezed
-          ? _value.authorName
-          : authorName // ignore: cast_nullable_to_non_nullable
-              as String,
       postTime: postTime == freezed
           ? _value.postTime
           : postTime // ignore: cast_nullable_to_non_nullable
@@ -160,10 +145,6 @@ class _$FFPostCopyWithImpl<$Res> implements $FFPostCopyWith<$Res> {
           ? _value.unlikedBy
           : unlikedBy // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      authorAvatarUrl: authorAvatarUrl == freezed
-          ? _value.authorAvatarUrl
-          : authorAvatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
       likedBy: likedBy == freezed
           ? _value.likedBy
           : likedBy // ignore: cast_nullable_to_non_nullable
@@ -192,11 +173,9 @@ abstract class _$FFPostCopyWith<$Res> implements $FFPostCopyWith<$Res> {
   $Res call(
       {String id,
       String authorId,
-      String authorName,
       DateTime postTime,
       List<String> imageUrls,
       List<String> unlikedBy,
-      String authorAvatarUrl,
       List<String> likedBy,
       String? body,
       int commentCount,
@@ -216,11 +195,9 @@ class __$FFPostCopyWithImpl<$Res> extends _$FFPostCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? authorId = freezed,
-    Object? authorName = freezed,
     Object? postTime = freezed,
     Object? imageUrls = freezed,
     Object? unlikedBy = freezed,
-    Object? authorAvatarUrl = freezed,
     Object? likedBy = freezed,
     Object? body = freezed,
     Object? commentCount = freezed,
@@ -235,10 +212,6 @@ class __$FFPostCopyWithImpl<$Res> extends _$FFPostCopyWithImpl<$Res>
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
               as String,
-      authorName: authorName == freezed
-          ? _value.authorName
-          : authorName // ignore: cast_nullable_to_non_nullable
-              as String,
       postTime: postTime == freezed
           ? _value.postTime
           : postTime // ignore: cast_nullable_to_non_nullable
@@ -251,10 +224,6 @@ class __$FFPostCopyWithImpl<$Res> extends _$FFPostCopyWithImpl<$Res>
           ? _value.unlikedBy
           : unlikedBy // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      authorAvatarUrl: authorAvatarUrl == freezed
-          ? _value.authorAvatarUrl
-          : authorAvatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
       likedBy: likedBy == freezed
           ? _value.likedBy
           : likedBy // ignore: cast_nullable_to_non_nullable
@@ -276,17 +245,16 @@ class __$FFPostCopyWithImpl<$Res> extends _$FFPostCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+@Implements(Likable)
 
 /// @nodoc
 class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
   const _$_FFPost(
       {required this.id,
       required this.authorId,
-      required this.authorName,
       required this.postTime,
       this.imageUrls = const [],
       this.unlikedBy = const [],
-      required this.authorAvatarUrl,
       this.likedBy = const [],
       this.body,
       this.commentCount = 0,
@@ -303,12 +271,8 @@ class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
 
   /// The Id of whoever made the post
   final String authorId;
-  @override
-
-  /// The full name of whoever made the post
-  final String authorName;
-  @override
-
+  @override // /// The full name of whoever made the post
+// required String authorName,
   /// The time that the post was made
   final DateTime postTime;
   @JsonKey(defaultValue: const [])
@@ -323,11 +287,8 @@ class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
   /// Once added an ID isn't removed.
   /// It is here so double likes don't send two notications.
   final List<String> unlikedBy;
-  @override
-  final String authorAvatarUrl;
   @JsonKey(defaultValue: const [])
-  @override
-
+  @override // required String authorAvatarUrl,
   /// Id's of those who liked post
   final List<String> likedBy;
   @override
@@ -347,7 +308,7 @@ class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FFPost(id: $id, authorId: $authorId, authorName: $authorName, postTime: $postTime, imageUrls: $imageUrls, unlikedBy: $unlikedBy, authorAvatarUrl: $authorAvatarUrl, likedBy: $likedBy, body: $body, commentCount: $commentCount, likeCount: $likeCount)';
+    return 'FFPost(id: $id, authorId: $authorId, postTime: $postTime, imageUrls: $imageUrls, unlikedBy: $unlikedBy, likedBy: $likedBy, body: $body, commentCount: $commentCount, likeCount: $likeCount)';
   }
 
   @override
@@ -357,11 +318,9 @@ class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
       ..add(DiagnosticsProperty('type', 'FFPost'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('authorId', authorId))
-      ..add(DiagnosticsProperty('authorName', authorName))
       ..add(DiagnosticsProperty('postTime', postTime))
       ..add(DiagnosticsProperty('imageUrls', imageUrls))
       ..add(DiagnosticsProperty('unlikedBy', unlikedBy))
-      ..add(DiagnosticsProperty('authorAvatarUrl', authorAvatarUrl))
       ..add(DiagnosticsProperty('likedBy', likedBy))
       ..add(DiagnosticsProperty('body', body))
       ..add(DiagnosticsProperty('commentCount', commentCount))
@@ -377,9 +336,6 @@ class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
             (identical(other.authorId, authorId) ||
                 const DeepCollectionEquality()
                     .equals(other.authorId, authorId)) &&
-            (identical(other.authorName, authorName) ||
-                const DeepCollectionEquality()
-                    .equals(other.authorName, authorName)) &&
             (identical(other.postTime, postTime) ||
                 const DeepCollectionEquality()
                     .equals(other.postTime, postTime)) &&
@@ -389,9 +345,6 @@ class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
             (identical(other.unlikedBy, unlikedBy) ||
                 const DeepCollectionEquality()
                     .equals(other.unlikedBy, unlikedBy)) &&
-            (identical(other.authorAvatarUrl, authorAvatarUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.authorAvatarUrl, authorAvatarUrl)) &&
             (identical(other.likedBy, likedBy) ||
                 const DeepCollectionEquality()
                     .equals(other.likedBy, likedBy)) &&
@@ -410,11 +363,9 @@ class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(authorId) ^
-      const DeepCollectionEquality().hash(authorName) ^
       const DeepCollectionEquality().hash(postTime) ^
       const DeepCollectionEquality().hash(imageUrls) ^
       const DeepCollectionEquality().hash(unlikedBy) ^
-      const DeepCollectionEquality().hash(authorAvatarUrl) ^
       const DeepCollectionEquality().hash(likedBy) ^
       const DeepCollectionEquality().hash(body) ^
       const DeepCollectionEquality().hash(commentCount) ^
@@ -431,15 +382,13 @@ class _$_FFPost with DiagnosticableTreeMixin implements _FFPost {
   }
 }
 
-abstract class _FFPost implements FFPost {
+abstract class _FFPost implements FFPost, Likable {
   const factory _FFPost(
       {required String id,
       required String authorId,
-      required String authorName,
       required DateTime postTime,
       List<String> imageUrls,
       List<String> unlikedBy,
-      required String authorAvatarUrl,
       List<String> likedBy,
       String? body,
       int commentCount,
@@ -455,12 +404,8 @@ abstract class _FFPost implements FFPost {
 
   /// The Id of whoever made the post
   String get authorId => throw _privateConstructorUsedError;
-  @override
-
-  /// The full name of whoever made the post
-  String get authorName => throw _privateConstructorUsedError;
-  @override
-
+  @override // /// The full name of whoever made the post
+// required String authorName,
   /// The time that the post was made
   DateTime get postTime => throw _privateConstructorUsedError;
   @override
@@ -473,10 +418,7 @@ abstract class _FFPost implements FFPost {
   /// Once added an ID isn't removed.
   /// It is here so double likes don't send two notications.
   List<String> get unlikedBy => throw _privateConstructorUsedError;
-  @override
-  String get authorAvatarUrl => throw _privateConstructorUsedError;
-  @override
-
+  @override // required String authorAvatarUrl,
   /// Id's of those who liked post
   List<String> get likedBy => throw _privateConstructorUsedError;
   @override

@@ -16,33 +16,33 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FeedStateTearOff {
   const _$FeedStateTearOff();
 
-  _Initial<T> initial<T>() {
+  _Initial<T> initial<T extends Model>() {
     return _Initial<T>();
   }
 
-  _Loading<T> loading<T>() {
+  _Loading<T> loading<T extends Model>() {
     return _Loading<T>();
   }
 
-  _Success<T> loaded<T>(List<T> items) {
+  _Success<T> loaded<T extends Model>(List<T> items) {
     return _Success<T>(
       items,
     );
   }
 
-  _ReachedMax<T> reachedMax<T>(List<T> items) {
+  _ReachedMax<T> reachedMax<T extends Model>(List<T> items) {
     return _ReachedMax<T>(
       items,
     );
   }
 
-  _Empty<T> empty<T>(List<T> items) {
+  _Empty<T> empty<T extends Model>(List<T> items) {
     return _Empty<T>(
       items,
     );
   }
 
-  _Failure<T> failure<T>(List<T> items) {
+  _Failure<T> failure<T extends Model>(List<T> items) {
     return _Failure<T>(
       items,
     );
@@ -53,7 +53,7 @@ class _$FeedStateTearOff {
 const $FeedState = _$FeedStateTearOff();
 
 /// @nodoc
-mixin _$FeedState<T> {
+mixin _$FeedState<T extends Model> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -99,14 +99,15 @@ mixin _$FeedState<T> {
 }
 
 /// @nodoc
-abstract class $FeedStateCopyWith<T, $Res> {
+abstract class $FeedStateCopyWith<T extends Model, $Res> {
   factory $FeedStateCopyWith(
           FeedState<T> value, $Res Function(FeedState<T>) then) =
       _$FeedStateCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class _$FeedStateCopyWithImpl<T, $Res> implements $FeedStateCopyWith<T, $Res> {
+class _$FeedStateCopyWithImpl<T extends Model, $Res>
+    implements $FeedStateCopyWith<T, $Res> {
   _$FeedStateCopyWithImpl(this._value, this._then);
 
   final FeedState<T> _value;
@@ -115,14 +116,15 @@ class _$FeedStateCopyWithImpl<T, $Res> implements $FeedStateCopyWith<T, $Res> {
 }
 
 /// @nodoc
-abstract class _$InitialCopyWith<T, $Res> {
+abstract class _$InitialCopyWith<T extends Model, $Res> {
   factory _$InitialCopyWith(
           _Initial<T> value, $Res Function(_Initial<T>) then) =
       __$InitialCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
+class __$InitialCopyWithImpl<T extends Model, $Res>
+    extends _$FeedStateCopyWithImpl<T, $Res>
     implements _$InitialCopyWith<T, $Res> {
   __$InitialCopyWithImpl(_Initial<T> _value, $Res Function(_Initial<T>) _then)
       : super(_value, (v) => _then(v as _Initial<T>));
@@ -132,7 +134,7 @@ class __$InitialCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-class _$_Initial<T> implements _Initial<T> {
+class _$_Initial<T extends Model> implements _Initial<T> {
   const _$_Initial();
 
   @override
@@ -209,19 +211,20 @@ class _$_Initial<T> implements _Initial<T> {
   }
 }
 
-abstract class _Initial<T> implements FeedState<T> {
+abstract class _Initial<T extends Model> implements FeedState<T> {
   const factory _Initial() = _$_Initial<T>;
 }
 
 /// @nodoc
-abstract class _$LoadingCopyWith<T, $Res> {
+abstract class _$LoadingCopyWith<T extends Model, $Res> {
   factory _$LoadingCopyWith(
           _Loading<T> value, $Res Function(_Loading<T>) then) =
       __$LoadingCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
+class __$LoadingCopyWithImpl<T extends Model, $Res>
+    extends _$FeedStateCopyWithImpl<T, $Res>
     implements _$LoadingCopyWith<T, $Res> {
   __$LoadingCopyWithImpl(_Loading<T> _value, $Res Function(_Loading<T>) _then)
       : super(_value, (v) => _then(v as _Loading<T>));
@@ -231,7 +234,7 @@ class __$LoadingCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-class _$_Loading<T> implements _Loading<T> {
+class _$_Loading<T extends Model> implements _Loading<T> {
   const _$_Loading();
 
   @override
@@ -308,12 +311,12 @@ class _$_Loading<T> implements _Loading<T> {
   }
 }
 
-abstract class _Loading<T> implements FeedState<T> {
+abstract class _Loading<T extends Model> implements FeedState<T> {
   const factory _Loading() = _$_Loading<T>;
 }
 
 /// @nodoc
-abstract class _$SuccessCopyWith<T, $Res> {
+abstract class _$SuccessCopyWith<T extends Model, $Res> {
   factory _$SuccessCopyWith(
           _Success<T> value, $Res Function(_Success<T>) then) =
       __$SuccessCopyWithImpl<T, $Res>;
@@ -321,7 +324,8 @@ abstract class _$SuccessCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
+class __$SuccessCopyWithImpl<T extends Model, $Res>
+    extends _$FeedStateCopyWithImpl<T, $Res>
     implements _$SuccessCopyWith<T, $Res> {
   __$SuccessCopyWithImpl(_Success<T> _value, $Res Function(_Success<T>) _then)
       : super(_value, (v) => _then(v as _Success<T>));
@@ -343,7 +347,7 @@ class __$SuccessCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-class _$_Success<T> implements _Success<T> {
+class _$_Success<T extends Model> implements _Success<T> {
   const _$_Success(this.items);
 
   @override
@@ -432,7 +436,7 @@ class _$_Success<T> implements _Success<T> {
   }
 }
 
-abstract class _Success<T> implements FeedState<T> {
+abstract class _Success<T extends Model> implements FeedState<T> {
   const factory _Success(List<T> items) = _$_Success<T>;
 
   List<T> get items => throw _privateConstructorUsedError;
@@ -442,7 +446,7 @@ abstract class _Success<T> implements FeedState<T> {
 }
 
 /// @nodoc
-abstract class _$ReachedMaxCopyWith<T, $Res> {
+abstract class _$ReachedMaxCopyWith<T extends Model, $Res> {
   factory _$ReachedMaxCopyWith(
           _ReachedMax<T> value, $Res Function(_ReachedMax<T>) then) =
       __$ReachedMaxCopyWithImpl<T, $Res>;
@@ -450,7 +454,7 @@ abstract class _$ReachedMaxCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class __$ReachedMaxCopyWithImpl<T, $Res>
+class __$ReachedMaxCopyWithImpl<T extends Model, $Res>
     extends _$FeedStateCopyWithImpl<T, $Res>
     implements _$ReachedMaxCopyWith<T, $Res> {
   __$ReachedMaxCopyWithImpl(
@@ -474,7 +478,7 @@ class __$ReachedMaxCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-class _$_ReachedMax<T> implements _ReachedMax<T> {
+class _$_ReachedMax<T extends Model> implements _ReachedMax<T> {
   const _$_ReachedMax(this.items);
 
   @override
@@ -563,7 +567,7 @@ class _$_ReachedMax<T> implements _ReachedMax<T> {
   }
 }
 
-abstract class _ReachedMax<T> implements FeedState<T> {
+abstract class _ReachedMax<T extends Model> implements FeedState<T> {
   const factory _ReachedMax(List<T> items) = _$_ReachedMax<T>;
 
   List<T> get items => throw _privateConstructorUsedError;
@@ -573,14 +577,15 @@ abstract class _ReachedMax<T> implements FeedState<T> {
 }
 
 /// @nodoc
-abstract class _$EmptyCopyWith<T, $Res> {
+abstract class _$EmptyCopyWith<T extends Model, $Res> {
   factory _$EmptyCopyWith(_Empty<T> value, $Res Function(_Empty<T>) then) =
       __$EmptyCopyWithImpl<T, $Res>;
   $Res call({List<T> items});
 }
 
 /// @nodoc
-class __$EmptyCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
+class __$EmptyCopyWithImpl<T extends Model, $Res>
+    extends _$FeedStateCopyWithImpl<T, $Res>
     implements _$EmptyCopyWith<T, $Res> {
   __$EmptyCopyWithImpl(_Empty<T> _value, $Res Function(_Empty<T>) _then)
       : super(_value, (v) => _then(v as _Empty<T>));
@@ -602,7 +607,7 @@ class __$EmptyCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-class _$_Empty<T> implements _Empty<T> {
+class _$_Empty<T extends Model> implements _Empty<T> {
   const _$_Empty(this.items);
 
   @override
@@ -691,7 +696,7 @@ class _$_Empty<T> implements _Empty<T> {
   }
 }
 
-abstract class _Empty<T> implements FeedState<T> {
+abstract class _Empty<T extends Model> implements FeedState<T> {
   const factory _Empty(List<T> items) = _$_Empty<T>;
 
   List<T> get items => throw _privateConstructorUsedError;
@@ -701,7 +706,7 @@ abstract class _Empty<T> implements FeedState<T> {
 }
 
 /// @nodoc
-abstract class _$FailureCopyWith<T, $Res> {
+abstract class _$FailureCopyWith<T extends Model, $Res> {
   factory _$FailureCopyWith(
           _Failure<T> value, $Res Function(_Failure<T>) then) =
       __$FailureCopyWithImpl<T, $Res>;
@@ -709,7 +714,8 @@ abstract class _$FailureCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class __$FailureCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
+class __$FailureCopyWithImpl<T extends Model, $Res>
+    extends _$FeedStateCopyWithImpl<T, $Res>
     implements _$FailureCopyWith<T, $Res> {
   __$FailureCopyWithImpl(_Failure<T> _value, $Res Function(_Failure<T>) _then)
       : super(_value, (v) => _then(v as _Failure<T>));
@@ -731,7 +737,7 @@ class __$FailureCopyWithImpl<T, $Res> extends _$FeedStateCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-class _$_Failure<T> implements _Failure<T> {
+class _$_Failure<T extends Model> implements _Failure<T> {
   const _$_Failure(this.items);
 
   @override
@@ -820,7 +826,7 @@ class _$_Failure<T> implements _Failure<T> {
   }
 }
 
-abstract class _Failure<T> implements FeedState<T> {
+abstract class _Failure<T extends Model> implements FeedState<T> {
   const factory _Failure(List<T> items) = _$_Failure<T>;
 
   List<T> get items => throw _privateConstructorUsedError;
