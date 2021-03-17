@@ -29,7 +29,7 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: BlocProvider(
+      home: MultiBlocProvider(
         create: (context) => EntityListRepository<FFTest>(),
         child: const NavigatorBridge(),
       ),
