@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:ut_social/util/helper.dart';
+import 'package:rowdy/util/functions.dart';
 
 import 'profile_avatar.dart';
 
 class ChatTile extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final DateTime lastMessageDate;
-  final int numUnreadMessages;
-  final String imageUrl;
-  final VoidCallback onTap;
-  final EdgeInsetsGeometry margin;
-  final EdgeInsetsGeometry padding;
-
   const ChatTile(
-      {@required this.title,
-      @required this.subtitle,
+      {required this.title,
+      required this.subtitle,
       this.onTap,
       this.lastMessageDate,
       this.margin,
       this.padding,
       this.numUnreadMessages,
       this.imageUrl});
+
+  final String title;
+  final String subtitle;
+  final DateTime? lastMessageDate;
+  final int? numUnreadMessages;
+  final String? imageUrl;
+  final VoidCallback? onTap;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -58,7 +59,7 @@ class ChatTile extends StatelessWidget {
               children: [
                 if (lastMessageDate != null)
                   Text(
-                    Helper.convertTime(lastMessageDate),
+                    FFFunctions.convertTime(lastMessageDate!),
                     style: const TextStyle(
                       color: Color(0xffa1a1a1),
                       fontSize: 14,

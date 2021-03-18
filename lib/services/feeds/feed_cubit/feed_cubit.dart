@@ -6,7 +6,7 @@ import 'package:rowdy/models/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../feed_filter.dart';
-import '../../mixins/feed_repo_mixin.dart';
+import '../feed_repo_mixin.dart';
 import '../feed_sort.dart';
 
 part 'feed_state.dart';

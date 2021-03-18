@@ -9,43 +9,37 @@ import 'package:uuid/uuid.dart';
 class StorageService {
   static Future<String> uploadUserProfileImage(
       String url, File imageFile) async {
-    final String photoId = Uuid().v4();
-    final File image = await compressImage(photoId, imageFile);
+    final photoId = const Uuid().v4();
+    final image = await compressImage(photoId, imageFile);
     // TODO: FIX AND MAKE SURE STORAGE DOESN't FILL UP UNNECESARILLY
 
-    // if (url.isNotEmpty) {
-    //   // Updating user profile image
-    //   final RegExp exp = RegExp(r'userProfile_(.*).jpg');
-    //   photoId = exp.firstMatch(url)[1];
-    // }
-
-    final UploadTask uploadTask = FirebaseStorage.instance
+    final uploadTask = FirebaseStorage.instance
         .ref()
         .child('images/users/userProfile_$photoId.jpg')
         .putFile(image);
     // Storage tasks function as a Delegating Future so we can await them.
-    final TaskSnapshot storageSnap = await uploadTask;
-    final String downloadUrl = await storageSnap.ref.getDownloadURL();
+    final storageSnap = await uploadTask;
+    final downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
 
   static Future<String> uploadUserCoverPhotoImage(
       String url, File imageFile) async {
-    String photoId = Uuid().v4();
-    final File image = await compressImage(photoId, imageFile);
+    var photoId = const Uuid().v4();
+    final image = await compressImage(photoId, imageFile);
 
     if (url.isNotEmpty) {
       // Updating user profile image
-      final RegExp exp = RegExp(r'userCoverPhoto_(.*).jpg');
-      photoId = exp.firstMatch(url)[1];
+      final exp = RegExp(r'userCoverPhoto_(.*).jpg');
+      photoId = exp.firstMatch(url)![1]!;
     }
 
-    final UploadTask uploadTask = FirebaseStorage.instance
+    final uploadTask = FirebaseStorage.instance
         .ref()
         .child('images/users/userCoverPhoto_$photoId.jpg')
         .putFile(image);
-    final TaskSnapshot storageSnap = await uploadTask;
-    final String downloadUrl = await storageSnap.ref.getDownloadURL();
+    final storageSnap = await uploadTask;
+    final downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
 
@@ -62,14 +56,14 @@ class StorageService {
   }
 
   static Future<String> uploadPost(File imageFile) async {
-    final String photoId = Uuid().v4();
-    final File image = await compressImage(photoId, imageFile);
-    final UploadTask uploadTask = FirebaseStorage.instance
+    final photoId = const Uuid().v4();
+    final image = await compressImage(photoId, imageFile);
+    final uploadTask = FirebaseStorage.instance
         .ref()
         .child('images/posts/post_$photoId.jpg')
         .putFile(image);
-    final TaskSnapshot storageSnap = await uploadTask;
-    final String downloadUrl = await storageSnap.ref.getDownloadURL();
+    final storageSnap = await uploadTask;
+    final downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
 }

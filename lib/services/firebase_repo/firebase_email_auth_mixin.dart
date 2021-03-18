@@ -1,25 +1,38 @@
+import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rowdy/models/model.dart';
-import 'package:rowdy/services/auth/firebase_auth_mixin.dart';
+import 'package:rowdy/services/firebase_repo/firebase_auth_mixin.dart';
 
 import '../../util/global.dart';
 import '../../util/result.dart';
 
-mixin FirebaseAnonymousAuthMixin<T extends Model> on FirebaseAuthMixin<T> {
-  /// Creates document in firestore for an anonymous user and initializes the
-  /// user locally through [FirebaseAuth].
-  Future<FFResult<T>> createAnonymousUser() async {
+mixin EmailLoginMixin<T extends Model> on FirebaseAuthMixin<T> {
+  Future<FFResult<T>> createEmailUser(
+    String email,
+    String password, {
+    Map<String, Object>? props,
+  }) async {
     try {
-      final firebaseUser = (await auth.signInAnonymously()).user;
+      final firebaseUser = (await auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      ))
+          .user;
+
       if (firebaseUser == null) {
         throw Exception();
       }
+
       final userMap = {
-        'userID': firebaseUser.uid,
-        'type': 'anonymous',
+        'userId': firebaseUser.uid,
+        'authType': 'emailLogin',
         'creationDate': Timestamp.now(),
         'lastOpenDate': Timestamp.now(),
       };
+
+      if (props != null) {
+        userMap.addAll(props);
+      }
 
       await FFGlobal.userRef.doc(firebaseUser.uid).set(userMap);
 

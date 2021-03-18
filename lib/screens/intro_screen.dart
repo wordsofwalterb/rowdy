@@ -8,9 +8,9 @@ class IntroSlide {
   final String body;
 
   IntroSlide({
-    @required this.imageUrl,
-    @required this.title,
-    @required this.body,
+    required this.imageUrl,
+    required this.title,
+    required this.body,
   });
 
   factory IntroSlide.fromMap(Map<String, dynamic> map) {

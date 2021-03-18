@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rowdy/cubits/Feed_Cubit/feed_cubit.dart';
-import 'package:rowdy/cubits/cubit/user_cubit.dart';
-import 'package:rowdy/models/test.dart';
-import 'package:rowdy/services/entity_repository.dart';
+import 'package:rowdy/models/student.dart';
+import 'package:rowdy/screens/login/login_screen.dart';
+import 'package:rowdy/services/firebase_repo/firebase_repository.dart';
+import 'package:rowdy/services/user/user_cubit/user_cubit.dart';
 
-import '../services/user/user_cubit.dart';
 import 'splash_screen.dart';
 
 class NavigatorBridge extends StatelessWidget {
@@ -14,50 +13,25 @@ class NavigatorBridge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => UserCubit(),
-      child: NavigatorView(),
+      create: (_) => UserCubit(
+          RepositoryProvider.of<FirebaseRepository<FFStudent>>(context)),
+      child: const NavigatorView(),
     );
   }
 }
 
 class NavigatorView extends StatelessWidget {
+  const NavigatorView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserCubit, UserState>(
-      builder: (context, state) {
-        state.when(
-          unauthenticated: () => Container(),
-          authenticating: () => SplashScreen(),
-          authenticated: (user) => Container(),
-          authenticationFailed: (_) => Container(),
-        );
-
-        if (state is UserAuthenticated) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider<PostsBloc>(
-                create: (context) => PostsBloc(
-                  postRepository: FirebasePostRepository(),
-                )..add(const SetupPosts()),
-              ),
-              BlocProvider<NotificationsBloc>(
-                create: (context) => NotificationsBloc(
-                  FirebaseNotificationRepository(),
-                )..add(BootstrapNotifications()),
-              )
-            ],
-            child: NotificationBridge(
-              child: HomeScreen(),
-            ),
-          );
-        }
-        if (state is UserUnauthenticated) {
-          return LoginScreen(
-            userRepository: _userRepository,
-          );
-        }
-        return SplashScreen();
-      },
-    );
+    return BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+      return state.map(
+        unauthenticated: (_) => const LoginScreen(),
+        authenticating: (_) => const SplashScreen(),
+        authenticated: (state) => Container(),
+        authenticationFailed: (_) => const LoginScreen(),
+      );
+    });
   }
 }

@@ -12,8 +12,26 @@ enum AvatarOutline {
 /// If [avatarUrl] is null will build using a default image
 /// from the assets folder at [defaultImageSrc]
 class ProfileAvatar extends StatelessWidget {
+  /// Displays a cached profile avatar
+  ///
+  /// If [avatarUrl] is null will build using a default image
+  /// from the assets folder at [defaultImageSrc]
+  const ProfileAvatar({
+    this.fileImage,
+    this.avatarUrl,
+    this.size = 37,
+    this.radius = 8,
+    this.onPressed,
+    this.borderColor = Colors.transparent,
+    this.borderWidth = 0,
+    this.padding = const EdgeInsets.all(0),
+    this.defaultImageSrc = 'assets/images/default4.png',
+  });
+
   /// The url of the avatar
-  final String avatarUrl;
+  final String? avatarUrl;
+
+  final EdgeInsets padding;
 
   /// The size of the avatar
   final double size;
@@ -25,27 +43,12 @@ class ProfileAvatar extends StatelessWidget {
   final String defaultImageSrc;
 
   /// When happens when the profile image is pressed
-  final GestureTapCallback onPressed;
+  final GestureTapCallback? onPressed;
 
-  final FileImage fileImage;
+  final FileImage? fileImage;
 
   final Color borderColor;
   final double borderWidth;
-
-  /// Displays a cached profile avatar
-  ///
-  /// If [avatarUrl] is null will build using a default image
-  /// from the assets folder at [defaultImageSrc]
-  const ProfileAvatar({
-    this.fileImage,
-    this.avatarUrl,
-    this.size = 37,
-    this.radius = 8,
-    this.onPressed,
-    this.borderColor,
-    this.borderWidth = 0,
-    this.defaultImageSrc = 'assets/images/default4.png',
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +71,7 @@ class ProfileAvatar extends StatelessWidget {
                     : null,
                 borderRadius: BorderRadius.circular(radius),
                 image: DecorationImage(
-                  image: fileImage,
+                  image: fileImage!,
                   fit: BoxFit.cover,
                 ),
               ),

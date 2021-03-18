@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:ut_social/models/failure.dart';
 
 class LostPasswordScreen extends StatefulWidget {
   @override
@@ -11,8 +10,8 @@ class LostPasswordScreen extends StatefulWidget {
 class _LostPasswordScreenState extends State<LostPasswordScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
-  Failure error;
-  String result;
+  // Failure error;
+  String? result;
   bool hasError = false;
   bool isSuccess = false;
 
@@ -68,7 +67,7 @@ class _LostPasswordScreenState extends State<LostPasswordScreen> {
         SnackBar(
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text(result), const Icon(Icons.error)],
+            children: [Text(result!), const Icon(Icons.error)],
           ),
           backgroundColor: Theme.of(context).primaryColor,
         ),
@@ -129,7 +128,7 @@ class _LostPasswordScreenState extends State<LostPasswordScreen> {
                 if (result != null) ...{
                   const SizedBox(height: 30),
                   Text(
-                    result,
+                    result!,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: (hasError) ? Colors.red : Colors.green,

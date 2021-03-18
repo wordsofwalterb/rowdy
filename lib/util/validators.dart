@@ -6,7 +6,7 @@ class FFValidators {
     r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
   );
 
-  static final RegExp _emailUTRegExp = RegExp(
+  static final RegExp _emailUTSARegExp = RegExp(
     r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@utsa.edu',
   );
 
@@ -29,6 +29,40 @@ class FFValidators {
   }
 
   static bool isValidUTSAEmail(String email) {
-    return _emailUTRegExp.hasMatch(email);
+    return _emailUTSARegExp.hasMatch(email);
+  }
+
+  static String? emailValidator(String? email) {
+    if (email == null || email == '') {
+      return 'Email is empty';
+    } else if (isValidEmail(email)) {
+      return 'The email is not formated properly';
+    } else if (isValidUTSAEmail(email)) {
+      return 'Not a proper UTSA email';
+    }
+  }
+
+  static String? firstNameValidator(String? name) {
+    if (name == null || name == '') {
+      return 'First name is empty';
+    } else if (isValidFirstName(name)) {
+      return 'First name cannot be empty';
+    }
+  }
+
+  static String? lastNameValidator(String? name) {
+    if (name == null || name == '') {
+      return 'Last name is empty';
+    } else if (isValidLastName(name)) {
+      return 'Last name cannot be empty';
+    }
+  }
+
+  static String? passwordValidator(String? password) {
+    if (password == null || password == '') {
+      return 'Password cannot be empty';
+    } else if (isValidPassword(password)) {
+      return 'Innapropriate Password';
+    }
   }
 }

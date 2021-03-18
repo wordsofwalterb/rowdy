@@ -1,38 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ut_social/blocs/login_bloc/login_bloc.dart';
-import 'package:ut_social/blocs/user_bloc/user_bloc.dart';
-import 'package:ut_social/util/router.dart';
-
-import '../services/user_repository.dart';
-import 'register_screen.dart';
+import 'package:rowdy/screens/login/login_form_cubit/login_form_cubit.dart';
+import 'package:rowdy/services/user/user_cubit/user_cubit.dart';
+import 'package:rowdy/util/router.dart';
 
 class LoginScreen extends StatelessWidget {
-  final UserRepository _userRepository;
-
-  const LoginScreen({Key key, @required UserRepository userRepository})
-      : assert(userRepository != null),
-        _userRepository = userRepository,
-        super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider<LoginBloc>(
-        create: (context) => LoginBloc(userRepository: _userRepository),
-        child: LoginForm(userRepository: _userRepository),
+      body: BlocProvider<LoginFormCubit>(
+        create: (context) => LoginFormCubit(
+          BlocProvider.of<UserCubit>(context),
+        ),
+        child: const LoginForm(),
       ),
     );
   }
 }
 
 class LoginForm extends StatefulWidget {
-  final UserRepository _userRepository;
-
-  const LoginForm({Key key, @required UserRepository userRepository})
-      : assert(userRepository != null),
-        _userRepository = userRepository,
-        super(key: key);
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -44,75 +33,21 @@ class _LoginFormState extends State<LoginForm> {
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
 
-  LoginBloc _loginBloc;
-
-  UserRepository get _userRepository => widget._userRepository;
-
-  String _failureType(LoginState state) {
-    if (state.error != null) {
-      return state.error;
-    } else {
-      return 'Login Failure, please try again later';
-    }
-  }
-
-  //bool _hasLoginFailure(LoginState state) => state.error != null;
-
   bool get isPopulated =>
       _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
 
   @override
   void initState() {
     super.initState();
-    _loginBloc = BlocProvider.of<LoginBloc>(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
-        if (state.isFailure) {
-          Scaffold.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(_failureType(state)),
-                    const Icon(Icons.error)
-                  ],
-                ),
-                backgroundColor: Theme.of(context).primaryColor,
-              ),
-            );
-        }
-        if (state.isSubmitting) {
-          Scaffold.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Logging In...',
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                    const CircularProgressIndicator(),
-                  ],
-                ),
-                backgroundColor: Theme.of(context).backgroundColor,
-              ),
-            );
-        }
-        if (state.isSuccess) {
-          BlocProvider.of<UserBloc>(context).add(LogInUser());
-        }
-      },
+    return BlocListener<LoginFormCubit, LoginFormState>(
+      listener: _onCubitListen,
       child: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-        child: BlocBuilder<LoginBloc, LoginState>(
+        child: BlocBuilder<LoginFormCubit, LoginFormState>(
           builder: (context, state) {
             return Padding(
               padding: const EdgeInsets.all(20.0),
@@ -130,12 +65,11 @@ class _LoginFormState extends State<LoginForm> {
                       controller: _emailController,
                       decoration: const InputDecoration(
                         alignLabelWithHint: true,
-                        // hasFloatingPlaceholder: false,
                         floatingLabelBehavior: FloatingLabelBehavior.never,
-                        hintText: 'UT Email',
+                        hintText: 'UTSA Email',
                       ),
                       keyboardType: TextInputType.emailAddress,
-                      autovalidate: false,
+                      autovalidateMode: AutovalidateMode.disabled,
                       autocorrect: false,
                       focusNode: _emailFocus,
                       textInputAction: TextInputAction.next,
@@ -148,20 +82,19 @@ class _LoginFormState extends State<LoginForm> {
                       controller: _passwordController,
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
-                        // hasFloatingPlaceholder: false,
                         floatingLabelBehavior: FloatingLabelBehavior.never,
                         hintText: 'Password',
                         suffixIcon: GestureDetector(
                           onTap: _onPasswordObscuredChanged,
-                          child: (state.isPasswordObscured)
+                          child: (state.isPasswordHidden)
                               ? Icon(Icons.visibility_off,
                                   color: Theme.of(context).primaryColor)
                               : Icon(Icons.visibility,
                                   color: Theme.of(context).primaryColor),
                         ),
                       ),
-                      obscureText: state.isPasswordObscured,
-                      autovalidate: false,
+                      obscureText: state.isPasswordHidden,
+                      autovalidateMode: AutovalidateMode.disabled,
                       autocorrect: false,
                       focusNode: _passwordFocus,
                       textInputAction: TextInputAction.done,
@@ -174,14 +107,15 @@ class _LoginFormState extends State<LoginForm> {
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       width: double.infinity,
                       child: GestureDetector(
-                        onTap: () => Navigator.of(context)
-                            .pushNamed(Routes.lostPassword),
+                        onTap: () => {},
+                        // Navigator.of(context)
+                        //     .pushNamed(FFRoutes.lostPassword),
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Text(
                             'Lost Password',
                             style:
-                                Theme.of(context).textTheme.bodyText1.copyWith(
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
                                       color: const Color(0xffcbcbcb),
                                     ),
                           ),
@@ -211,12 +145,7 @@ class _LoginFormState extends State<LoginForm> {
                               ),
                             ),
                             child: FlatButton(
-                              onPressed: () => Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) {
-                                  return RegisterScreen(
-                                      userRepository: _userRepository);
-                                }),
-                              ),
+                              onPressed: () => {},
                               child: const Text(
                                 'Create an Account',
                                 style: TextStyle(color: Color(0xffc4c4c4)),
@@ -252,17 +181,52 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void _onPasswordObscuredChanged() {
-    _loginBloc.add(
-      ToggledObscurePassword(),
-    );
+    BlocProvider.of<LoginFormCubit>(context).toggleHiddenPassword();
   }
 
   void _onFormSubmitted() {
-    _loginBloc.add(
-      LoginWithCredentialsPressed(
-        email: _emailController.text,
-        password: _passwordController.text,
-      ),
+    BlocProvider.of<LoginFormCubit>(context).submitForm(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+  }
+
+  void _onCubitListen(BuildContext content, LoginFormState state) {
+    state.map(
+      initial: (_) => {},
+      processing: (_) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Logging In...',
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  const CircularProgressIndicator(),
+                ],
+              ),
+              backgroundColor: Theme.of(context).backgroundColor,
+            ),
+          );
+      },
+      success: (_) => Navigator.of(context).pop(),
+      failure: (state) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text(state.error), const Icon(Icons.error)],
+              ),
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
+          );
+      },
     );
   }
 }

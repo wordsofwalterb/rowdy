@@ -4,9 +4,9 @@ class ProfileButton extends StatelessWidget {
   const ProfileButton(this.text, {this.onPressed, this.width, this.height});
 
   final String text;
-  final VoidCallback onPressed;
-  final double width;
-  final double height;
+  final VoidCallback? onPressed;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {

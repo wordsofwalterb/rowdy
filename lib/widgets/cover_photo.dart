@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 
 class CoverPhoto extends StatelessWidget {
   /// The network url of the cover photo
-  final String coverPhotoUrl;
+  final String? coverPhotoUrl;
 
-  final double height;
+  final double? height;
 
-  final double width;
+  final double? width;
 
   final double radius;
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
-  final FileImage fileImage;
+  final FileImage? fileImage;
 
   /// The asset src, file must be in assets
   final String defaultImageSrc;
@@ -43,7 +43,7 @@ class CoverPhoto extends StatelessWidget {
                     topLeft: Radius.circular(radius),
                     topRight: Radius.circular(radius)),
                 image: DecorationImage(
-                  image: fileImage,
+                  image: fileImage!,
                   fit: BoxFit.cover,
                 ),
               ),

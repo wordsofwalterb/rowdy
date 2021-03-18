@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rowdy/models/model.dart';
 import 'package:rowdy/util/global.dart';
 
-import '../feeds/feed.dart';
-import '../feeds/feed_cubit/feed_cubit.dart';
-import '../feeds/feed_filter.dart';
-import '../feeds/feed_sort.dart';
+import 'feed.dart';
+import 'feed_cubit/feed_cubit.dart';
+import 'feed_filter.dart';
+import 'feed_sort.dart';
 
 mixin FeedRepoMixin<T extends Model> {
   Set<FeedCubit<T, FeedRepoMixin>> feeds = {};

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:ut_social/util/helper.dart';
+import 'package:rowdy/util/functions.dart';
 
 import 'profile_avatar.dart';
 
 class ChatMessage extends StatelessWidget {
+  const ChatMessage({
+    this.avatarUrl,
+    required this.name,
+    required this.body,
+    required this.timestamp,
+    this.backgroundColor,
+  });
+
   final String name;
   final String body;
   final DateTime timestamp;
-  final Color backgroundColor;
-  final String avatarUrl;
-
-  const ChatMessage({
-    this.avatarUrl,
-    this.name,
-    this.body,
-    this.timestamp,
-    this.backgroundColor,
-  });
+  final Color? backgroundColor;
+  final String? avatarUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +42,8 @@ class ChatMessage extends StatelessWidget {
                       Text(
                         name,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: const Color(0xfff1f1f1),
+                        style: const TextStyle(
+                          color: Color(0xfff1f1f1),
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                         ),
@@ -52,10 +52,10 @@ class ChatMessage extends StatelessWidget {
                         width: 6,
                       ),
                       Text(
-                        Helper.convertTimeToHourMinute(timestamp),
+                        FFFunctions.convertTimeToHourMinute(timestamp),
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: const Color(0xff8e8e8e),
+                        style: const TextStyle(
+                          color: Color(0xff8e8e8e),
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),
@@ -68,8 +68,8 @@ class ChatMessage extends StatelessWidget {
                   Text(
                     body,
                     softWrap: true,
-                    style: TextStyle(
-                      color: const Color(0xfff1f1f1),
+                    style: const TextStyle(
+                      color: Color(0xfff1f1f1),
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),

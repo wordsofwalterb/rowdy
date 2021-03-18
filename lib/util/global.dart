@@ -23,6 +23,9 @@ class FFGlobal {
   static final CollectionReference userRef =
       FirebaseFirestore.instance.collection('students');
 
+  static final CollectionReference studentsRef =
+      FirebaseFirestore.instance.collection('students');
+
   // static final FirebaseAnalytics analytics = FirebaseAnalytics();
 
   static final collectionMapper = <Type, CollectionReference>{

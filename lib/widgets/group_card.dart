@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:ut_social/util/dark_theme.dart';
 
 class GroupCard extends StatelessWidget {
   final String title;
-  final String subtitle;
-  final String imageUrl;
+  final String? subtitle;
+  final String? imageUrl;
 
-  const GroupCard({@required this.title, this.subtitle, this.imageUrl});
+  const GroupCard({required this.title, this.subtitle, this.imageUrl});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -20,17 +19,16 @@ class GroupCard extends StatelessWidget {
       child: Container(
         height: 135,
         width: 135,
-        decoration: (imageUrl != null)
-            ? BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  //colorFilter: ColorFilter.mode(Colors.black12, BlendMode.srcOver),
-                  image: CachedNetworkImageProvider(imageUrl),
-                ),
-              )
-            : BoxDecoration(
-                gradient: orangeGradient(),
-              ),
+        // decoration: (imageUrl != null)
+        //     ? BoxDecoration(
+        //         image: DecorationImage(
+        //           fit: BoxFit.cover,
+        //           image: CachedNetworkImageProvider(imageUrl),
+        //         ),
+        //       )
+        //     : BoxDecoration(
+        //         gradient: orangeGradient(),
+        //       ),
         child: Stack(
           children: <Widget>[
             if (imageUrl != null) ...{

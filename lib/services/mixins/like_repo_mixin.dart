@@ -1,4 +1,4 @@
-import 'feed_repo_mixin.dart';
+import '../feeds/feed_repo_mixin.dart';
 import '../likable/likable.dart';
 
 mixin LikeRepoMixin<T extends Likable> implements FeedRepoMixin<T> {

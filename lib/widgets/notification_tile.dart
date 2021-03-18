@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'profile_avatar.dart';
 
 class NotificationTile extends StatelessWidget {
-  final String title;
-  final String body;
-  final Icon icon;
-  final String imageUrl;
-  final VoidCallback onTap;
-  final EdgeInsetsGeometry margin;
-  final EdgeInsetsGeometry padding;
-
   const NotificationTile({
-    this.title,
-    this.body,
-    this.icon,
+    required this.title,
+    required this.body,
+    required this.icon,
     this.imageUrl,
     this.onTap,
     this.margin,
     this.padding,
   });
+
+  final String title;
+  final String body;
+  final Icon icon;
+  final String? imageUrl;
+  final VoidCallback? onTap;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {

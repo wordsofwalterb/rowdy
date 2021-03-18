@@ -1,32 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ut_social/blocs/profile_info_bloc/profile_info_bloc.dart';
-import 'package:ut_social/util/router.dart';
+import 'package:rowdy/util/router.dart';
 
 import 'cover_photo.dart';
 import 'profile_avatar.dart';
 
 /// This widget displays the main overview information about a user
 class TopProfileSection extends StatelessWidget {
-  final String coverPhotoUrl;
-  final bool isCurrentUser;
-  final String avatarUrl;
-  final String name;
-  final String bio;
-  final bool isFollowed;
-  final Function onFollow;
-  final Function onMessage;
-
   const TopProfileSection(
       {this.coverPhotoUrl,
       this.avatarUrl,
       this.bio,
-      @required this.isCurrentUser,
+      required this.isCurrentUser,
       this.isFollowed,
-      @required this.name,
+      required this.name,
       this.onFollow,
       this.onMessage});
+
+  final String? coverPhotoUrl;
+  final bool isCurrentUser;
+  final String? avatarUrl;
+  final String name;
+  final String? bio;
+  final bool? isFollowed;
+  final Function? onFollow;
+  final Function? onMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -77,18 +76,14 @@ class TopProfileSection extends StatelessWidget {
               margin: const EdgeInsets.all(8),
               padding: const EdgeInsets.symmetric(horizontal: 9),
               child: Text(
-                bio,
+                bio!,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
           const SizedBox(height: 8),
           if (isCurrentUser)
             GestureDetector(
-              onTap: () => Navigator.pushNamed(
-                context,
-                Routes.editProfile,
-                arguments: BlocProvider.of<ProfileInfoBloc>(context),
-              ),
+              onTap: () => {},
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(6),

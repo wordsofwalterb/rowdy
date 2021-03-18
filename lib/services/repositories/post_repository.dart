@@ -6,8 +6,8 @@ import 'package:rowdy/services/feeds/feed_cubit/feed_cubit.dart';
 
 import '../../models/post.dart';
 import '../feeds/feed.dart';
-import '../mixins/feed_repo_mixin.dart';
-import '../mixins/feed_repo_mixin.dart';
+import '../feeds/feed_repo_mixin.dart';
+import '../feeds/feed_repo_mixin.dart';
 import '../likable/likable.dart';
 import '../mixins/like_repo_mixin.dart';
 

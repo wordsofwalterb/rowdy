@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'profile_avatar.dart';
 
 class SearchTile extends StatelessWidget {
-  final String name;
-  final String imageUrl;
-  final VoidCallback onTap;
-  final EdgeInsetsGeometry margin;
-  final EdgeInsetsGeometry padding;
-
   const SearchTile({
-    this.name,
+    required this.name,
     this.imageUrl,
     this.onTap,
     this.margin,
     this.padding,
   });
+
+  final String name;
+  final String? imageUrl;
+  final VoidCallback? onTap;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {

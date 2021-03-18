@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rowdy/models/model.dart';
-import 'package:rowdy/services/mixins/avatar_user_mixin.dart';
+import 'package:rowdy/services/user/avatar_user_model.dart';
 
 part 'student.freezed.dart';
 part 'student.g.dart';

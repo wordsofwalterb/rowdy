@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 
 class ChatInput extends StatelessWidget {
-  final VoidCallback onImagePressed;
-  final VoidCallback onSendPressed;
-  final TextEditingController textController;
-
   const ChatInput({
     this.onImagePressed,
     this.onSendPressed,
     this.textController,
   });
+
+  final VoidCallback? onImagePressed;
+  final VoidCallback? onSendPressed;
+  final TextEditingController? textController;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class ChatInput extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 5),
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: TextField(
-                style: TextStyle(color: Colors.white, fontSize: 15.0),
+                style: const TextStyle(color: Colors.white, fontSize: 15.0),
                 controller: textController,
                 decoration: const InputDecoration.collapsed(
                   hintText: 'Type your message...',
@@ -77,7 +77,6 @@ class ChatInput extends StatelessWidget {
                   iconSize: 37,
                   padding: EdgeInsets.zero,
                   onPressed: onSendPressed,
-                  //onPressed: () => onSendMessage(textEditingController.text, 0),
                   color: Theme.of(context).primaryColor,
                 ),
               ],

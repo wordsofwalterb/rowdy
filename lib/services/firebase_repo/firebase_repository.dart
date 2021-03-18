@@ -1,22 +1,13 @@
 import 'dart:math';
 
-import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rowdy/models/model.dart';
-import 'package:rowdy/services/auth/firebase_auth_mixin.dart';
-import 'package:rowdy/services/mixins/avatar_repo_mixin.dart';
-import 'package:rowdy/services/mixins/single_entity_repo_mixin.dart';
+import 'package:rowdy/services/firebase_repo/firebase_email_auth_mixin.dart';
 import 'package:rowdy/services/mixins/update_entity_repo_mixin.dart';
+import 'package:rowdy/services/firebase_repo/firebase_auth_mixin.dart';
+import 'package:rowdy/util/global.dart';
 
-import '../../models/student.dart';
-import '../../util/global.dart';
-
-class UserRepository
-    with
-        FirebaseAuthMixin<FFStudent>,
-        UpdateEntityRepo<FFStudent>,
-        SingleEntityRepoMixin<FFStudent>,
-        AvatarRepoMixin<FFStudent> {
+class FirebaseRepository<T extends Model>
+    with FirebaseAuthMixin<T>, EmailLoginMixin<T> {
   /// Creates document for user in firestore after registration.
   Future<void> setupUser(
       {required String firstName,
@@ -46,6 +37,18 @@ class UserRepository
       await FFGlobal.userRef.doc(currentUser.uid).set(userMap);
     } catch (error) {
       throw Exception('There was an unexpected error connecting to database');
+    }
+  }
+
+  Future<void> updateItem(T item) async {
+    try {
+      final ref = FFGlobal.collectionMapper[T];
+
+      if (ref != null) {
+        await ref.doc(item.id).update(item.toJson());
+      }
+    } catch (error) {
+      throw Exception();
     }
   }
 }
