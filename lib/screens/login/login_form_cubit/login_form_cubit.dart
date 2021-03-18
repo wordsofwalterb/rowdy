@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rowdy/services/user/user_cubit/user_cubit.dart';
+import 'package:rowdy/services/user/user_cubit/user_repository.dart';
 
 part 'login_form_state.dart';
 part 'login_form_cubit.freezed.dart';
@@ -9,7 +9,7 @@ class LoginFormCubit extends Cubit<LoginFormState> {
   LoginFormCubit(this.userCubit)
       : super(const LoginFormState.initial(isPasswordHidden: true));
 
-  UserCubit userCubit;
+  UserRepository userCubit;
 
   Future<void> submitForm({
     required String email,

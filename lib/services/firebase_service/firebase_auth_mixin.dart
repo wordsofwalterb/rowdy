@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:rowdy/models/model.dart';
-import 'package:rowdy/services/user/user_cubit/user_cubit.dart';
 
 import '../../util/global.dart';
 import '../../util/result.dart';

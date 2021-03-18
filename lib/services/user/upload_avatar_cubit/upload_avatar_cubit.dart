@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rowdy/services/user/avatar_user_cubit_mixin.dart';
-import 'package:rowdy/services/user/user_cubit/user_cubit.dart';
+import 'package:rowdy/services/user/user_cubit/user_repository.dart';
 
-import '../post_upload_repository.dart';
+import '../../post_upload_service.dart';
 
 part 'upload_avatar_state.dart';
 part 'upload_avatar_cubit.freezed.dart';
 
-class UploadAvatarCubit<C extends UserCubit> extends Cubit<UploadAvatarState> {
+class UploadAvatarCubit<C extends UserRepository>
+    extends Cubit<UploadAvatarState> {
   UploadAvatarCubit(this.userCubit) : super(const UploadAvatarState.initial());
 
   C userCubit;

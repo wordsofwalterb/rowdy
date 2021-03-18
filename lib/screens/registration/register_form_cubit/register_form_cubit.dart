@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rowdy/services/user/user_cubit/user_cubit.dart';
+
+import 'package:rowdy/services/user/user_cubit/user_repository.dart';
 import 'package:rowdy/util/exceptions.dart';
 import 'package:rowdy/util/validators.dart';
 
@@ -13,7 +14,7 @@ class RegisterFormCubit extends Cubit<RegisterFormState> {
           isPasswordHidden: false,
         ));
 
-  UserCubit userCubit;
+  UserRepository userCubit;
 
   Future<void> submitForm({
     required String email,

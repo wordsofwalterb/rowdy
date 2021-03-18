@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:rowdy/l10n/l10n.dart';
-import 'package:rowdy/models/student.dart';
-import 'package:rowdy/services/firebase_repo/firebase_repository.dart';
+
+import 'package:rowdy/services/firebase_service/firebase_service.dart';
+import 'package:rowdy/services/user/user_cubit/user_repository.dart';
+
 import 'package:rowdy/util/theme.dart';
 
-import 'screens/navigator_screen.dart';
+import 'screens/navigator_bridge.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       home: MultiRepositoryProvider(
         providers: [
-          RepositoryProvider(create: (_) => FirebaseRepository<FFStudent>()),
+          RepositoryProvider(create: (_) => UserRepository(FirebaseService())),
         ],
         child: const NavigatorBridge(),
       ),

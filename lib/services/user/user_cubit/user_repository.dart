@@ -3,30 +3,31 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:rowdy/models/student.dart';
-import 'package:rowdy/services/firebase_repo/firebase_repo_mixin.dart';
-import 'package:rowdy/services/firebase_repo/firebase_repository.dart';
+
+import 'package:rowdy/services/firebase_service/firebase_repo_mixin.dart';
+import 'package:rowdy/services/firebase_service/firebase_service.dart';
 
 import 'package:rowdy/util/result.dart';
 
 import '../avatar_user_cubit_mixin.dart';
 
 part 'user_state.dart';
-part 'user_cubit.freezed.dart';
+part 'user_repository.freezed.dart';
 
-class UserCubit extends Cubit<UserState<FFStudent>>
-    with UpdateAvatarUserCubitMixin<FFStudent>
-    implements FirebaseRepoMixin<FFStudent> {
-  UserCubit(this.repo) : super(const UserState.unauthenticated());
+class UserRepository extends Cubit<UserState<FFStudent>>
+    with UpdateAvatarUserRepoMixin<FFStudent>
+    implements FirebaseServiceMixin<FFStudent> {
+  UserRepository(this.service) : super(const UserState.unauthenticated());
 
   @override
-  FirebaseRepository<FFStudent> repo;
+  FirebaseService<FFStudent> service;
 
   Future<void> signUpWithCredential(
     String email,
     String password, {
     Map<String, Object>? props,
   }) async {
-    final result = await repo.createEmailUser(email, password, props: props);
+    final result = await service.createEmailUser(email, password, props: props);
 
     (result.hasData)
         ? emit(UserState.authenticated(user: result.data!))
@@ -39,10 +40,10 @@ class UserCubit extends Cubit<UserState<FFStudent>>
   }) async {
     emit(const UserState.authenticating());
 
-    final authResult = await repo.signInWithCredentials(email, password);
+    final authResult = await service.signInWithCredentials(email, password);
 
     if (authResult.hasData) {
-      final userResult = await repo.getUser();
+      final userResult = await service.getUser();
 
       (userResult.hasData)
           ? emit(UserState.authenticated(user: userResult.data!))
@@ -55,8 +56,8 @@ class UserCubit extends Cubit<UserState<FFStudent>>
   Future<void> autoLogin() async {
     emit(const UserState.authenticating());
 
-    final authResult = repo.isSignedIn()
-        ? await repo.getUser()
+    final authResult = service.isSignedIn()
+        ? await service.getUser()
         : FFResult<FFStudent>.failure(
             errorCode: 'AUTH_NOT_SIGNED_IN',
             errorMessage: 'Error retrieving user data');

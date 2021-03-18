@@ -61,7 +61,7 @@ class _LostPasswordScreenState extends State<LostPasswordScreen> {
   }
 
   void _errorPopup() {
-    Scaffold.of(context)
+    ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
@@ -75,7 +75,7 @@ class _LostPasswordScreenState extends State<LostPasswordScreen> {
   }
 
   void _submitingPopup() {
-    Scaffold.of(context)
+    ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(

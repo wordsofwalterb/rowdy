@@ -1,10 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rowdy/models/model.dart';
-import 'package:rowdy/services/firebase_repo/firebase_auth_mixin.dart';
 
 import '../../util/global.dart';
 import '../../util/result.dart';
+import 'firebase_auth_mixin.dart';
 
 mixin EmailLoginMixin<T extends Model> on FirebaseAuthMixin<T> {
   Future<FFResult<T>> createEmailUser(

@@ -1,4 +1,4 @@
-part of 'user_cubit.dart';
+part of 'user_repository.dart';
 
 @freezed
 abstract class UserState<FFStudent> with _$UserState {

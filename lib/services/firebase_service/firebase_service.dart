@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:rowdy/models/model.dart';
-import 'package:rowdy/services/firebase_repo/firebase_email_auth_mixin.dart';
-import 'package:rowdy/services/mixins/update_entity_repo_mixin.dart';
-import 'package:rowdy/services/firebase_repo/firebase_auth_mixin.dart';
+
 import 'package:rowdy/util/global.dart';
 
-class FirebaseRepository<T extends Model>
+import 'firebase_auth_mixin.dart';
+import 'firebase_email_auth_mixin.dart';
+
+class FirebaseService<T extends Model>
     with FirebaseAuthMixin<T>, EmailLoginMixin<T> {
   /// Creates document for user in firestore after registration.
   Future<void> setupUser(
