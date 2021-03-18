@@ -25,20 +25,20 @@ mixin FirebaseAuthMixin<T extends Model> {
         password: password,
       );
       return FFResult.success(userCredential);
-    } on PlatformException catch (error) {
+    } on FirebaseAuthException catch (error) {
       String errorMessage;
 
       switch (error.code) {
-        case 'ERROR_INVALID_EMAIL':
+        case 'invalid-email':
           errorMessage = 'Email address not found';
           break;
-        case 'ERROR_WRONG_PASSWORD':
+        case 'wrong-password':
           errorMessage = 'Password is incorrect';
           break;
-        case 'ERROR_USER_NOT_FOUND':
+        case 'user-not-found':
           errorMessage = "User with this email doesn't exist.";
           break;
-        case 'ERROR_USER_DISABLED':
+        case 'user-disabled':
           errorMessage = 'User with this email has been disabled.';
           break;
         case 'ERROR_TOO_MANY_REQUESTS':

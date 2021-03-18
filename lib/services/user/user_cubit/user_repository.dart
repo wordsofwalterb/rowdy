@@ -38,8 +38,6 @@ class UserRepository extends Cubit<UserState<FFStudent>>
     required String email,
     required String password,
   }) async {
-    emit(const UserState.authenticating());
-
     final authResult = await service.signInWithCredentials(email, password);
 
     if (authResult.hasData) {

@@ -24,9 +24,9 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: MultiRepositoryProvider(
+      home: MultiBlocProvider(
         providers: [
-          RepositoryProvider(create: (_) => UserRepository(FirebaseService())),
+          BlocProvider(create: (_) => UserRepository(FirebaseService())),
         ],
         child: const NavigatorBridge(),
       ),

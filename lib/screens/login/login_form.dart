@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rowdy/screens/login/login_form_cubit/login_form_cubit.dart';
+import 'package:rowdy/screens/registration/register_screen.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -127,7 +128,10 @@ class _LoginFormState extends State<LoginForm> {
                               ),
                             ),
                             child: FlatButton(
-                              onPressed: () => {},
+                              onPressed: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const RegisterScreen())),
                               child: const Text(
                                 'Create an Account',
                                 style: TextStyle(color: Color(0xffc4c4c4)),
