@@ -16,35 +16,39 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FeedStateTearOff {
   const _$FeedStateTearOff();
 
-  _Initial<T> initial<T extends Model>() {
-    return _Initial<T>();
-  }
-
-  _Loading<T> loading<T extends Model>() {
-    return _Loading<T>();
-  }
-
-  _Success<T> loaded<T extends Model>(List<T> items) {
-    return _Success<T>(
-      items,
+  _Initial initial(List<String> itemIds) {
+    return _Initial(
+      itemIds,
     );
   }
 
-  _ReachedMax<T> reachedMax<T extends Model>(List<T> items) {
-    return _ReachedMax<T>(
-      items,
+  _Loading loading(List<String> itemIds) {
+    return _Loading(
+      itemIds,
     );
   }
 
-  _Empty<T> empty<T extends Model>(List<T> items) {
-    return _Empty<T>(
-      items,
+  _Success loaded(List<String> itemIds) {
+    return _Success(
+      itemIds,
     );
   }
 
-  _Failure<T> failure<T extends Model>(List<T> items) {
-    return _Failure<T>(
-      items,
+  _ReachedMax reachedMax(List<String> itemIds) {
+    return _ReachedMax(
+      itemIds,
+    );
+  }
+
+  _Empty empty(List<String> itemIds) {
+    return _Empty(
+      itemIds,
+    );
+  }
+
+  _Failure failure(List<String> itemIds) {
+    return _Failure(
+      itemIds,
     );
   }
 }
@@ -53,129 +57,170 @@ class _$FeedStateTearOff {
 const $FeedState = _$FeedStateTearOff();
 
 /// @nodoc
-mixin _$FeedState<T extends Model> {
+mixin _$FeedState {
+  List<String> get itemIds => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<T> items) loaded,
-    required TResult Function(List<T> items) reachedMax,
-    required TResult Function(List<T> items) empty,
-    required TResult Function(List<T> items) failure,
+    required TResult Function(List<String> itemIds) initial,
+    required TResult Function(List<String> itemIds) loading,
+    required TResult Function(List<String> itemIds) loaded,
+    required TResult Function(List<String> itemIds) reachedMax,
+    required TResult Function(List<String> itemIds) empty,
+    required TResult Function(List<String> itemIds) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<T> items)? loaded,
-    TResult Function(List<T> items)? reachedMax,
-    TResult Function(List<T> items)? empty,
-    TResult Function(List<T> items)? failure,
+    TResult Function(List<String> itemIds)? initial,
+    TResult Function(List<String> itemIds)? loading,
+    TResult Function(List<String> itemIds)? loaded,
+    TResult Function(List<String> itemIds)? reachedMax,
+    TResult Function(List<String> itemIds)? empty,
+    TResult Function(List<String> itemIds)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) loaded,
-    required TResult Function(_ReachedMax<T> value) reachedMax,
-    required TResult Function(_Empty<T> value) empty,
-    required TResult Function(_Failure<T> value) failure,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) loaded,
+    required TResult Function(_ReachedMax value) reachedMax,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Failure value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? loaded,
-    TResult Function(_ReachedMax<T> value)? reachedMax,
-    TResult Function(_Empty<T> value)? empty,
-    TResult Function(_Failure<T> value)? failure,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? loaded,
+    TResult Function(_ReachedMax value)? reachedMax,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $FeedStateCopyWith<FeedState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FeedStateCopyWith<T extends Model, $Res> {
-  factory $FeedStateCopyWith(
-          FeedState<T> value, $Res Function(FeedState<T>) then) =
-      _$FeedStateCopyWithImpl<T, $Res>;
+abstract class $FeedStateCopyWith<$Res> {
+  factory $FeedStateCopyWith(FeedState value, $Res Function(FeedState) then) =
+      _$FeedStateCopyWithImpl<$Res>;
+  $Res call({List<String> itemIds});
 }
 
 /// @nodoc
-class _$FeedStateCopyWithImpl<T extends Model, $Res>
-    implements $FeedStateCopyWith<T, $Res> {
+class _$FeedStateCopyWithImpl<$Res> implements $FeedStateCopyWith<$Res> {
   _$FeedStateCopyWithImpl(this._value, this._then);
 
-  final FeedState<T> _value;
+  final FeedState _value;
   // ignore: unused_field
-  final $Res Function(FeedState<T>) _then;
-}
-
-/// @nodoc
-abstract class _$InitialCopyWith<T extends Model, $Res> {
-  factory _$InitialCopyWith(
-          _Initial<T> value, $Res Function(_Initial<T>) then) =
-      __$InitialCopyWithImpl<T, $Res>;
-}
-
-/// @nodoc
-class __$InitialCopyWithImpl<T extends Model, $Res>
-    extends _$FeedStateCopyWithImpl<T, $Res>
-    implements _$InitialCopyWith<T, $Res> {
-  __$InitialCopyWithImpl(_Initial<T> _value, $Res Function(_Initial<T>) _then)
-      : super(_value, (v) => _then(v as _Initial<T>));
+  final $Res Function(FeedState) _then;
 
   @override
-  _Initial<T> get _value => super._value as _Initial<T>;
+  $Res call({
+    Object? itemIds = freezed,
+  }) {
+    return _then(_value.copyWith(
+      itemIds: itemIds == freezed
+          ? _value.itemIds
+          : itemIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
 /// @nodoc
-class _$_Initial<T extends Model> implements _Initial<T> {
-  const _$_Initial();
+abstract class _$InitialCopyWith<$Res> implements $FeedStateCopyWith<$Res> {
+  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
+      __$InitialCopyWithImpl<$Res>;
+  @override
+  $Res call({List<String> itemIds});
+}
+
+/// @nodoc
+class __$InitialCopyWithImpl<$Res> extends _$FeedStateCopyWithImpl<$Res>
+    implements _$InitialCopyWith<$Res> {
+  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
+      : super(_value, (v) => _then(v as _Initial));
+
+  @override
+  _Initial get _value => super._value as _Initial;
+
+  @override
+  $Res call({
+    Object? itemIds = freezed,
+  }) {
+    return _then(_Initial(
+      itemIds == freezed
+          ? _value.itemIds
+          : itemIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_Initial implements _Initial {
+  const _$_Initial(this.itemIds);
+
+  @override
+  final List<String> itemIds;
 
   @override
   String toString() {
-    return 'FeedState<$T>.initial()';
+    return 'FeedState.initial(itemIds: $itemIds)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initial<T>);
+    return identical(this, other) ||
+        (other is _Initial &&
+            (identical(other.itemIds, itemIds) ||
+                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
+
+  @JsonKey(ignore: true)
+  @override
+  _$InitialCopyWith<_Initial> get copyWith =>
+      __$InitialCopyWithImpl<_Initial>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<T> items) loaded,
-    required TResult Function(List<T> items) reachedMax,
-    required TResult Function(List<T> items) empty,
-    required TResult Function(List<T> items) failure,
+    required TResult Function(List<String> itemIds) initial,
+    required TResult Function(List<String> itemIds) loading,
+    required TResult Function(List<String> itemIds) loaded,
+    required TResult Function(List<String> itemIds) reachedMax,
+    required TResult Function(List<String> itemIds) empty,
+    required TResult Function(List<String> itemIds) failure,
   }) {
-    return initial();
+    return initial(itemIds);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<T> items)? loaded,
-    TResult Function(List<T> items)? reachedMax,
-    TResult Function(List<T> items)? empty,
-    TResult Function(List<T> items)? failure,
+    TResult Function(List<String> itemIds)? initial,
+    TResult Function(List<String> itemIds)? loading,
+    TResult Function(List<String> itemIds)? loaded,
+    TResult Function(List<String> itemIds)? reachedMax,
+    TResult Function(List<String> itemIds)? empty,
+    TResult Function(List<String> itemIds)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(itemIds);
     }
     return orElse();
   }
@@ -183,12 +228,12 @@ class _$_Initial<T extends Model> implements _Initial<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) loaded,
-    required TResult Function(_ReachedMax<T> value) reachedMax,
-    required TResult Function(_Empty<T> value) empty,
-    required TResult Function(_Failure<T> value) failure,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) loaded,
+    required TResult Function(_ReachedMax value) reachedMax,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Failure value) failure,
   }) {
     return initial(this);
   }
@@ -196,12 +241,12 @@ class _$_Initial<T extends Model> implements _Initial<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? loaded,
-    TResult Function(_ReachedMax<T> value)? reachedMax,
-    TResult Function(_Empty<T> value)? empty,
-    TResult Function(_Failure<T> value)? failure,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? loaded,
+    TResult Function(_ReachedMax value)? reachedMax,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -211,71 +256,102 @@ class _$_Initial<T extends Model> implements _Initial<T> {
   }
 }
 
-abstract class _Initial<T extends Model> implements FeedState<T> {
-  const factory _Initial() = _$_Initial<T>;
-}
-
-/// @nodoc
-abstract class _$LoadingCopyWith<T extends Model, $Res> {
-  factory _$LoadingCopyWith(
-          _Loading<T> value, $Res Function(_Loading<T>) then) =
-      __$LoadingCopyWithImpl<T, $Res>;
-}
-
-/// @nodoc
-class __$LoadingCopyWithImpl<T extends Model, $Res>
-    extends _$FeedStateCopyWithImpl<T, $Res>
-    implements _$LoadingCopyWith<T, $Res> {
-  __$LoadingCopyWithImpl(_Loading<T> _value, $Res Function(_Loading<T>) _then)
-      : super(_value, (v) => _then(v as _Loading<T>));
+abstract class _Initial implements FeedState {
+  const factory _Initial(List<String> itemIds) = _$_Initial;
 
   @override
-  _Loading<T> get _value => super._value as _Loading<T>;
+  List<String> get itemIds => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$InitialCopyWith<_Initial> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class _$_Loading<T extends Model> implements _Loading<T> {
-  const _$_Loading();
+abstract class _$LoadingCopyWith<$Res> implements $FeedStateCopyWith<$Res> {
+  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
+      __$LoadingCopyWithImpl<$Res>;
+  @override
+  $Res call({List<String> itemIds});
+}
+
+/// @nodoc
+class __$LoadingCopyWithImpl<$Res> extends _$FeedStateCopyWithImpl<$Res>
+    implements _$LoadingCopyWith<$Res> {
+  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
+      : super(_value, (v) => _then(v as _Loading));
+
+  @override
+  _Loading get _value => super._value as _Loading;
+
+  @override
+  $Res call({
+    Object? itemIds = freezed,
+  }) {
+    return _then(_Loading(
+      itemIds == freezed
+          ? _value.itemIds
+          : itemIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_Loading implements _Loading {
+  const _$_Loading(this.itemIds);
+
+  @override
+  final List<String> itemIds;
 
   @override
   String toString() {
-    return 'FeedState<$T>.loading()';
+    return 'FeedState.loading(itemIds: $itemIds)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Loading<T>);
+    return identical(this, other) ||
+        (other is _Loading &&
+            (identical(other.itemIds, itemIds) ||
+                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadingCopyWith<_Loading> get copyWith =>
+      __$LoadingCopyWithImpl<_Loading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<T> items) loaded,
-    required TResult Function(List<T> items) reachedMax,
-    required TResult Function(List<T> items) empty,
-    required TResult Function(List<T> items) failure,
+    required TResult Function(List<String> itemIds) initial,
+    required TResult Function(List<String> itemIds) loading,
+    required TResult Function(List<String> itemIds) loaded,
+    required TResult Function(List<String> itemIds) reachedMax,
+    required TResult Function(List<String> itemIds) empty,
+    required TResult Function(List<String> itemIds) failure,
   }) {
-    return loading();
+    return loading(itemIds);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<T> items)? loaded,
-    TResult Function(List<T> items)? reachedMax,
-    TResult Function(List<T> items)? empty,
-    TResult Function(List<T> items)? failure,
+    TResult Function(List<String> itemIds)? initial,
+    TResult Function(List<String> itemIds)? loading,
+    TResult Function(List<String> itemIds)? loaded,
+    TResult Function(List<String> itemIds)? reachedMax,
+    TResult Function(List<String> itemIds)? empty,
+    TResult Function(List<String> itemIds)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(itemIds);
     }
     return orElse();
   }
@@ -283,12 +359,12 @@ class _$_Loading<T extends Model> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) loaded,
-    required TResult Function(_ReachedMax<T> value) reachedMax,
-    required TResult Function(_Empty<T> value) empty,
-    required TResult Function(_Failure<T> value) failure,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) loaded,
+    required TResult Function(_ReachedMax value) reachedMax,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Failure value) failure,
   }) {
     return loading(this);
   }
@@ -296,12 +372,12 @@ class _$_Loading<T extends Model> implements _Loading<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? loaded,
-    TResult Function(_ReachedMax<T> value)? reachedMax,
-    TResult Function(_Empty<T> value)? empty,
-    TResult Function(_Failure<T> value)? failure,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? loaded,
+    TResult Function(_ReachedMax value)? reachedMax,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -311,96 +387,102 @@ class _$_Loading<T extends Model> implements _Loading<T> {
   }
 }
 
-abstract class _Loading<T extends Model> implements FeedState<T> {
-  const factory _Loading() = _$_Loading<T>;
-}
-
-/// @nodoc
-abstract class _$SuccessCopyWith<T extends Model, $Res> {
-  factory _$SuccessCopyWith(
-          _Success<T> value, $Res Function(_Success<T>) then) =
-      __$SuccessCopyWithImpl<T, $Res>;
-  $Res call({List<T> items});
-}
-
-/// @nodoc
-class __$SuccessCopyWithImpl<T extends Model, $Res>
-    extends _$FeedStateCopyWithImpl<T, $Res>
-    implements _$SuccessCopyWith<T, $Res> {
-  __$SuccessCopyWithImpl(_Success<T> _value, $Res Function(_Success<T>) _then)
-      : super(_value, (v) => _then(v as _Success<T>));
+abstract class _Loading implements FeedState {
+  const factory _Loading(List<String> itemIds) = _$_Loading;
 
   @override
-  _Success<T> get _value => super._value as _Success<T>;
+  List<String> get itemIds => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$LoadingCopyWith<_Loading> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SuccessCopyWith<$Res> implements $FeedStateCopyWith<$Res> {
+  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) then) =
+      __$SuccessCopyWithImpl<$Res>;
+  @override
+  $Res call({List<String> itemIds});
+}
+
+/// @nodoc
+class __$SuccessCopyWithImpl<$Res> extends _$FeedStateCopyWithImpl<$Res>
+    implements _$SuccessCopyWith<$Res> {
+  __$SuccessCopyWithImpl(_Success _value, $Res Function(_Success) _then)
+      : super(_value, (v) => _then(v as _Success));
+
+  @override
+  _Success get _value => super._value as _Success;
 
   @override
   $Res call({
-    Object? items = freezed,
+    Object? itemIds = freezed,
   }) {
-    return _then(_Success<T>(
-      items == freezed
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<T>,
+    return _then(_Success(
+      itemIds == freezed
+          ? _value.itemIds
+          : itemIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
 
 /// @nodoc
-class _$_Success<T extends Model> implements _Success<T> {
-  const _$_Success(this.items);
+class _$_Success implements _Success {
+  const _$_Success(this.itemIds);
 
   @override
-  final List<T> items;
+  final List<String> itemIds;
 
   @override
   String toString() {
-    return 'FeedState<$T>.loaded(items: $items)';
+    return 'FeedState.loaded(itemIds: $itemIds)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Success<T> &&
-            (identical(other.items, items) ||
-                const DeepCollectionEquality().equals(other.items, items)));
+        (other is _Success &&
+            (identical(other.itemIds, itemIds) ||
+                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(items);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
 
   @JsonKey(ignore: true)
   @override
-  _$SuccessCopyWith<T, _Success<T>> get copyWith =>
-      __$SuccessCopyWithImpl<T, _Success<T>>(this, _$identity);
+  _$SuccessCopyWith<_Success> get copyWith =>
+      __$SuccessCopyWithImpl<_Success>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<T> items) loaded,
-    required TResult Function(List<T> items) reachedMax,
-    required TResult Function(List<T> items) empty,
-    required TResult Function(List<T> items) failure,
+    required TResult Function(List<String> itemIds) initial,
+    required TResult Function(List<String> itemIds) loading,
+    required TResult Function(List<String> itemIds) loaded,
+    required TResult Function(List<String> itemIds) reachedMax,
+    required TResult Function(List<String> itemIds) empty,
+    required TResult Function(List<String> itemIds) failure,
   }) {
-    return loaded(items);
+    return loaded(itemIds);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<T> items)? loaded,
-    TResult Function(List<T> items)? reachedMax,
-    TResult Function(List<T> items)? empty,
-    TResult Function(List<T> items)? failure,
+    TResult Function(List<String> itemIds)? initial,
+    TResult Function(List<String> itemIds)? loading,
+    TResult Function(List<String> itemIds)? loaded,
+    TResult Function(List<String> itemIds)? reachedMax,
+    TResult Function(List<String> itemIds)? empty,
+    TResult Function(List<String> itemIds)? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(items);
+      return loaded(itemIds);
     }
     return orElse();
   }
@@ -408,12 +490,12 @@ class _$_Success<T extends Model> implements _Success<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) loaded,
-    required TResult Function(_ReachedMax<T> value) reachedMax,
-    required TResult Function(_Empty<T> value) empty,
-    required TResult Function(_Failure<T> value) failure,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) loaded,
+    required TResult Function(_ReachedMax value) reachedMax,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Failure value) failure,
   }) {
     return loaded(this);
   }
@@ -421,12 +503,12 @@ class _$_Success<T extends Model> implements _Success<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? loaded,
-    TResult Function(_ReachedMax<T> value)? reachedMax,
-    TResult Function(_Empty<T> value)? empty,
-    TResult Function(_Failure<T> value)? failure,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? loaded,
+    TResult Function(_ReachedMax value)? reachedMax,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -436,102 +518,104 @@ class _$_Success<T extends Model> implements _Success<T> {
   }
 }
 
-abstract class _Success<T extends Model> implements FeedState<T> {
-  const factory _Success(List<T> items) = _$_Success<T>;
+abstract class _Success implements FeedState {
+  const factory _Success(List<String> itemIds) = _$_Success;
 
-  List<T> get items => throw _privateConstructorUsedError;
+  @override
+  List<String> get itemIds => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
-  _$SuccessCopyWith<T, _Success<T>> get copyWith =>
+  _$SuccessCopyWith<_Success> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$ReachedMaxCopyWith<T extends Model, $Res> {
+abstract class _$ReachedMaxCopyWith<$Res> implements $FeedStateCopyWith<$Res> {
   factory _$ReachedMaxCopyWith(
-          _ReachedMax<T> value, $Res Function(_ReachedMax<T>) then) =
-      __$ReachedMaxCopyWithImpl<T, $Res>;
-  $Res call({List<T> items});
+          _ReachedMax value, $Res Function(_ReachedMax) then) =
+      __$ReachedMaxCopyWithImpl<$Res>;
+  @override
+  $Res call({List<String> itemIds});
 }
 
 /// @nodoc
-class __$ReachedMaxCopyWithImpl<T extends Model, $Res>
-    extends _$FeedStateCopyWithImpl<T, $Res>
-    implements _$ReachedMaxCopyWith<T, $Res> {
+class __$ReachedMaxCopyWithImpl<$Res> extends _$FeedStateCopyWithImpl<$Res>
+    implements _$ReachedMaxCopyWith<$Res> {
   __$ReachedMaxCopyWithImpl(
-      _ReachedMax<T> _value, $Res Function(_ReachedMax<T>) _then)
-      : super(_value, (v) => _then(v as _ReachedMax<T>));
+      _ReachedMax _value, $Res Function(_ReachedMax) _then)
+      : super(_value, (v) => _then(v as _ReachedMax));
 
   @override
-  _ReachedMax<T> get _value => super._value as _ReachedMax<T>;
+  _ReachedMax get _value => super._value as _ReachedMax;
 
   @override
   $Res call({
-    Object? items = freezed,
+    Object? itemIds = freezed,
   }) {
-    return _then(_ReachedMax<T>(
-      items == freezed
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<T>,
+    return _then(_ReachedMax(
+      itemIds == freezed
+          ? _value.itemIds
+          : itemIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
 
 /// @nodoc
-class _$_ReachedMax<T extends Model> implements _ReachedMax<T> {
-  const _$_ReachedMax(this.items);
+class _$_ReachedMax implements _ReachedMax {
+  const _$_ReachedMax(this.itemIds);
 
   @override
-  final List<T> items;
+  final List<String> itemIds;
 
   @override
   String toString() {
-    return 'FeedState<$T>.reachedMax(items: $items)';
+    return 'FeedState.reachedMax(itemIds: $itemIds)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ReachedMax<T> &&
-            (identical(other.items, items) ||
-                const DeepCollectionEquality().equals(other.items, items)));
+        (other is _ReachedMax &&
+            (identical(other.itemIds, itemIds) ||
+                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(items);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
 
   @JsonKey(ignore: true)
   @override
-  _$ReachedMaxCopyWith<T, _ReachedMax<T>> get copyWith =>
-      __$ReachedMaxCopyWithImpl<T, _ReachedMax<T>>(this, _$identity);
+  _$ReachedMaxCopyWith<_ReachedMax> get copyWith =>
+      __$ReachedMaxCopyWithImpl<_ReachedMax>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<T> items) loaded,
-    required TResult Function(List<T> items) reachedMax,
-    required TResult Function(List<T> items) empty,
-    required TResult Function(List<T> items) failure,
+    required TResult Function(List<String> itemIds) initial,
+    required TResult Function(List<String> itemIds) loading,
+    required TResult Function(List<String> itemIds) loaded,
+    required TResult Function(List<String> itemIds) reachedMax,
+    required TResult Function(List<String> itemIds) empty,
+    required TResult Function(List<String> itemIds) failure,
   }) {
-    return reachedMax(items);
+    return reachedMax(itemIds);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<T> items)? loaded,
-    TResult Function(List<T> items)? reachedMax,
-    TResult Function(List<T> items)? empty,
-    TResult Function(List<T> items)? failure,
+    TResult Function(List<String> itemIds)? initial,
+    TResult Function(List<String> itemIds)? loading,
+    TResult Function(List<String> itemIds)? loaded,
+    TResult Function(List<String> itemIds)? reachedMax,
+    TResult Function(List<String> itemIds)? empty,
+    TResult Function(List<String> itemIds)? failure,
     required TResult orElse(),
   }) {
     if (reachedMax != null) {
-      return reachedMax(items);
+      return reachedMax(itemIds);
     }
     return orElse();
   }
@@ -539,12 +623,12 @@ class _$_ReachedMax<T extends Model> implements _ReachedMax<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) loaded,
-    required TResult Function(_ReachedMax<T> value) reachedMax,
-    required TResult Function(_Empty<T> value) empty,
-    required TResult Function(_Failure<T> value) failure,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) loaded,
+    required TResult Function(_ReachedMax value) reachedMax,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Failure value) failure,
   }) {
     return reachedMax(this);
   }
@@ -552,12 +636,12 @@ class _$_ReachedMax<T extends Model> implements _ReachedMax<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? loaded,
-    TResult Function(_ReachedMax<T> value)? reachedMax,
-    TResult Function(_Empty<T> value)? empty,
-    TResult Function(_Failure<T> value)? failure,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? loaded,
+    TResult Function(_ReachedMax value)? reachedMax,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
     if (reachedMax != null) {
@@ -567,100 +651,102 @@ class _$_ReachedMax<T extends Model> implements _ReachedMax<T> {
   }
 }
 
-abstract class _ReachedMax<T extends Model> implements FeedState<T> {
-  const factory _ReachedMax(List<T> items) = _$_ReachedMax<T>;
+abstract class _ReachedMax implements FeedState {
+  const factory _ReachedMax(List<String> itemIds) = _$_ReachedMax;
 
-  List<T> get items => throw _privateConstructorUsedError;
+  @override
+  List<String> get itemIds => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
-  _$ReachedMaxCopyWith<T, _ReachedMax<T>> get copyWith =>
+  _$ReachedMaxCopyWith<_ReachedMax> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$EmptyCopyWith<T extends Model, $Res> {
-  factory _$EmptyCopyWith(_Empty<T> value, $Res Function(_Empty<T>) then) =
-      __$EmptyCopyWithImpl<T, $Res>;
-  $Res call({List<T> items});
+abstract class _$EmptyCopyWith<$Res> implements $FeedStateCopyWith<$Res> {
+  factory _$EmptyCopyWith(_Empty value, $Res Function(_Empty) then) =
+      __$EmptyCopyWithImpl<$Res>;
+  @override
+  $Res call({List<String> itemIds});
 }
 
 /// @nodoc
-class __$EmptyCopyWithImpl<T extends Model, $Res>
-    extends _$FeedStateCopyWithImpl<T, $Res>
-    implements _$EmptyCopyWith<T, $Res> {
-  __$EmptyCopyWithImpl(_Empty<T> _value, $Res Function(_Empty<T>) _then)
-      : super(_value, (v) => _then(v as _Empty<T>));
+class __$EmptyCopyWithImpl<$Res> extends _$FeedStateCopyWithImpl<$Res>
+    implements _$EmptyCopyWith<$Res> {
+  __$EmptyCopyWithImpl(_Empty _value, $Res Function(_Empty) _then)
+      : super(_value, (v) => _then(v as _Empty));
 
   @override
-  _Empty<T> get _value => super._value as _Empty<T>;
+  _Empty get _value => super._value as _Empty;
 
   @override
   $Res call({
-    Object? items = freezed,
+    Object? itemIds = freezed,
   }) {
-    return _then(_Empty<T>(
-      items == freezed
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<T>,
+    return _then(_Empty(
+      itemIds == freezed
+          ? _value.itemIds
+          : itemIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
 
 /// @nodoc
-class _$_Empty<T extends Model> implements _Empty<T> {
-  const _$_Empty(this.items);
+class _$_Empty implements _Empty {
+  const _$_Empty(this.itemIds);
 
   @override
-  final List<T> items;
+  final List<String> itemIds;
 
   @override
   String toString() {
-    return 'FeedState<$T>.empty(items: $items)';
+    return 'FeedState.empty(itemIds: $itemIds)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Empty<T> &&
-            (identical(other.items, items) ||
-                const DeepCollectionEquality().equals(other.items, items)));
+        (other is _Empty &&
+            (identical(other.itemIds, itemIds) ||
+                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(items);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
 
   @JsonKey(ignore: true)
   @override
-  _$EmptyCopyWith<T, _Empty<T>> get copyWith =>
-      __$EmptyCopyWithImpl<T, _Empty<T>>(this, _$identity);
+  _$EmptyCopyWith<_Empty> get copyWith =>
+      __$EmptyCopyWithImpl<_Empty>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<T> items) loaded,
-    required TResult Function(List<T> items) reachedMax,
-    required TResult Function(List<T> items) empty,
-    required TResult Function(List<T> items) failure,
+    required TResult Function(List<String> itemIds) initial,
+    required TResult Function(List<String> itemIds) loading,
+    required TResult Function(List<String> itemIds) loaded,
+    required TResult Function(List<String> itemIds) reachedMax,
+    required TResult Function(List<String> itemIds) empty,
+    required TResult Function(List<String> itemIds) failure,
   }) {
-    return empty(items);
+    return empty(itemIds);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<T> items)? loaded,
-    TResult Function(List<T> items)? reachedMax,
-    TResult Function(List<T> items)? empty,
-    TResult Function(List<T> items)? failure,
+    TResult Function(List<String> itemIds)? initial,
+    TResult Function(List<String> itemIds)? loading,
+    TResult Function(List<String> itemIds)? loaded,
+    TResult Function(List<String> itemIds)? reachedMax,
+    TResult Function(List<String> itemIds)? empty,
+    TResult Function(List<String> itemIds)? failure,
     required TResult orElse(),
   }) {
     if (empty != null) {
-      return empty(items);
+      return empty(itemIds);
     }
     return orElse();
   }
@@ -668,12 +754,12 @@ class _$_Empty<T extends Model> implements _Empty<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) loaded,
-    required TResult Function(_ReachedMax<T> value) reachedMax,
-    required TResult Function(_Empty<T> value) empty,
-    required TResult Function(_Failure<T> value) failure,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) loaded,
+    required TResult Function(_ReachedMax value) reachedMax,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Failure value) failure,
   }) {
     return empty(this);
   }
@@ -681,12 +767,12 @@ class _$_Empty<T extends Model> implements _Empty<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? loaded,
-    TResult Function(_ReachedMax<T> value)? reachedMax,
-    TResult Function(_Empty<T> value)? empty,
-    TResult Function(_Failure<T> value)? failure,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? loaded,
+    TResult Function(_ReachedMax value)? reachedMax,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -696,101 +782,101 @@ class _$_Empty<T extends Model> implements _Empty<T> {
   }
 }
 
-abstract class _Empty<T extends Model> implements FeedState<T> {
-  const factory _Empty(List<T> items) = _$_Empty<T>;
-
-  List<T> get items => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$EmptyCopyWith<T, _Empty<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$FailureCopyWith<T extends Model, $Res> {
-  factory _$FailureCopyWith(
-          _Failure<T> value, $Res Function(_Failure<T>) then) =
-      __$FailureCopyWithImpl<T, $Res>;
-  $Res call({List<T> items});
-}
-
-/// @nodoc
-class __$FailureCopyWithImpl<T extends Model, $Res>
-    extends _$FeedStateCopyWithImpl<T, $Res>
-    implements _$FailureCopyWith<T, $Res> {
-  __$FailureCopyWithImpl(_Failure<T> _value, $Res Function(_Failure<T>) _then)
-      : super(_value, (v) => _then(v as _Failure<T>));
+abstract class _Empty implements FeedState {
+  const factory _Empty(List<String> itemIds) = _$_Empty;
 
   @override
-  _Failure<T> get _value => super._value as _Failure<T>;
+  List<String> get itemIds => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$EmptyCopyWith<_Empty> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$FailureCopyWith<$Res> implements $FeedStateCopyWith<$Res> {
+  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) then) =
+      __$FailureCopyWithImpl<$Res>;
+  @override
+  $Res call({List<String> itemIds});
+}
+
+/// @nodoc
+class __$FailureCopyWithImpl<$Res> extends _$FeedStateCopyWithImpl<$Res>
+    implements _$FailureCopyWith<$Res> {
+  __$FailureCopyWithImpl(_Failure _value, $Res Function(_Failure) _then)
+      : super(_value, (v) => _then(v as _Failure));
+
+  @override
+  _Failure get _value => super._value as _Failure;
 
   @override
   $Res call({
-    Object? items = freezed,
+    Object? itemIds = freezed,
   }) {
-    return _then(_Failure<T>(
-      items == freezed
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<T>,
+    return _then(_Failure(
+      itemIds == freezed
+          ? _value.itemIds
+          : itemIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
 
 /// @nodoc
-class _$_Failure<T extends Model> implements _Failure<T> {
-  const _$_Failure(this.items);
+class _$_Failure implements _Failure {
+  const _$_Failure(this.itemIds);
 
   @override
-  final List<T> items;
+  final List<String> itemIds;
 
   @override
   String toString() {
-    return 'FeedState<$T>.failure(items: $items)';
+    return 'FeedState.failure(itemIds: $itemIds)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Failure<T> &&
-            (identical(other.items, items) ||
-                const DeepCollectionEquality().equals(other.items, items)));
+        (other is _Failure &&
+            (identical(other.itemIds, itemIds) ||
+                const DeepCollectionEquality().equals(other.itemIds, itemIds)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(items);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(itemIds);
 
   @JsonKey(ignore: true)
   @override
-  _$FailureCopyWith<T, _Failure<T>> get copyWith =>
-      __$FailureCopyWithImpl<T, _Failure<T>>(this, _$identity);
+  _$FailureCopyWith<_Failure> get copyWith =>
+      __$FailureCopyWithImpl<_Failure>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<T> items) loaded,
-    required TResult Function(List<T> items) reachedMax,
-    required TResult Function(List<T> items) empty,
-    required TResult Function(List<T> items) failure,
+    required TResult Function(List<String> itemIds) initial,
+    required TResult Function(List<String> itemIds) loading,
+    required TResult Function(List<String> itemIds) loaded,
+    required TResult Function(List<String> itemIds) reachedMax,
+    required TResult Function(List<String> itemIds) empty,
+    required TResult Function(List<String> itemIds) failure,
   }) {
-    return failure(items);
+    return failure(itemIds);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<T> items)? loaded,
-    TResult Function(List<T> items)? reachedMax,
-    TResult Function(List<T> items)? empty,
-    TResult Function(List<T> items)? failure,
+    TResult Function(List<String> itemIds)? initial,
+    TResult Function(List<String> itemIds)? loading,
+    TResult Function(List<String> itemIds)? loaded,
+    TResult Function(List<String> itemIds)? reachedMax,
+    TResult Function(List<String> itemIds)? empty,
+    TResult Function(List<String> itemIds)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure(items);
+      return failure(itemIds);
     }
     return orElse();
   }
@@ -798,12 +884,12 @@ class _$_Failure<T extends Model> implements _Failure<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) loaded,
-    required TResult Function(_ReachedMax<T> value) reachedMax,
-    required TResult Function(_Empty<T> value) empty,
-    required TResult Function(_Failure<T> value) failure,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) loaded,
+    required TResult Function(_ReachedMax value) reachedMax,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Failure value) failure,
   }) {
     return failure(this);
   }
@@ -811,12 +897,12 @@ class _$_Failure<T extends Model> implements _Failure<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? loaded,
-    TResult Function(_ReachedMax<T> value)? reachedMax,
-    TResult Function(_Empty<T> value)? empty,
-    TResult Function(_Failure<T> value)? failure,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? loaded,
+    TResult Function(_ReachedMax value)? reachedMax,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -826,11 +912,13 @@ class _$_Failure<T extends Model> implements _Failure<T> {
   }
 }
 
-abstract class _Failure<T extends Model> implements FeedState<T> {
-  const factory _Failure(List<T> items) = _$_Failure<T>;
+abstract class _Failure implements FeedState {
+  const factory _Failure(List<String> itemIds) = _$_Failure;
 
-  List<T> get items => throw _privateConstructorUsedError;
+  @override
+  List<String> get itemIds => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
-  _$FailureCopyWith<T, _Failure<T>> get copyWith =>
+  _$FailureCopyWith<_Failure> get copyWith =>
       throw _privateConstructorUsedError;
 }

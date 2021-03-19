@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,32 +7,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 import 'package:like_button/like_button.dart';
 import 'package:rowdy/models/post.dart';
+import 'package:rowdy/services/repositories/post_repository.dart';
 import 'package:rowdy/util/functions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'profile_avatar.dart';
+import '../profile_avatar.dart';
 
 typedef PostChevronCallback = void Function(bool byCurrentUser, FFPost post);
 
 class PostCard extends StatelessWidget {
   PostCard({
     Key? key,
-    this.body,
-    this.imageUrl,
+    required this.id,
     this.commentsDisabled,
-    this.isLikedByUser,
-    this.commentsCount,
-    this.likeCount,
   }) : super(key: key);
 
-  final String? body;
-  final String? imageUrl;
+  final String id;
   final bool? commentsDisabled;
-  final int? likeCount;
-  final bool? isLikedByUser;
-  final int? commentsCount;
 
   @override
   Widget build(BuildContext context) {
+    final body = context.select((PostRepository r) => r.state[id]?.body);
+    final imageUrl =
+        context.select((PostRepository r) => r.state[id]?.imageUrls[0]);
+    final commentsCount =
+        context.select((PostRepository r) => r.state[id]?.commentCount);
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
       child: Container(
@@ -43,9 +45,7 @@ class PostCard extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             CardAuthorProfile(),
-
             const Spacer(),
-
             IconButton(
               onPressed: () => {},
               icon: const Icon(
@@ -59,20 +59,16 @@ class PostCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
               child: SelectableText(
-                body!,
+                body,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
           },
-
           const SizedBox(height: 6),
-
           if (imageUrl != null) ...{
-            FFImageWidget(imageUrl!),
+            FFImageWidget(imageUrl),
           },
-
           FFLikeButton(),
-
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
             child:
@@ -86,7 +82,7 @@ class PostCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                child: Text(commentsCount.toString(),
+                child: Text(commentsCount?.toString() ?? '',
                     style: Theme.of(context).textTheme.overline),
               ),
               const Spacer(
@@ -96,7 +92,7 @@ class PostCard extends StatelessWidget {
                 flex: 12,
               ),
             ]),
-          ), 
+          ),
         ]),
       ),
     );

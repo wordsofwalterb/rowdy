@@ -10,6 +10,8 @@ import 'package:rowdy/services/user/user_cubit/user_repository.dart';
 import 'package:rowdy/util/theme.dart';
 
 import 'screens/navigator_bridge.dart';
+import 'services/repositories/post_repository.dart';
+import 'services/repositories/student_repository.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -27,6 +29,8 @@ class App extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => UserRepository(FirebaseService())),
+          BlocProvider(create: (_) => StudentRepository(FirebaseService())),
+          BlocProvider(create: (_) => PostRepository(FirebaseService())),
         ],
         child: const NavigatorBridge(),
       ),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-typedef FormValidator = String? Function(String? body)?;
-
 class FFRegisterFormField extends StatelessWidget {
   FFRegisterFormField({
     required this.node,
@@ -16,7 +14,7 @@ class FFRegisterFormField extends StatelessWidget {
 
   final FocusNode node;
   final FocusNode nextNode;
-  final FormValidator validator;
+  final FormFieldValidator<String>? validator;
   final TextEditingController controller;
   final String hintText;
   final String? errorText;

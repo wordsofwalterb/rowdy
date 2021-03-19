@@ -1,116 +1,57 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rowdy/models/model.dart';
-import 'package:rowdy/util/global.dart';
+import 'package:rowdy/services/firebase_service/firebase_repo_mixin.dart';
+import 'package:rowdy/util/result.dart';
 
-import 'feed.dart';
 import 'feed_cubit/feed_cubit.dart';
-import 'feed_filter.dart';
-import 'feed_sort.dart';
 
-mixin FeedRepoMixin<T extends Model> {
-  Set<FeedCubit<T, FeedRepoMixin>> feeds = {};
+mixin FeedMixin<T extends Model> on Cubit<Map<String, T>>
+    implements FirebaseServiceMixin<T> {
+  final List<FeedCubit> feeds = [];
 
-  Future<List<T>> setupPaginatedFeed(FeedCubit<T, FeedRepoMixin> feed) async {
-    Query? query;
-    final ref = FFGlobal.collectionMapper[T];
-
-    if (ref != null) {
-      query = _buildFirestoreQuery(
-        ref,
-        feed.defaultLimit,
-        feed.filter,
-        feed.sort,
-      );
-    } else {
-      throw Exception();
+  Future<FFResult<List<String>>> setupPaginatedFeed(FeedCubit feed) async {
+    if (!feeds.contains(feed)) {
+      feeds.add(feed);
     }
 
-    final snapshot = await query.get();
+    final result = await service.getQuery(feed.query);
 
-    final feedData = parseFirestoreQuery<T>(snapshot);
-
-    return feedData;
-  }
-
-  Future<void> openFeed(FeedCubit<T, FeedRepoMixin> feed) async {
-    feeds.add(feed);
-  }
-
-  Future<void> closeFeed(String feedId) async {
-    feeds.removeWhere((e) => e.feedId == feedId);
-  }
-
-  Future<List<T>> refreshFeed(FeedCubit<T, FeedRepoMixin> feed) async {
-    Query? query;
-    final ref = FFGlobal.collectionMapper[T];
-
-    if (ref != null) {
-      query = _buildFirestoreQuery(
-        ref,
-        feed.defaultLimit,
-        feed.filter,
-        feed.sort,
-      );
+    if (result.hasData) {
+      final newItems = result.data!.map((e) => {e.id, e}) as Map<String, T>;
+      emit(state..addAll(newItems));
+      return FFResult.success(newItems.keys.toList());
     } else {
-      throw Exception();
+      return FFResult.failure(
+        errorCode: result.errorCode,
+        errorMessage: result.errorMessage,
+      );
     }
-
-    final snapshot = await query.get();
-
-    final feedData = parseFirestoreQuery<T>(snapshot);
-
-    return feedData;
   }
 
-  Future<void> fetchNextFeedPage(String feedId) async {}
+  Future<void> closeFeed(FeedCubit feed) async {
+    feeds.remove(feed);
+    final newState = Map<String, T>.from(state);
 
-  Future<void> addItemToDb(T item) async {
-    final json = item.toJson();
-
-    for (final feed in feeds) {
-      final filter = feed.filter;
-      if (filter != null) {
-        if (json[filter.filterField] == filter.isEqualTo) {
-          await feed.addItemToFeed(item);
+    for (final feedItemId in feed.state.itemIds) {
+      var isGarbageId = true;
+      for (final feed in feeds) {
+        if (feed.state.itemIds.contains(feedItemId) && isGarbageId) {
+          isGarbageId = false;
         }
+      }
+      if (isGarbageId) {
+        newState.removeWhere((e, _) => e == feedItemId);
       }
     }
 
-    final ref = FFGlobal.collectionMapper[T];
-    if (ref != null) {
-      await ref.add(json);
-    }
+    emit(newState);
   }
 
-  Future<void> deleteItemFromDb(String itemId) async {
-    for (final feed in feeds) {
-      feed.state.maybeWhen(
-        loaded: (items) {
-          final index = items.indexWhere((e) => e.id == itemId);
-          if (index != -1) {
-            feed.removeItemFromFeed(itemId);
-          }
-        },
-        orElse: () => {},
-      );
-    }
+  Future<void> refreshFeed(List<String> itemIds) async {}
 
-    final ref = FFGlobal.collectionMapper[T];
-    if (ref != null) {
-      await ref.doc(itemId).delete();
-    }
-  }
+  Future<void> fetchNextPage(FeedCubit feed) async {}
 
-  Query _buildFirestoreQuery(
-      CollectionReference ref, int limit, FeedFilter? f, FeedSort? s) {
-    var query = ref.limit(limit);
-    if (f?.filterField != null && f?.isEqualTo != null) {
-      query = query.where(f?.filterField, isEqualTo: f?.isEqualTo);
-    }
-    if (s?.orderBy != null) {
-      query = query.orderBy(s?.orderBy, descending: s?.descending ?? false);
-    }
-    return query;
-  }
+  Future<void> addItemToDb(T item) async {}
+
+  Future<void> deleteItemFromDb(String itemId) async {}
 }

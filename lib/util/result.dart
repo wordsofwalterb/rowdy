@@ -1,3 +1,5 @@
+import 'package:rowdy/models/model.dart';
+
 /// Used to store the result of an operation. Should be used when to store
 /// captured errors and and translate them to a user friendly message. [hasError]
 /// is required, and automatically assigned by contructors

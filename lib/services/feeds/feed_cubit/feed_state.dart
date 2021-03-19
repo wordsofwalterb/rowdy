@@ -1,11 +1,11 @@
 part of 'feed_cubit.dart';
 
 @freezed
-class FeedState<T extends Model> with _$FeedState<T> {
-  const factory FeedState.initial() = _Initial;
-  const factory FeedState.loading() = _Loading;
-  const factory FeedState.loaded(List<T> items) = _Success;
-  const factory FeedState.reachedMax(List<T> items) = _ReachedMax;
-  const factory FeedState.empty(List<T> items) = _Empty;
-  const factory FeedState.failure(List<T> items) = _Failure;
+class FeedState with _$FeedState {
+  const factory FeedState.initial(List<String> itemIds) = _Initial;
+  const factory FeedState.loading(List<String> itemIds) = _Loading;
+  const factory FeedState.loaded(List<String> itemIds) = _Success;
+  const factory FeedState.reachedMax(List<String> itemIds) = _ReachedMax;
+  const factory FeedState.empty(List<String> itemIds) = _Empty;
+  const factory FeedState.failure(List<String> itemIds) = _Failure;
 }

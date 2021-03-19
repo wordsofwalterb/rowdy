@@ -2,91 +2,72 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:rowdy/models/model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rowdy/services/repositories/student_repository.dart';
 
-import '../feed_filter.dart';
 import '../feed_repo_mixin.dart';
-import '../feed_sort.dart';
 
 part 'feed_state.dart';
 part 'feed_cubit.freezed.dart';
 
-class FeedCubit<T extends Model, R extends FeedRepoMixin>
-    extends Cubit<FeedState<T>> {
+class FeedCubit<R extends FeedMixin> extends Cubit<FeedState> {
   FeedCubit({
-    required this.feedId,
     required this.repository,
-    this.defaultLimit = 20,
-    this.sort,
-    this.filter,
-  }) : super(const FeedState.initial());
+    required this.query,
+    this.limit = 20,
+  }) : super(const FeedState.initial([])) {
+    queryParams = query.parameters;
+  }
 
-  R repository;
-  int defaultLimit;
-  String feedId;
-  FeedFilter? filter;
-  FeedSort? sort;
+  final R repository;
+  Query query;
+  final int limit;
+  late Map<String, dynamic> queryParams;
 
   @override
   Future<void> close() {
-    // repoSubscription.cancel();
+    repository.closeFeed(this);
     return super.close();
   }
 
   Future<void> setupFeed() async {
-    emit(const FeedState.loading());
-    final data = await repository.openFeed(this) as List<T>;
-    emit(FeedState.loaded(data));
-  }
+    emit(const FeedState.loading([]));
 
-  /// Should only be called by repo
-  Future<void> updateItemInFeed(T item) async {
-    state.maybeWhen(
-      loaded: (items) => _replaceInList(items, item),
-      reachedMax: (items) => _replaceInList(items, item),
-      orElse: () => throw Exception('Wrong state when updated item in feed.'),
-    );
-  }
+    final result = await repository.setupPaginatedFeed(this);
 
-  List<T> _replaceInList(List<T> items, T item) {
-    final index = items.indexWhere((e) => e.id == item.id);
-    if (index != -1) {
-      var newList = List<T>.from(items);
-      newList[index] = item;
-      return newList;
+    if (result.hasData) {
+      if (result.data!.isEmpty) {
+        emit(const FeedState.empty([]));
+      } else if (result.data!.length < limit) {
+        emit(FeedState.reachedMax(result.data!));
+      } else {
+        emit(FeedState.loaded(result.data!));
+      }
     } else {
-      log('Item not found when trying to update feed');
-      return items;
+      emit(FeedState.failure(result.data!));
     }
   }
 
-  Future<void> addItemToFeed(T item) async {
+  Future<void> addItemToFeed(String itemId) async {
     state.maybeWhen(
-      loaded: (items) => emit(FeedState.loaded(items..add(item))),
-      orElse: () => emit(FeedState.reachedMax([item])),
+      loaded: (itemIds) => emit(FeedState.loaded(itemIds..add(itemId))),
+      orElse: () => emit(FeedState.reachedMax([itemId])),
     );
   }
 
   Future<void> removeItemFromFeed(String itemId) async {
     state.maybeWhen(
-        loaded: (items) =>
-            emit(FeedState.loaded(items..removeWhere((e) => e.id == itemId))),
-        reachedMax: (items) => emit(
-            FeedState.reachedMax(items..removeWhere((e) => e.id == itemId))),
+        loaded: (itemIds) =>
+            emit(FeedState.loaded(itemIds..removeWhere((e) => e == itemId))),
+        reachedMax: (itemIds) => emit(
+            FeedState.reachedMax(itemIds..removeWhere((e) => e == itemId))),
         orElse: () =>
             throw Exception('Tried to remove item in improper state.'));
   }
 
   Future<void> refreshFeed() async {
-    final items = await repository.refreshFeed(this) as List<T>;
-    if (items.isEmpty) {
-      emit(const FeedState.empty([]));
-    } else if (items.length < defaultLimit) {
-      emit(FeedState.reachedMax(items));
-    } else {
-      emit(FeedState.loaded(items));
-    }
+    await repository.refreshFeed(state.itemIds);
   }
 
   Future<void> fetchPage({
