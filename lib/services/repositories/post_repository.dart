@@ -1,24 +1,24 @@
-import 'dart:async';
+// import 'dart:async';
 
-import 'package:bloc/bloc.dart';
-import 'package:rowdy/models/model.dart';
-import 'package:rowdy/services/feeds/feed_cubit/feed_cubit.dart';
-import 'package:rowdy/services/firebase_service/firebase_service.dart';
+// import 'package:bloc/bloc.dart';
+// import 'package:rowdy/models/model.dart';
 
-import '../../models/post.dart';
-import '../feeds/feed.dart';
-import '../feeds/feed_repo_mixin.dart';
-import '../feeds/feed_repo_mixin.dart';
-import '../likable/likable.dart';
-import '../mixins/like_repo_mixin.dart';
-import 'student_repository.dart';
+// import 'package:rowdy/services/firebase_service/firebase_service.dart';
 
-class PostRepository extends Cubit<Map<String, FFPost>>
-    with FeedMixin<FFPost>, LikeRepoMixin<FFPost> {
-  PostRepository(this.service) : super({});
+// import '../../models/post.dart';
+// import '../feeds/feed.dart';
+// import '../feeds/feed_repo_mixin.dart';
+// import '../feeds/feed_repo_mixin.dart';
+// import '../likable/likable.dart';
+// import '../mixins/like_repo_mixin.dart';
+// import 'student_repository.dart';
 
-  @override
-  FirebaseService<FFPost> service;
+// class PostRepository extends Cubit<Map<String, FFPost>>
+//     with FeedMixin<FFPost>, LikeRepoMixin<FFPost> {
+//   PostRepository(this.service) : super({});
 
-  Future<void> updateCommentCount(String postId, int byValue) async {}
-}
+//   @override
+//   FirebaseService<FFPost> service;
+
+//   Future<void> updateCommentCount(String postId, int byValue) async {}
+// }

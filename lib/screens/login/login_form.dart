@@ -131,7 +131,7 @@ class _LoginFormState extends State<LoginForm> {
                               onPressed: () => Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          const RegisterScreen())),
+                                          RegisterScreen())),
                               child: const Text(
                                 'Create an Account',
                                 style: TextStyle(color: Color(0xffc4c4c4)),

@@ -3,13 +3,11 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:uuid/uuid.dart';
 
 // TODO: Refactor into fewer methods
 class StorageService {
   static Future<String> uploadUserProfileImage(
-      String url, File imageFile) async {
-    final photoId = const Uuid().v4();
+      String photoId, String url, File imageFile) async {
     final image = await compressImage(photoId, imageFile);
     // TODO: FIX AND MAKE SURE STORAGE DOESN't FILL UP UNNECESARILLY
 
@@ -24,8 +22,7 @@ class StorageService {
   }
 
   static Future<String> uploadUserCoverPhotoImage(
-      String url, File imageFile) async {
-    var photoId = const Uuid().v4();
+      String photoId, String url, File imageFile) async {
     final image = await compressImage(photoId, imageFile);
 
     if (url.isNotEmpty) {
@@ -55,8 +52,7 @@ class StorageService {
     return compressedImageFile;
   }
 
-  static Future<String> uploadPost(File imageFile) async {
-    final photoId = const Uuid().v4();
+  static Future<String> uploadPost(String photoId, File imageFile) async {
     final image = await compressImage(photoId, imageFile);
     final uploadTask = FirebaseStorage.instance
         .ref()

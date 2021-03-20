@@ -23,6 +23,11 @@ _$_Student _$_$_StudentFromJson(Map<String, dynamic> json) {
     coverPhotoUrl: json['coverPhotoUrl'] as String?,
     email: json['email'] as String?,
     avatarUrl: json['avatarUrl'] as String?,
+    authType: json['authType'] as String?,
+    creationDate:
+        FFFunctions.dateTimeFromTimestamp(json['creationDate'] as Timestamp),
+    lastOpenDate:
+        FFFunctions.dateTimeFromTimestamp(json['lastOpenDate'] as Timestamp),
   );
 }
 
@@ -40,4 +45,7 @@ Map<String, dynamic> _$_$_StudentToJson(_$_Student instance) =>
       'coverPhotoUrl': instance.coverPhotoUrl,
       'email': instance.email,
       'avatarUrl': instance.avatarUrl,
+      'authType': instance.authType,
+      'creationDate': FFFunctions.dateTimeAsIs(instance.creationDate),
+      'lastOpenDate': FFFunctions.dateTimeAsIs(instance.lastOpenDate),
     };

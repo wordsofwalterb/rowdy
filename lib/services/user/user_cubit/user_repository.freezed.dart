@@ -16,24 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserStateTearOff {
   const _$UserStateTearOff();
 
-  _Unauthenticated<FFStudent> unauthenticated<FFStudent>() {
-    return _Unauthenticated<FFStudent>();
+  _Unauthenticated<T> unauthenticated<T>() {
+    return _Unauthenticated<T>();
   }
 
-  _Authenticating<FFStudent> authenticating<FFStudent>() {
-    return _Authenticating<FFStudent>();
+  _Authenticating<T> authenticating<T>() {
+    return _Authenticating<T>();
   }
 
-  _Authenticated<FFStudent> authenticated<FFStudent>(
-      {required FFStudent user}) {
-    return _Authenticated<FFStudent>(
+  _Authenticated<T> authenticated<T>({required T user}) {
+    return _Authenticated<T>(
       user: user,
     );
   }
 
-  _AuthenticationFailure<FFStudent> authenticationFailed<FFStudent>(
-      String errorMessage) {
-    return _AuthenticationFailure<FFStudent>(
+  _AuthenticationFailure<T> authenticationFailed<T>(String errorMessage) {
+    return _AuthenticationFailure<T>(
       errorMessage,
     );
   }
@@ -43,12 +41,12 @@ class _$UserStateTearOff {
 const $UserState = _$UserStateTearOff();
 
 /// @nodoc
-mixin _$UserState<FFStudent> {
+mixin _$UserState<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthenticated,
     required TResult Function() authenticating,
-    required TResult Function(FFStudent user) authenticated,
+    required TResult Function(T user) authenticated,
     required TResult Function(String errorMessage) authenticationFailed,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,82 +54,78 @@ mixin _$UserState<FFStudent> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthenticated,
     TResult Function()? authenticating,
-    TResult Function(FFStudent user)? authenticated,
+    TResult Function(T user)? authenticated,
     TResult Function(String errorMessage)? authenticationFailed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Unauthenticated<FFStudent> value)
-        unauthenticated,
-    required TResult Function(_Authenticating<FFStudent> value) authenticating,
-    required TResult Function(_Authenticated<FFStudent> value) authenticated,
-    required TResult Function(_AuthenticationFailure<FFStudent> value)
+    required TResult Function(_Unauthenticated<T> value) unauthenticated,
+    required TResult Function(_Authenticating<T> value) authenticating,
+    required TResult Function(_Authenticated<T> value) authenticated,
+    required TResult Function(_AuthenticationFailure<T> value)
         authenticationFailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Unauthenticated<FFStudent> value)? unauthenticated,
-    TResult Function(_Authenticating<FFStudent> value)? authenticating,
-    TResult Function(_Authenticated<FFStudent> value)? authenticated,
-    TResult Function(_AuthenticationFailure<FFStudent> value)?
-        authenticationFailed,
+    TResult Function(_Unauthenticated<T> value)? unauthenticated,
+    TResult Function(_Authenticating<T> value)? authenticating,
+    TResult Function(_Authenticated<T> value)? authenticated,
+    TResult Function(_AuthenticationFailure<T> value)? authenticationFailed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserStateCopyWith<FFStudent, $Res> {
-  factory $UserStateCopyWith(UserState<FFStudent> value,
-          $Res Function(UserState<FFStudent>) then) =
-      _$UserStateCopyWithImpl<FFStudent, $Res>;
+abstract class $UserStateCopyWith<T, $Res> {
+  factory $UserStateCopyWith(
+          UserState<T> value, $Res Function(UserState<T>) then) =
+      _$UserStateCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class _$UserStateCopyWithImpl<FFStudent, $Res>
-    implements $UserStateCopyWith<FFStudent, $Res> {
+class _$UserStateCopyWithImpl<T, $Res> implements $UserStateCopyWith<T, $Res> {
   _$UserStateCopyWithImpl(this._value, this._then);
 
-  final UserState<FFStudent> _value;
+  final UserState<T> _value;
   // ignore: unused_field
-  final $Res Function(UserState<FFStudent>) _then;
+  final $Res Function(UserState<T>) _then;
 }
 
 /// @nodoc
-abstract class _$UnauthenticatedCopyWith<FFStudent, $Res> {
-  factory _$UnauthenticatedCopyWith(_Unauthenticated<FFStudent> value,
-          $Res Function(_Unauthenticated<FFStudent>) then) =
-      __$UnauthenticatedCopyWithImpl<FFStudent, $Res>;
+abstract class _$UnauthenticatedCopyWith<T, $Res> {
+  factory _$UnauthenticatedCopyWith(
+          _Unauthenticated<T> value, $Res Function(_Unauthenticated<T>) then) =
+      __$UnauthenticatedCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$UnauthenticatedCopyWithImpl<FFStudent, $Res>
-    extends _$UserStateCopyWithImpl<FFStudent, $Res>
-    implements _$UnauthenticatedCopyWith<FFStudent, $Res> {
-  __$UnauthenticatedCopyWithImpl(_Unauthenticated<FFStudent> _value,
-      $Res Function(_Unauthenticated<FFStudent>) _then)
-      : super(_value, (v) => _then(v as _Unauthenticated<FFStudent>));
+class __$UnauthenticatedCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res>
+    implements _$UnauthenticatedCopyWith<T, $Res> {
+  __$UnauthenticatedCopyWithImpl(
+      _Unauthenticated<T> _value, $Res Function(_Unauthenticated<T>) _then)
+      : super(_value, (v) => _then(v as _Unauthenticated<T>));
 
   @override
-  _Unauthenticated<FFStudent> get _value =>
-      super._value as _Unauthenticated<FFStudent>;
+  _Unauthenticated<T> get _value => super._value as _Unauthenticated<T>;
 }
 
 /// @nodoc
-class _$_Unauthenticated<FFStudent> implements _Unauthenticated<FFStudent> {
+class _$_Unauthenticated<T> implements _Unauthenticated<T> {
   const _$_Unauthenticated();
 
   @override
   String toString() {
-    return 'UserState<$FFStudent>.unauthenticated()';
+    return 'UserState<$T>.unauthenticated()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Unauthenticated<FFStudent>);
+    return identical(this, other) || (other is _Unauthenticated<T>);
   }
 
   @override
@@ -142,7 +136,7 @@ class _$_Unauthenticated<FFStudent> implements _Unauthenticated<FFStudent> {
   TResult when<TResult extends Object?>({
     required TResult Function() unauthenticated,
     required TResult Function() authenticating,
-    required TResult Function(FFStudent user) authenticated,
+    required TResult Function(T user) authenticated,
     required TResult Function(String errorMessage) authenticationFailed,
   }) {
     return unauthenticated();
@@ -153,7 +147,7 @@ class _$_Unauthenticated<FFStudent> implements _Unauthenticated<FFStudent> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthenticated,
     TResult Function()? authenticating,
-    TResult Function(FFStudent user)? authenticated,
+    TResult Function(T user)? authenticated,
     TResult Function(String errorMessage)? authenticationFailed,
     required TResult orElse(),
   }) {
@@ -166,11 +160,10 @@ class _$_Unauthenticated<FFStudent> implements _Unauthenticated<FFStudent> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Unauthenticated<FFStudent> value)
-        unauthenticated,
-    required TResult Function(_Authenticating<FFStudent> value) authenticating,
-    required TResult Function(_Authenticated<FFStudent> value) authenticated,
-    required TResult Function(_AuthenticationFailure<FFStudent> value)
+    required TResult Function(_Unauthenticated<T> value) unauthenticated,
+    required TResult Function(_Authenticating<T> value) authenticating,
+    required TResult Function(_Authenticated<T> value) authenticated,
+    required TResult Function(_AuthenticationFailure<T> value)
         authenticationFailed,
   }) {
     return unauthenticated(this);
@@ -179,11 +172,10 @@ class _$_Unauthenticated<FFStudent> implements _Unauthenticated<FFStudent> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Unauthenticated<FFStudent> value)? unauthenticated,
-    TResult Function(_Authenticating<FFStudent> value)? authenticating,
-    TResult Function(_Authenticated<FFStudent> value)? authenticated,
-    TResult Function(_AuthenticationFailure<FFStudent> value)?
-        authenticationFailed,
+    TResult Function(_Unauthenticated<T> value)? unauthenticated,
+    TResult Function(_Authenticating<T> value)? authenticating,
+    TResult Function(_Authenticated<T> value)? authenticated,
+    TResult Function(_AuthenticationFailure<T> value)? authenticationFailed,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -193,42 +185,41 @@ class _$_Unauthenticated<FFStudent> implements _Unauthenticated<FFStudent> {
   }
 }
 
-abstract class _Unauthenticated<FFStudent> implements UserState<FFStudent> {
-  const factory _Unauthenticated() = _$_Unauthenticated<FFStudent>;
+abstract class _Unauthenticated<T> implements UserState<T> {
+  const factory _Unauthenticated() = _$_Unauthenticated<T>;
 }
 
 /// @nodoc
-abstract class _$AuthenticatingCopyWith<FFStudent, $Res> {
-  factory _$AuthenticatingCopyWith(_Authenticating<FFStudent> value,
-          $Res Function(_Authenticating<FFStudent>) then) =
-      __$AuthenticatingCopyWithImpl<FFStudent, $Res>;
+abstract class _$AuthenticatingCopyWith<T, $Res> {
+  factory _$AuthenticatingCopyWith(
+          _Authenticating<T> value, $Res Function(_Authenticating<T>) then) =
+      __$AuthenticatingCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$AuthenticatingCopyWithImpl<FFStudent, $Res>
-    extends _$UserStateCopyWithImpl<FFStudent, $Res>
-    implements _$AuthenticatingCopyWith<FFStudent, $Res> {
-  __$AuthenticatingCopyWithImpl(_Authenticating<FFStudent> _value,
-      $Res Function(_Authenticating<FFStudent>) _then)
-      : super(_value, (v) => _then(v as _Authenticating<FFStudent>));
+class __$AuthenticatingCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res>
+    implements _$AuthenticatingCopyWith<T, $Res> {
+  __$AuthenticatingCopyWithImpl(
+      _Authenticating<T> _value, $Res Function(_Authenticating<T>) _then)
+      : super(_value, (v) => _then(v as _Authenticating<T>));
 
   @override
-  _Authenticating<FFStudent> get _value =>
-      super._value as _Authenticating<FFStudent>;
+  _Authenticating<T> get _value => super._value as _Authenticating<T>;
 }
 
 /// @nodoc
-class _$_Authenticating<FFStudent> implements _Authenticating<FFStudent> {
+class _$_Authenticating<T> implements _Authenticating<T> {
   const _$_Authenticating();
 
   @override
   String toString() {
-    return 'UserState<$FFStudent>.authenticating()';
+    return 'UserState<$T>.authenticating()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Authenticating<FFStudent>);
+    return identical(this, other) || (other is _Authenticating<T>);
   }
 
   @override
@@ -239,7 +230,7 @@ class _$_Authenticating<FFStudent> implements _Authenticating<FFStudent> {
   TResult when<TResult extends Object?>({
     required TResult Function() unauthenticated,
     required TResult Function() authenticating,
-    required TResult Function(FFStudent user) authenticated,
+    required TResult Function(T user) authenticated,
     required TResult Function(String errorMessage) authenticationFailed,
   }) {
     return authenticating();
@@ -250,7 +241,7 @@ class _$_Authenticating<FFStudent> implements _Authenticating<FFStudent> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthenticated,
     TResult Function()? authenticating,
-    TResult Function(FFStudent user)? authenticated,
+    TResult Function(T user)? authenticated,
     TResult Function(String errorMessage)? authenticationFailed,
     required TResult orElse(),
   }) {
@@ -263,11 +254,10 @@ class _$_Authenticating<FFStudent> implements _Authenticating<FFStudent> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Unauthenticated<FFStudent> value)
-        unauthenticated,
-    required TResult Function(_Authenticating<FFStudent> value) authenticating,
-    required TResult Function(_Authenticated<FFStudent> value) authenticated,
-    required TResult Function(_AuthenticationFailure<FFStudent> value)
+    required TResult Function(_Unauthenticated<T> value) unauthenticated,
+    required TResult Function(_Authenticating<T> value) authenticating,
+    required TResult Function(_Authenticated<T> value) authenticated,
+    required TResult Function(_AuthenticationFailure<T> value)
         authenticationFailed,
   }) {
     return authenticating(this);
@@ -276,11 +266,10 @@ class _$_Authenticating<FFStudent> implements _Authenticating<FFStudent> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Unauthenticated<FFStudent> value)? unauthenticated,
-    TResult Function(_Authenticating<FFStudent> value)? authenticating,
-    TResult Function(_Authenticated<FFStudent> value)? authenticated,
-    TResult Function(_AuthenticationFailure<FFStudent> value)?
-        authenticationFailed,
+    TResult Function(_Unauthenticated<T> value)? unauthenticated,
+    TResult Function(_Authenticating<T> value)? authenticating,
+    TResult Function(_Authenticated<T> value)? authenticated,
+    TResult Function(_AuthenticationFailure<T> value)? authenticationFailed,
     required TResult orElse(),
   }) {
     if (authenticating != null) {
@@ -290,59 +279,58 @@ class _$_Authenticating<FFStudent> implements _Authenticating<FFStudent> {
   }
 }
 
-abstract class _Authenticating<FFStudent> implements UserState<FFStudent> {
-  const factory _Authenticating() = _$_Authenticating<FFStudent>;
+abstract class _Authenticating<T> implements UserState<T> {
+  const factory _Authenticating() = _$_Authenticating<T>;
 }
 
 /// @nodoc
-abstract class _$AuthenticatedCopyWith<FFStudent, $Res> {
-  factory _$AuthenticatedCopyWith(_Authenticated<FFStudent> value,
-          $Res Function(_Authenticated<FFStudent>) then) =
-      __$AuthenticatedCopyWithImpl<FFStudent, $Res>;
-  $Res call({FFStudent user});
+abstract class _$AuthenticatedCopyWith<T, $Res> {
+  factory _$AuthenticatedCopyWith(
+          _Authenticated<T> value, $Res Function(_Authenticated<T>) then) =
+      __$AuthenticatedCopyWithImpl<T, $Res>;
+  $Res call({T user});
 }
 
 /// @nodoc
-class __$AuthenticatedCopyWithImpl<FFStudent, $Res>
-    extends _$UserStateCopyWithImpl<FFStudent, $Res>
-    implements _$AuthenticatedCopyWith<FFStudent, $Res> {
-  __$AuthenticatedCopyWithImpl(_Authenticated<FFStudent> _value,
-      $Res Function(_Authenticated<FFStudent>) _then)
-      : super(_value, (v) => _then(v as _Authenticated<FFStudent>));
+class __$AuthenticatedCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res>
+    implements _$AuthenticatedCopyWith<T, $Res> {
+  __$AuthenticatedCopyWithImpl(
+      _Authenticated<T> _value, $Res Function(_Authenticated<T>) _then)
+      : super(_value, (v) => _then(v as _Authenticated<T>));
 
   @override
-  _Authenticated<FFStudent> get _value =>
-      super._value as _Authenticated<FFStudent>;
+  _Authenticated<T> get _value => super._value as _Authenticated<T>;
 
   @override
   $Res call({
     Object? user = freezed,
   }) {
-    return _then(_Authenticated<FFStudent>(
+    return _then(_Authenticated<T>(
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as FFStudent,
+              as T,
     ));
   }
 }
 
 /// @nodoc
-class _$_Authenticated<FFStudent> implements _Authenticated<FFStudent> {
+class _$_Authenticated<T> implements _Authenticated<T> {
   const _$_Authenticated({required this.user});
 
   @override
-  final FFStudent user;
+  final T user;
 
   @override
   String toString() {
-    return 'UserState<$FFStudent>.authenticated(user: $user)';
+    return 'UserState<$T>.authenticated(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Authenticated<FFStudent> &&
+        (other is _Authenticated<T> &&
             (identical(other.user, user) ||
                 const DeepCollectionEquality().equals(other.user, user)));
   }
@@ -353,16 +341,15 @@ class _$_Authenticated<FFStudent> implements _Authenticated<FFStudent> {
 
   @JsonKey(ignore: true)
   @override
-  _$AuthenticatedCopyWith<FFStudent, _Authenticated<FFStudent>> get copyWith =>
-      __$AuthenticatedCopyWithImpl<FFStudent, _Authenticated<FFStudent>>(
-          this, _$identity);
+  _$AuthenticatedCopyWith<T, _Authenticated<T>> get copyWith =>
+      __$AuthenticatedCopyWithImpl<T, _Authenticated<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthenticated,
     required TResult Function() authenticating,
-    required TResult Function(FFStudent user) authenticated,
+    required TResult Function(T user) authenticated,
     required TResult Function(String errorMessage) authenticationFailed,
   }) {
     return authenticated(user);
@@ -373,7 +360,7 @@ class _$_Authenticated<FFStudent> implements _Authenticated<FFStudent> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthenticated,
     TResult Function()? authenticating,
-    TResult Function(FFStudent user)? authenticated,
+    TResult Function(T user)? authenticated,
     TResult Function(String errorMessage)? authenticationFailed,
     required TResult orElse(),
   }) {
@@ -386,11 +373,10 @@ class _$_Authenticated<FFStudent> implements _Authenticated<FFStudent> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Unauthenticated<FFStudent> value)
-        unauthenticated,
-    required TResult Function(_Authenticating<FFStudent> value) authenticating,
-    required TResult Function(_Authenticated<FFStudent> value) authenticated,
-    required TResult Function(_AuthenticationFailure<FFStudent> value)
+    required TResult Function(_Unauthenticated<T> value) unauthenticated,
+    required TResult Function(_Authenticating<T> value) authenticating,
+    required TResult Function(_Authenticated<T> value) authenticated,
+    required TResult Function(_AuthenticationFailure<T> value)
         authenticationFailed,
   }) {
     return authenticated(this);
@@ -399,11 +385,10 @@ class _$_Authenticated<FFStudent> implements _Authenticated<FFStudent> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Unauthenticated<FFStudent> value)? unauthenticated,
-    TResult Function(_Authenticating<FFStudent> value)? authenticating,
-    TResult Function(_Authenticated<FFStudent> value)? authenticated,
-    TResult Function(_AuthenticationFailure<FFStudent> value)?
-        authenticationFailed,
+    TResult Function(_Unauthenticated<T> value)? unauthenticated,
+    TResult Function(_Authenticating<T> value)? authenticating,
+    TResult Function(_Authenticated<T> value)? authenticated,
+    TResult Function(_AuthenticationFailure<T> value)? authenticationFailed,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -413,42 +398,40 @@ class _$_Authenticated<FFStudent> implements _Authenticated<FFStudent> {
   }
 }
 
-abstract class _Authenticated<FFStudent> implements UserState<FFStudent> {
-  const factory _Authenticated({required FFStudent user}) =
-      _$_Authenticated<FFStudent>;
+abstract class _Authenticated<T> implements UserState<T> {
+  const factory _Authenticated({required T user}) = _$_Authenticated<T>;
 
-  FFStudent get user => throw _privateConstructorUsedError;
+  T get user => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$AuthenticatedCopyWith<FFStudent, _Authenticated<FFStudent>> get copyWith =>
+  _$AuthenticatedCopyWith<T, _Authenticated<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$AuthenticationFailureCopyWith<FFStudent, $Res> {
-  factory _$AuthenticationFailureCopyWith(
-          _AuthenticationFailure<FFStudent> value,
-          $Res Function(_AuthenticationFailure<FFStudent>) then) =
-      __$AuthenticationFailureCopyWithImpl<FFStudent, $Res>;
+abstract class _$AuthenticationFailureCopyWith<T, $Res> {
+  factory _$AuthenticationFailureCopyWith(_AuthenticationFailure<T> value,
+          $Res Function(_AuthenticationFailure<T>) then) =
+      __$AuthenticationFailureCopyWithImpl<T, $Res>;
   $Res call({String errorMessage});
 }
 
 /// @nodoc
-class __$AuthenticationFailureCopyWithImpl<FFStudent, $Res>
-    extends _$UserStateCopyWithImpl<FFStudent, $Res>
-    implements _$AuthenticationFailureCopyWith<FFStudent, $Res> {
-  __$AuthenticationFailureCopyWithImpl(_AuthenticationFailure<FFStudent> _value,
-      $Res Function(_AuthenticationFailure<FFStudent>) _then)
-      : super(_value, (v) => _then(v as _AuthenticationFailure<FFStudent>));
+class __$AuthenticationFailureCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res>
+    implements _$AuthenticationFailureCopyWith<T, $Res> {
+  __$AuthenticationFailureCopyWithImpl(_AuthenticationFailure<T> _value,
+      $Res Function(_AuthenticationFailure<T>) _then)
+      : super(_value, (v) => _then(v as _AuthenticationFailure<T>));
 
   @override
-  _AuthenticationFailure<FFStudent> get _value =>
-      super._value as _AuthenticationFailure<FFStudent>;
+  _AuthenticationFailure<T> get _value =>
+      super._value as _AuthenticationFailure<T>;
 
   @override
   $Res call({
     Object? errorMessage = freezed,
   }) {
-    return _then(_AuthenticationFailure<FFStudent>(
+    return _then(_AuthenticationFailure<T>(
       errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -458,8 +441,7 @@ class __$AuthenticationFailureCopyWithImpl<FFStudent, $Res>
 }
 
 /// @nodoc
-class _$_AuthenticationFailure<FFStudent>
-    implements _AuthenticationFailure<FFStudent> {
+class _$_AuthenticationFailure<T> implements _AuthenticationFailure<T> {
   const _$_AuthenticationFailure(this.errorMessage);
 
   @override
@@ -467,13 +449,13 @@ class _$_AuthenticationFailure<FFStudent>
 
   @override
   String toString() {
-    return 'UserState<$FFStudent>.authenticationFailed(errorMessage: $errorMessage)';
+    return 'UserState<$T>.authenticationFailed(errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AuthenticationFailure<FFStudent> &&
+        (other is _AuthenticationFailure<T> &&
             (identical(other.errorMessage, errorMessage) ||
                 const DeepCollectionEquality()
                     .equals(other.errorMessage, errorMessage)));
@@ -485,16 +467,16 @@ class _$_AuthenticationFailure<FFStudent>
 
   @JsonKey(ignore: true)
   @override
-  _$AuthenticationFailureCopyWith<FFStudent, _AuthenticationFailure<FFStudent>>
-      get copyWith => __$AuthenticationFailureCopyWithImpl<FFStudent,
-          _AuthenticationFailure<FFStudent>>(this, _$identity);
+  _$AuthenticationFailureCopyWith<T, _AuthenticationFailure<T>> get copyWith =>
+      __$AuthenticationFailureCopyWithImpl<T, _AuthenticationFailure<T>>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthenticated,
     required TResult Function() authenticating,
-    required TResult Function(FFStudent user) authenticated,
+    required TResult Function(T user) authenticated,
     required TResult Function(String errorMessage) authenticationFailed,
   }) {
     return authenticationFailed(errorMessage);
@@ -505,7 +487,7 @@ class _$_AuthenticationFailure<FFStudent>
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthenticated,
     TResult Function()? authenticating,
-    TResult Function(FFStudent user)? authenticated,
+    TResult Function(T user)? authenticated,
     TResult Function(String errorMessage)? authenticationFailed,
     required TResult orElse(),
   }) {
@@ -518,11 +500,10 @@ class _$_AuthenticationFailure<FFStudent>
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Unauthenticated<FFStudent> value)
-        unauthenticated,
-    required TResult Function(_Authenticating<FFStudent> value) authenticating,
-    required TResult Function(_Authenticated<FFStudent> value) authenticated,
-    required TResult Function(_AuthenticationFailure<FFStudent> value)
+    required TResult Function(_Unauthenticated<T> value) unauthenticated,
+    required TResult Function(_Authenticating<T> value) authenticating,
+    required TResult Function(_Authenticated<T> value) authenticated,
+    required TResult Function(_AuthenticationFailure<T> value)
         authenticationFailed,
   }) {
     return authenticationFailed(this);
@@ -531,11 +512,10 @@ class _$_AuthenticationFailure<FFStudent>
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Unauthenticated<FFStudent> value)? unauthenticated,
-    TResult Function(_Authenticating<FFStudent> value)? authenticating,
-    TResult Function(_Authenticated<FFStudent> value)? authenticated,
-    TResult Function(_AuthenticationFailure<FFStudent> value)?
-        authenticationFailed,
+    TResult Function(_Unauthenticated<T> value)? unauthenticated,
+    TResult Function(_Authenticating<T> value)? authenticating,
+    TResult Function(_Authenticated<T> value)? authenticated,
+    TResult Function(_AuthenticationFailure<T> value)? authenticationFailed,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -545,13 +525,12 @@ class _$_AuthenticationFailure<FFStudent>
   }
 }
 
-abstract class _AuthenticationFailure<FFStudent>
-    implements UserState<FFStudent> {
+abstract class _AuthenticationFailure<T> implements UserState<T> {
   const factory _AuthenticationFailure(String errorMessage) =
-      _$_AuthenticationFailure<FFStudent>;
+      _$_AuthenticationFailure<T>;
 
   String get errorMessage => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$AuthenticationFailureCopyWith<FFStudent, _AuthenticationFailure<FFStudent>>
-      get copyWith => throw _privateConstructorUsedError;
+  _$AuthenticationFailureCopyWith<T, _AuthenticationFailure<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }

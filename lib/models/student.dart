@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rowdy/services/user/avatar_user_model.dart';
+import 'package:rowdy/util/functions.dart';
 
 part 'student.freezed.dart';
 part 'student.g.dart';
@@ -30,6 +32,17 @@ class FFStudent with _$FFStudent implements AvatarUser {
     String? coverPhotoUrl,
     String? email,
     String? avatarUrl,
+    String? authType,
+
+    /// When the account was created. Created from firestore [Timestamp].
+
+    @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+        required DateTime creationDate,
+
+    /// The last time the user opened the app. Created from firestore [Timestamp].
+
+    @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+        required DateTime lastOpenDate,
   }) = _Student;
 
   /// Converts a map of items with same variable name (key) and type for value

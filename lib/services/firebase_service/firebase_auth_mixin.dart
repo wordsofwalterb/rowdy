@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,6 +58,7 @@ mixin FirebaseAuthMixin<T extends Model> {
         errorMessage: errorMessage,
       );
     } catch (error) {
+      log(error.toString());
       return FFResult.failure(
         errorCode: 'UNKNOWN_ERROR',
         errorMessage: 'There was an unknown error signing in.',
@@ -80,11 +83,14 @@ mixin FirebaseAuthMixin<T extends Model> {
           .doc(firebaseUser.uid)
           .update({'lastOpenDate': Timestamp.now()});
 
-      final user = parseJson<T>(
-          userDoc.data()!..update('lastOpenDate', (value) => Timestamp.now()));
+      final map = userDoc.data()!
+        ..update('lastOpenDate', (value) => Timestamp.now());
+
+      final user = parseJson<T>(map);
 
       return FFResult.success(user);
     } catch (error) {
+      log(error.toString());
       return FFResult.failure(
           errorCode: error.toString(),
           errorMessage: 'There was a problem retrieving your account');

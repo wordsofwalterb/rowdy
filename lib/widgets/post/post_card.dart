@@ -1,12 +1,10 @@
-import 'dart:js';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 import 'package:like_button/like_button.dart';
 import 'package:rowdy/models/post.dart';
+import 'package:rowdy/services/firebase_service/feed_steam_cubit/feed_stream_cubit.dart';
 import 'package:rowdy/services/repositories/post_repository.dart';
 import 'package:rowdy/util/functions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,11 +25,12 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final body = context.select((PostRepository r) => r.state[id]?.body);
-    final imageUrl =
-        context.select((PostRepository r) => r.state[id]?.imageUrls[0]);
-    final commentsCount =
-        context.select((PostRepository r) => r.state[id]?.commentCount);
+    final body = context
+        .select((FeedStreamCubit<FFPost> r) => r.state.itemIds[id]?.body);
+    final imageUrl = context.select(
+        (FeedStreamCubit<FFPost> r) => r.state.itemIds[id]?.imageUrls[0]);
+    final commentsCount = context.select(
+        (FeedStreamCubit<FFPost> r) => r.state.itemIds[id]?.commentCount);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
@@ -64,10 +63,10 @@ class PostCard extends StatelessWidget {
               ),
             ),
           },
-          const SizedBox(height: 6),
-          if (imageUrl != null) ...{
-            FFImageWidget(imageUrl),
-          },
+          // const SizedBox(height: 6),
+          // if (imageUrl != null) ...{
+          //   FFImageWidget(imageUrl),
+          // },
           FFLikeButton(),
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
@@ -99,27 +98,27 @@ class PostCard extends StatelessWidget {
   }
 }
 
-class FFImageWidget extends StatelessWidget {
-  const FFImageWidget(this.imageUrl, {Key? key}) : super(key: key);
+// class FFImageWidget extends StatelessWidget {
+//   const FFImageWidget(this.imageUrl, {Key? key}) : super(key: key);
 
-  final String imageUrl;
+//   final String imageUrl;
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
-      child: Container(
-        height: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: CachedNetworkImageProvider(imageUrl),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 6.0),
+//       child: Container(
+//         height: MediaQuery.of(context).size.width,
+//         decoration: BoxDecoration(
+//           image: DecorationImage(
+//             image: CachedNetworkImageProvider(imageUrl),
+//             fit: BoxFit.cover,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class CardAuthorProfile extends StatelessWidget {
   const CardAuthorProfile({Key? key}) : super(key: key);

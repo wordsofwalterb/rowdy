@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,9 +24,7 @@ class RegisterFormCubit extends Cubit<RegisterFormState> {
     required String firstName,
     required String lastName,
   }) async {
-    emit(RegisterFormState.processing(
-      isPasswordHidden: state.isPasswordHidden,
-    ));
+    emit(RegisterFormState.initial(isPasswordHidden: state.isPasswordHidden));
 
     try {
       if (!FFValidators.isValidFirstName(firstName)) {
@@ -42,11 +42,25 @@ class RegisterFormCubit extends Cubit<RegisterFormState> {
       if (!FFValidators.isValidPassword(password)) {
         throw ValidationException('ERROR_PASSWORD');
       }
+      emit(RegisterFormState.processing(
+        isPasswordHidden: state.isPasswordHidden,
+      ));
+
+      final _random = Random();
+
+      final defaultAvatarIndex = _random.nextInt(4);
+      const accessToken = [
+        'https://firebasestorage.googleapis.com/v0/b/fyrefly-92a36.appspot.com/o/images%2Fdefault%2FdefaultAvatar1.png?alt=media&token=4f1a8bd3-39f7-4f72-b26a-417afa58d1a0',
+        'https://firebasestorage.googleapis.com/v0/b/fyrefly-92a36.appspot.com/o/images%2Fdefault%2FdefaultAvatar2.png?alt=media&token=61f44679-6903-46bf-b806-7cdc819d3ace',
+        'https://firebasestorage.googleapis.com/v0/b/fyrefly-92a36.appspot.com/o/images%2Fdefault%2FdefaultAvatar3.png?alt=media&token=aa2ccebb-d34c-4c55-814f-54934d41a590',
+        'https://firebasestorage.googleapis.com/v0/b/fyrefly-92a36.appspot.com/o/images%2Fdefault%2FdefaultAvatar4.png?alt=media&token=c6ee020c-4d0d-4f30-97ed-dd4fdcc93401',
+      ];
 
       await userCubit.signUpWithCredential(email, password, props: {
         'firstName': firstName,
         'lastName': lastName,
         'fullName': '$firstName $lastName',
+        'avatarUrl': accessToken[defaultAvatarIndex],
       });
 
       userCubit.state.maybeWhen(
@@ -87,12 +101,12 @@ class RegisterFormCubit extends Cubit<RegisterFormState> {
           errorMessage = 'Email format is incorrect';
           isEmailValid = false;
           break;
-        case 'ERROR_EMAIL_UT':
-          errorMessage = 'UTexas email is required';
+        case 'ERROR_EMAIL_UTSA':
+          errorMessage = 'Please enter a UTSA email';
           isEmailValid = false;
           break;
         case 'ERROR_PASSWORD':
-          errorMessage = 'Password was invalid';
+          errorMessage = 'Password must be 8 characters or longer.';
           isPasswordValid = false;
           break;
         default:
@@ -109,6 +123,6 @@ class RegisterFormCubit extends Cubit<RegisterFormState> {
     }
   }
 
-  Future<void> toggleHiddenPassword() async =>
-      emit(state.copyWith(isPasswordHidden: !state.isPasswordHidden));
+  Future<void> toggleHiddenPassword() async => emit(
+      RegisterFormState.initial(isPasswordHidden: !state.isPasswordHidden));
 }

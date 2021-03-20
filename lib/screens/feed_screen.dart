@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rowdy/models/post.dart';
-import 'package:rowdy/services/feeds/feed_cubit/feed_cubit.dart';
-import 'package:rowdy/services/repositories/post_repository.dart';
+
+import 'package:rowdy/services/firebase_service/feed_steam_cubit/feed_stream_cubit.dart';
+import 'package:rowdy/services/firebase_service/firebase_service.dart';
+
 import 'package:rowdy/util/global.dart';
 import 'package:rowdy/widgets/bottom_loader.dart';
 
@@ -19,12 +21,11 @@ class PostFeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FeedCubit(
-          repository: BlocProvider.of<PostRepository>(context),
-          query: FFGlobal.collectionMapper[FFPost]!.limit(20)),
-      child: FeedScreen(
-        feedController: feedController,
-      ),
+      create: (context) => FeedStreamCubit<FFPost>(
+          repository: FirebaseService<FFPost>(),
+          query: FFGlobal.collectionMapper[FFPost]!.limit(20))
+        ..setupFeed(),
+      child: FeedScreen(feedController: feedController),
     );
   }
 }
@@ -57,7 +58,7 @@ class _FeedScreenState extends State<FeedScreen>
     final maxScroll = _feedController.position.maxScrollExtent;
     final currentScroll = _feedController.position.pixels;
     if (maxScroll - currentScroll <= _scrollThreshold) {
-      context.read();
+      // context.read();
     }
   }
 
@@ -198,7 +199,8 @@ class _FeedScreenState extends State<FeedScreen>
   }
 
   Widget _postList() {
-    final postFeed = context.watch<FeedCubit<PostRepository>>();
+    final postFeed = context.watch<FeedStreamCubit<FFPost>>();
+    final keys = postFeed.state.itemIds.keys.toList();
 
     return postFeed.state.when(
       initial: (_) {
@@ -231,8 +233,8 @@ class _FeedScreenState extends State<FeedScreen>
                 return BottomLoader();
               } else {
                 return PostCard(
-                  key: ValueKey(state[index]),
-                  id: state[index],
+                  key: ValueKey(keys[index]),
+                  id: keys[index],
                 );
               }
             },
@@ -248,8 +250,8 @@ class _FeedScreenState extends State<FeedScreen>
                 return BottomLoader();
               } else {
                 return PostCard(
-                  key: ValueKey(state[index]),
-                  id: state[index],
+                  key: ValueKey(keys[index]),
+                  id: keys[index],
                 );
               }
             },
@@ -257,68 +259,8 @@ class _FeedScreenState extends State<FeedScreen>
           ),
         );
       },
-      empty: (_) => Container(),
-      failure: (_) => Container(),
+      empty: (_) => const SliverPadding(padding: EdgeInsets.zero),
+      failure: (_) => const SliverPadding(padding: EdgeInsets.zero),
     );
   }
 }
-
-//   return BlocBuilder<PostsBloc, PostsState>(builder: (context, postState) {
-//     if (postState is PostsInitial) {
-//       return SliverList(
-//         delegate: SliverChildListDelegate(
-//           [
-//             const Center(
-//               child: CircularProgressIndicator(),
-//             ),
-//           ],
-//         ),
-//       );
-//     }
-//     if (postState is PostsError) {
-//       return SliverList(
-//           delegate: SliverChildListDelegate([
-//         const Center(
-//           child: Text('failed to fetch posts'),
-//         ),
-//       ]));
-//     }
-//     if (postState is PostsEmpty) {
-//       return SliverList(
-//           delegate: SliverChildListDelegate([
-//         const Center(
-//           child: Text('no posts'),
-//         ),
-//       ]));
-//     }
-//     if (postState is PostsLoaded || postState is PostsReachedMax) {
-//       return SliverList(
-//         delegate: SliverChildBuilderDelegate(
-//           (BuildContext context, int index) {
-//             if (index >= postState.posts.length &&
-//                 postState is PostsReachedMax) {
-//               return Container(
-//                 width: MediaQuery.of(context).size.width,
-//                 height: 50,
-//                 child: const Align(
-//                   child: Text('No more posts :/'),
-//                 ),
-//               );
-//             } else if (index >= postState.posts.length &&
-//                 postState is PostsLoaded) {
-//               return BottomLoader();
-//             } else {
-//               return PostCard(
-//                 onChevronTap: _showPostDialog,
-//                 post: postState.posts[index],
-//               );
-//             }
-//           },
-//           childCount: postState.posts.length + 1,
-//         ),
-//       );
-//     }
-//     return const SliverPadding(padding: EdgeInsets.all(0));
-//   });
-// }
-// }

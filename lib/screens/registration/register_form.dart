@@ -71,7 +71,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     hintText: 'First name',
                     errorText: state.maybeMap(
                       failure: (state) {
-                        if (state.isFirstNameValid) {
+                        if (!state.isFirstNameValid) {
                           return state.error;
                         }
                       },
@@ -87,7 +87,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     hintText: 'Last Name',
                     errorText: state.maybeMap(
                       failure: (state) {
-                        if (state.isLastNameValid) {
+                        if (!state.isLastNameValid) {
                           return state.error;
                         }
                       },
@@ -103,7 +103,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     hintText: 'UTSA Email',
                     errorText: state.maybeMap(
                       failure: (state) {
-                        if (state.isEmailValid) {
+                        if (!state.isEmailValid) {
                           return state.error;
                         }
                       },
@@ -118,7 +118,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       errorText: state.maybeMap(
                         failure: (state) {
-                          if (state.isPasswordValid) {
+                          if (!state.isPasswordValid) {
                             return state.error;
                           }
                         },

@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rowdy/models/model.dart';
 import 'package:rowdy/models/post.dart';
 import 'package:rowdy/models/test.dart';
 
 import '../models/student.dart';
+
+typedef mapper = Object Function(Map<String, dynamic> data);
 
 class FFGlobal {
   static final CollectionReference likeRef =
@@ -35,15 +38,15 @@ class FFGlobal {
 
   static final jsonMapper = {
     FFPost: (Map<String, dynamic> data) => FFPost.fromJson(data),
-    FFStudent: (Map<String, dynamic> data) => FFTest.fromJson(data),
+    FFStudent: (Map<String, dynamic> data) => FFStudent.fromJson(data),
   };
 }
 
-T parseJson<T>(Map<String, dynamic> data) {
+T parseJson<T extends Model>(Map<String, dynamic> data) {
   return FFGlobal.jsonMapper[T]!(data) as T;
 }
 
-List<T> parseFirestoreQuery<T>(QuerySnapshot queryList) {
+List<T> parseFirestoreQuery<T extends Model>(QuerySnapshot queryList) {
   return queryList.docs
       .map((e) => FFGlobal.jsonMapper[T]!(e.data()!..addAll({'id': e.id})) as T)
       .toList();

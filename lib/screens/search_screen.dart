@@ -3,12 +3,6 @@
 // import 'package:flappy_search_bar/search_bar_style.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:ut_social/blocs/user_bloc/user_bloc.dart';
-
-// import 'package:ut_social/models/student.dart';
-
-// import 'package:ut_social/services/student_repository.dart';
-// import 'package:ut_social/util/router.dart';
 
 // import '../widgets/search_tile.dart';
 

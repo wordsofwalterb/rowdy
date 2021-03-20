@@ -18,21 +18,24 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Rowdy',
-      theme: ffTheme(FFThemes.dark),
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<UserRepository>(
+            create: (_) => UserRepository(FirebaseService())..autoLogin()),
+        // BlocProvider<PostRepository>(
+        //     create: (_) => PostRepository(FirebaseService())),
+        // BlocProvider<StudentRepository>(
+        //     create: (_) => StudentRepository(FirebaseService()))
       ],
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => UserRepository(FirebaseService())),
-          BlocProvider(create: (_) => StudentRepository(FirebaseService())),
-          BlocProvider(create: (_) => PostRepository(FirebaseService())),
+      child: MaterialApp(
+        title: 'Rowdy',
+        theme: ffTheme(FFThemes.dark),
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
         ],
-        child: const NavigatorBridge(),
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const NavigatorBridge(),
       ),
     );
   }

@@ -15,8 +15,9 @@ part 'user_state.dart';
 part 'user_repository.freezed.dart';
 
 class UserRepository extends Cubit<UserState<FFStudent>>
-    with UpdateAvatarUserRepoMixin<FFStudent>
-    implements FirebaseServiceMixin<FFStudent> {
+    // with UpdateAvatarUserRepoMixin<FFStudent>
+    implements
+        FirebaseServiceMixin<FFStudent> {
   UserRepository(this.service) : super(const UserState.unauthenticated());
 
   @override
@@ -45,7 +46,7 @@ class UserRepository extends Cubit<UserState<FFStudent>>
 
       (userResult.hasData)
           ? emit(UserState.authenticated(user: userResult.data!))
-          : emit(UserState.authenticationFailed(authResult.errorMessage!));
+          : emit(UserState.authenticationFailed(userResult.errorMessage!));
     } else {
       emit(UserState.authenticationFailed(authResult.errorMessage!));
     }

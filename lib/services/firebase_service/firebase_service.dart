@@ -31,7 +31,7 @@ class FirebaseService<T extends Model>
     try {
       final currentUser = auth.currentUser!;
       final userMap = {
-        'userID': currentUser.uid,
+        'id': currentUser.uid,
         'firstName': firstName,
         'lastName': lastName,
         'email': email,
@@ -47,7 +47,7 @@ class FirebaseService<T extends Model>
 
   Future<FFResult<List<T>>> getQuery(Query query) async {
     try {
-      return FFResult.success(parseFirestoreQuery(await query.get()));
+      return FFResult<List<T>>.success(parseFirestoreQuery(await query.get()));
     } catch (err) {
       return FFResult.failure(
           errorCode: 'QUERY_ERROR',
@@ -67,12 +67,41 @@ class FirebaseService<T extends Model>
     }
   }
 
+  Stream<List<T>> getStreamFromQuery(Query query) {
+    return query.snapshots().map((list) {
+      final newList = list.docs.map((doc) {
+        final fun = FFGlobal.jsonMapper[T];
+        final data = doc.data();
+
+        if (fun != null && data != null) {
+          final conv = fun(data) as T;
+          return conv;
+        } else {
+          throw Exception();
+        }
+      });
+      return newList.toList();
+    });
+  }
+
   Future<void> updateItem(T item) async {
     try {
       final ref = FFGlobal.collectionMapper[T];
 
       if (ref != null) {
         await ref.doc(item.id).update(item.toJson());
+      }
+    } catch (error) {
+      throw Exception();
+    }
+  }
+
+  Future<void> addItem(T item) async {
+    try {
+      final ref = FFGlobal.collectionMapper[T];
+
+      if (ref != null) {
+        await ref.doc(item.id).set(item.toJson());
       }
     } catch (error) {
       throw Exception();

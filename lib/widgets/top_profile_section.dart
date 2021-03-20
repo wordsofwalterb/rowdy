@@ -43,10 +43,10 @@ class TopProfileSection extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  CoverPhoto(
-                    height: 120,
-                    coverPhotoUrl: coverPhotoUrl,
-                  ),
+                  // CoverPhoto(
+                  //   height: 120,
+                  //   coverPhotoUrl: coverPhotoUrl,
+                  // ),
                 ],
               ),
               Positioned(

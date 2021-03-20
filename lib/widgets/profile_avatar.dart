@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 enum AvatarOutline {
@@ -77,25 +76,42 @@ class ProfileAvatar extends StatelessWidget {
               ),
             );
           } else if (avatarUrl != null && avatarUrl != '') {
-            return CachedNetworkImage(
-              imageUrl: avatarUrl,
-              imageBuilder: (context, imageProvider) => Container(
-                width: size,
-                height: size,
-                decoration: BoxDecoration(
-                  border: (borderColor != null)
-                      ? Border.all(
-                          color: borderColor,
-                          width: borderWidth,
-                        )
-                      : null,
-                  borderRadius: BorderRadius.circular(radius),
-                  image:
-                      DecorationImage(image: imageProvider, fit: BoxFit.cover),
+            return Container(
+              width: size,
+              height: size,
+              decoration: BoxDecoration(
+                border: (borderColor != null)
+                    ? Border.all(
+                        color: borderColor,
+                        width: borderWidth,
+                      )
+                    : null,
+                borderRadius: BorderRadius.circular(radius),
+                image: DecorationImage(
+                  image: NetworkImage(avatarUrl!),
+                  fit: BoxFit.cover,
                 ),
               ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
             );
+            // CachedNetworkImage(
+            //   imageUrl: avatarUrl,
+            //   imageBuilder: (context, imageProvider) => Container(
+            //     width: size,
+            //     height: size,
+            //     decoration: BoxDecoration(
+            //       border: (borderColor != null)
+            //           ? Border.all(
+            //               color: borderColor,
+            //               width: borderWidth,
+            //             )
+            //           : null,
+            //       borderRadius: BorderRadius.circular(radius),
+            //       image:
+            //           DecorationImage(image: imageProvider, fit: BoxFit.cover),
+            //     ),
+            //   ),
+            //   errorWidget: (context, url, error) => const Icon(Icons.error),
+            // );
           }
           // If everything else is false display placeholder
           return Container(

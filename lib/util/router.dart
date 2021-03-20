@@ -1,73 +1,66 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:rowdy/screens/feed_screen.dart';
-// import 'package:rowdy/screens/home_screen.dart';
-// import 'package:rowdy/screens/lost_password_screen.dart';
-// import 'package:rowdy/screens/settings_overview_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rowdy/screens/create_post_screen.dart';
+import 'package:rowdy/screens/feed_screen.dart';
+import 'package:rowdy/screens/home_screen.dart';
+import 'package:rowdy/screens/lost_password_screen.dart';
+import 'package:rowdy/screens/settings_overview_screen.dart';
 
-// /// Static Namespace for routes
-// class FFRoutes {
-//   static const String home = '/';
-//   static const String feed = 'feed';
-//   static const String profile = 'profile';
-//   static const String editProfile = 'editProfile';
-//   static const String createPost = 'createPost';
-//   static const String chatDetail = 'chatDetail';
-//   static const String postComments = 'postComments';
-//   static const String authenticationSettings = 'authenticationSettings';
-//   static const String settingsOverview = 'settingsOverview';
-//   static const String lostPassword = 'lostPassword';
-// }
+/// Static Namespace for routes
+class FFRoutes {
+  static const String home = '/';
+  static const String feed = 'feed';
+  static const String profile = 'profile';
+  static const String editProfile = 'editProfile';
+  static const String createPost = 'createPost';
+  static const String chatDetail = 'chatDetail';
+  static const String postComments = 'postComments';
+  static const String authenticationSettings = 'authenticationSettings';
+  static const String settingsOverview = 'settingsOverview';
+  static const String lostPassword = 'lostPassword';
+}
 
-// /// Correlates routes names to builders
-// class FFRouter {
-//   static Route<dynamic> generateRoute(RouteSettings settings) {
-//     final args = settings.arguments;
+/// Correlates routes names to builders
+class FFRouter {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    final args = settings.arguments;
 
-//     switch (settings.name) {
-//       case FFRoutes.home:
-//         return MaterialPageRoute(builder: (_) => HomeScreen());
-//       case FFRoutes.feed:
-//         return MaterialPageRoute(builder: (_) => FeedScreen());
-//       case FFRoutes.lostPassword:
-//         return MaterialPageRoute(builder: (_) => LostPasswordScreen());
-//       case FFRoutes.authenticationSettings:
-//         return MaterialPageRoute(
-//             builder: (_) => AuthenticationSettingsScreen());
-//       case FFRoutes.settingsOverview:
-//         return MaterialPageRoute(builder: (_) => SettingsOverviewScreen());
-//       case FFRoutes.postComments:
-//         if (args is PostCommentsArgs) {
-//           return _postCommentsRoute(args);
-//         }
-//         throw Exception('Invalid arguments for ${settings.name}');
-//         break;
-//       case FFRoutes.profile:
-//         if (args is ProfileArgs) {
-//           return _profileRoute(args);
-//         }
-//         throw Exception('Invalid arguments for ${settings.name}');
-//         break;
-//       case FFRoutes.createPost:
-//         if (args is PostsBloc) {
-//           return _createPostRoute(args);
-//         }
-//         throw Exception('Invalid arguments for ${settings.name}');
-//         break;
-//       case FFRoutes.editProfile:
-//         if (args is ProfileInfoBloc) {
-//           return _editProfileRoute(args);
-//         }
-//         throw Exception('Invalid arguments for ${settings.name}');
-//         break;
-//       case FFRoutes.chatDetail:
-//         return MaterialPageRoute(
-//           builder: (_) => ChatDetailScreen(),
-//         );
-//       default:
-//         return _errorRoute(settings);
-//     }
-//   }
+    switch (settings.name) {
+      case FFRoutes.home:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
+      case FFRoutes.feed:
+        return MaterialPageRoute(
+            builder: (_) => PostFeedScreen(args as ScrollController));
+      case FFRoutes.lostPassword:
+        return MaterialPageRoute(builder: (_) => LostPasswordScreen());
+      // case FFRoutes.authenticationSettings:
+      //   return MaterialPageRoute(
+      //       builder: (_) => AuthenticationSettingsScreen());
+      // case FFRoutes.settingsOverview:
+      //   return MaterialPageRoute(builder: (_) => SettingsOverviewScreen());
+      case FFRoutes.postComments:
+        throw Exception('Invalid arguments for ${settings.name}');
+        break;
+      case FFRoutes.profile:
+        throw Exception('Invalid arguments for ${settings.name}');
+        break;
+      case FFRoutes.createPost:
+        return MaterialPageRoute(builder: (_) => CreatePostScreen());
+        throw Exception('Invalid arguments for ${settings.name}');
+        break;
+      // case FFRoutes.editProfile:
+      //   return MaterialPageRoute(
+      //     builder: (_) => EditProfileScreen(),
+      //   );
+      //   break;
+      // case FFRoutes.chatDetail:
+      //   return MaterialPageRoute(
+      //     builder: (_) => ChatDetailScreen(),
+      //   );
+      default:
+        return _errorRoute(settings);
+    }
+  }
 
 // // Moved route generation to this section for brevity in previous section
 
@@ -116,16 +109,16 @@
 //     );
 //   }
 
-//   static Route<dynamic> _errorRoute(dynamic settings) {
-//     return MaterialPageRoute(
-//       builder: (_) => Scaffold(
-//         body: Center(child: Text('No route defined for ${settings.name}')),
-//       ),
-//     );
-//   }
-// }
+  static Route<dynamic> _errorRoute(dynamic settings) {
+    return MaterialPageRoute(
+      builder: (_) => Scaffold(
+        body: Center(child: Text('No route defined for ${settings.name}')),
+      ),
+    );
+  }
+}
 
-// //Arguement Classes
+//Arguement Classes
 
 // class ProfileArgs {
 //   final String userId;

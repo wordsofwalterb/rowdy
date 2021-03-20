@@ -16,7 +16,7 @@
 //   NotificationsBloc _notificationBloc;
 
 //   @override
-//   Widget build(BuildContext context) {
+//   Widget build(BuildContext context) {1
 //     _notificationBloc = BlocProvider.of<NotificationsBloc>(context);
 //     return Scaffold(
 //       appBar: mainAppBar(context),

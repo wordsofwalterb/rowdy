@@ -15,7 +15,7 @@ class FFValidators {
   }
 
   static bool isValidPassword(String password) {
-    return _passwordRegExp.hasMatch(password);
+    return (password.length >= 8);
   }
 
   static bool isValidFirstName(String firstName) {
@@ -35,9 +35,9 @@ class FFValidators {
   static String? emailValidator(String? email) {
     if (email == null || email == '') {
       return 'Email is empty';
-    } else if (isValidEmail(email)) {
+    } else if (!isValidEmail(email)) {
       return 'The email is not formated properly';
-    } else if (isValidUTSAEmail(email)) {
+    } else if (!isValidUTSAEmail(email)) {
       return 'Not a proper UTSA email';
     }
   }
@@ -45,7 +45,7 @@ class FFValidators {
   static String? firstNameValidator(String? name) {
     if (name == null || name == '') {
       return 'First name is empty';
-    } else if (isValidFirstName(name)) {
+    } else if (!isValidFirstName(name)) {
       return 'First name cannot be empty';
     }
   }
@@ -53,7 +53,7 @@ class FFValidators {
   static String? lastNameValidator(String? name) {
     if (name == null || name == '') {
       return 'Last name is empty';
-    } else if (isValidLastName(name)) {
+    } else if (!isValidLastName(name)) {
       return 'Last name cannot be empty';
     }
   }
@@ -61,8 +61,8 @@ class FFValidators {
   static String? passwordValidator(String? password) {
     if (password == null || password == '') {
       return 'Password cannot be empty';
-    } else if (isValidPassword(password)) {
-      return 'Innapropriate Password';
+    } else if (!isValidPassword(password)) {
+      return 'Password must be 8 characters or longer.';
     }
   }
 }

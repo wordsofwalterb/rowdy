@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rowdy/models/model.dart';
 
@@ -29,6 +31,7 @@ mixin FirebaseAnonymousAuthMixin<T extends Model> on FirebaseAuthMixin<T> {
 
       return FFResult.success(parseJson(userMap));
     } catch (error) {
+      log(error.toString());
       return FFResult.failure(
           errorCode: error.toString(),
           errorMessage: 'There was a problem setting up your account.');

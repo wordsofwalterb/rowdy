@@ -32,7 +32,12 @@ class _$FFStudentTearOff {
       String? bio,
       String? coverPhotoUrl,
       String? email,
-      String? avatarUrl}) {
+      String? avatarUrl,
+      String? authType,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          required DateTime creationDate,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          required DateTime lastOpenDate}) {
     return _Student(
       id: id,
       fullName: fullName,
@@ -46,6 +51,9 @@ class _$FFStudentTearOff {
       coverPhotoUrl: coverPhotoUrl,
       email: email,
       avatarUrl: avatarUrl,
+      authType: authType,
+      creationDate: creationDate,
+      lastOpenDate: lastOpenDate,
     );
   }
 
@@ -71,6 +79,19 @@ mixin _$FFStudent {
   String? get coverPhotoUrl => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
+  String? get authType => throw _privateConstructorUsedError;
+
+  /// When the account was created. Created from firestore [Timestamp].
+  @JsonKey(
+      fromJson: FFFunctions.dateTimeFromTimestamp,
+      toJson: FFFunctions.dateTimeAsIs)
+  DateTime get creationDate => throw _privateConstructorUsedError;
+
+  /// The last time the user opened the app. Created from firestore [Timestamp].
+  @JsonKey(
+      fromJson: FFFunctions.dateTimeFromTimestamp,
+      toJson: FFFunctions.dateTimeAsIs)
+  DateTime get lastOpenDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -94,7 +115,12 @@ abstract class $FFStudentCopyWith<$Res> {
       String? bio,
       String? coverPhotoUrl,
       String? email,
-      String? avatarUrl});
+      String? avatarUrl,
+      String? authType,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          DateTime creationDate,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          DateTime lastOpenDate});
 }
 
 /// @nodoc
@@ -119,6 +145,9 @@ class _$FFStudentCopyWithImpl<$Res> implements $FFStudentCopyWith<$Res> {
     Object? coverPhotoUrl = freezed,
     Object? email = freezed,
     Object? avatarUrl = freezed,
+    Object? authType = freezed,
+    Object? creationDate = freezed,
+    Object? lastOpenDate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -169,6 +198,18 @@ class _$FFStudentCopyWithImpl<$Res> implements $FFStudentCopyWith<$Res> {
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      authType: authType == freezed
+          ? _value.authType
+          : authType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creationDate: creationDate == freezed
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      lastOpenDate: lastOpenDate == freezed
+          ? _value.lastOpenDate
+          : lastOpenDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -190,7 +231,12 @@ abstract class _$StudentCopyWith<$Res> implements $FFStudentCopyWith<$Res> {
       String? bio,
       String? coverPhotoUrl,
       String? email,
-      String? avatarUrl});
+      String? avatarUrl,
+      String? authType,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          DateTime creationDate,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          DateTime lastOpenDate});
 }
 
 /// @nodoc
@@ -216,6 +262,9 @@ class __$StudentCopyWithImpl<$Res> extends _$FFStudentCopyWithImpl<$Res>
     Object? coverPhotoUrl = freezed,
     Object? email = freezed,
     Object? avatarUrl = freezed,
+    Object? authType = freezed,
+    Object? creationDate = freezed,
+    Object? lastOpenDate = freezed,
   }) {
     return _then(_Student(
       id: id == freezed
@@ -266,6 +315,18 @@ class __$StudentCopyWithImpl<$Res> extends _$FFStudentCopyWithImpl<$Res>
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      authType: authType == freezed
+          ? _value.authType
+          : authType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creationDate: creationDate == freezed
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      lastOpenDate: lastOpenDate == freezed
+          ? _value.lastOpenDate
+          : lastOpenDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -287,7 +348,12 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
       this.bio,
       this.coverPhotoUrl,
       this.email,
-      this.avatarUrl});
+      this.avatarUrl,
+      this.authType,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          required this.creationDate,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          required this.lastOpenDate});
 
   factory _$_Student.fromJson(Map<String, dynamic> json) =>
       _$_$_StudentFromJson(json);
@@ -320,10 +386,26 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
   final String? email;
   @override
   final String? avatarUrl;
+  @override
+  final String? authType;
+  @override
+
+  /// When the account was created. Created from firestore [Timestamp].
+  @JsonKey(
+      fromJson: FFFunctions.dateTimeFromTimestamp,
+      toJson: FFFunctions.dateTimeAsIs)
+  final DateTime creationDate;
+  @override
+
+  /// The last time the user opened the app. Created from firestore [Timestamp].
+  @JsonKey(
+      fromJson: FFFunctions.dateTimeFromTimestamp,
+      toJson: FFFunctions.dateTimeAsIs)
+  final DateTime lastOpenDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FFStudent(id: $id, fullName: $fullName, firstName: $firstName, lastName: $lastName, channels: $channels, notificationsEnabled: $notificationsEnabled, reportCount: $reportCount, isTester: $isTester, bio: $bio, coverPhotoUrl: $coverPhotoUrl, email: $email, avatarUrl: $avatarUrl)';
+    return 'FFStudent(id: $id, fullName: $fullName, firstName: $firstName, lastName: $lastName, channels: $channels, notificationsEnabled: $notificationsEnabled, reportCount: $reportCount, isTester: $isTester, bio: $bio, coverPhotoUrl: $coverPhotoUrl, email: $email, avatarUrl: $avatarUrl, authType: $authType, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
   }
 
   @override
@@ -342,7 +424,10 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
       ..add(DiagnosticsProperty('bio', bio))
       ..add(DiagnosticsProperty('coverPhotoUrl', coverPhotoUrl))
       ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('avatarUrl', avatarUrl));
+      ..add(DiagnosticsProperty('avatarUrl', avatarUrl))
+      ..add(DiagnosticsProperty('authType', authType))
+      ..add(DiagnosticsProperty('creationDate', creationDate))
+      ..add(DiagnosticsProperty('lastOpenDate', lastOpenDate));
   }
 
   @override
@@ -381,7 +466,16 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.avatarUrl, avatarUrl) ||
                 const DeepCollectionEquality()
-                    .equals(other.avatarUrl, avatarUrl)));
+                    .equals(other.avatarUrl, avatarUrl)) &&
+            (identical(other.authType, authType) ||
+                const DeepCollectionEquality()
+                    .equals(other.authType, authType)) &&
+            (identical(other.creationDate, creationDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.creationDate, creationDate)) &&
+            (identical(other.lastOpenDate, lastOpenDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastOpenDate, lastOpenDate)));
   }
 
   @override
@@ -398,7 +492,10 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
       const DeepCollectionEquality().hash(bio) ^
       const DeepCollectionEquality().hash(coverPhotoUrl) ^
       const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(avatarUrl);
+      const DeepCollectionEquality().hash(avatarUrl) ^
+      const DeepCollectionEquality().hash(authType) ^
+      const DeepCollectionEquality().hash(creationDate) ^
+      const DeepCollectionEquality().hash(lastOpenDate);
 
   @JsonKey(ignore: true)
   @override
@@ -424,7 +521,12 @@ abstract class _Student implements FFStudent, AvatarUser {
       String? bio,
       String? coverPhotoUrl,
       String? email,
-      String? avatarUrl}) = _$_Student;
+      String? avatarUrl,
+      String? authType,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          required DateTime creationDate,
+      @JsonKey(fromJson: FFFunctions.dateTimeFromTimestamp, toJson: FFFunctions.dateTimeAsIs)
+          required DateTime lastOpenDate}) = _$_Student;
 
   factory _Student.fromJson(Map<String, dynamic> json) = _$_Student.fromJson;
 
@@ -452,6 +554,22 @@ abstract class _Student implements FFStudent, AvatarUser {
   String? get email => throw _privateConstructorUsedError;
   @override
   String? get avatarUrl => throw _privateConstructorUsedError;
+  @override
+  String? get authType => throw _privateConstructorUsedError;
+  @override
+
+  /// When the account was created. Created from firestore [Timestamp].
+  @JsonKey(
+      fromJson: FFFunctions.dateTimeFromTimestamp,
+      toJson: FFFunctions.dateTimeAsIs)
+  DateTime get creationDate => throw _privateConstructorUsedError;
+  @override
+
+  /// The last time the user opened the app. Created from firestore [Timestamp].
+  @JsonKey(
+      fromJson: FFFunctions.dateTimeFromTimestamp,
+      toJson: FFFunctions.dateTimeAsIs)
+  DateTime get lastOpenDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$StudentCopyWith<_Student> get copyWith =>
