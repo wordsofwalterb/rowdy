@@ -123,13 +123,18 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       setState(() {
         _isLoading = true;
       });
-      String imageUrl;
+      List<String> imageUrls = [];
       // Create post
       if (_image != null) {
-        imageUrl = await StorageService.uploadPost(postId, _image!);
+        imageUrls[0] = await StorageService.uploadPost(postId, _image!);
       }
-      await FirebaseService<FFPost>()
-          .addItem(FFPost(id: postId, authorId: authorId, postTime: time));
+      await FirebaseService<FFPost>().addItem(FFPost(
+        id: postId,
+        authorId: authorId,
+        postTime: time,
+        body: _caption,
+        imageUrls: imageUrls,
+      ));
     }
 
     // Reset data

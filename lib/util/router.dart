@@ -40,14 +40,13 @@ class FFRouter {
       //   return MaterialPageRoute(builder: (_) => SettingsOverviewScreen());
       case FFRoutes.postComments:
         throw Exception('Invalid arguments for ${settings.name}');
-        break;
+
       case FFRoutes.profile:
         throw Exception('Invalid arguments for ${settings.name}');
-        break;
+
       case FFRoutes.createPost:
         return MaterialPageRoute(builder: (_) => CreatePostScreen());
-        throw Exception('Invalid arguments for ${settings.name}');
-        break;
+
       // case FFRoutes.editProfile:
       //   return MaterialPageRoute(
       //     builder: (_) => EditProfileScreen(),

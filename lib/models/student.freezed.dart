@@ -29,6 +29,7 @@ class _$FFStudentTearOff {
       bool notificationsEnabled = false,
       int reportCount = 0,
       bool isTester = false,
+      List<String> likedPosts = const [],
       String? bio,
       String? coverPhotoUrl,
       String? email,
@@ -47,6 +48,7 @@ class _$FFStudentTearOff {
       notificationsEnabled: notificationsEnabled,
       reportCount: reportCount,
       isTester: isTester,
+      likedPosts: likedPosts,
       bio: bio,
       coverPhotoUrl: coverPhotoUrl,
       email: email,
@@ -75,6 +77,7 @@ mixin _$FFStudent {
   bool get notificationsEnabled => throw _privateConstructorUsedError;
   int get reportCount => throw _privateConstructorUsedError;
   bool get isTester => throw _privateConstructorUsedError;
+  List<String> get likedPosts => throw _privateConstructorUsedError;
   String? get bio => throw _privateConstructorUsedError;
   String? get coverPhotoUrl => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
@@ -112,6 +115,7 @@ abstract class $FFStudentCopyWith<$Res> {
       bool notificationsEnabled,
       int reportCount,
       bool isTester,
+      List<String> likedPosts,
       String? bio,
       String? coverPhotoUrl,
       String? email,
@@ -141,6 +145,7 @@ class _$FFStudentCopyWithImpl<$Res> implements $FFStudentCopyWith<$Res> {
     Object? notificationsEnabled = freezed,
     Object? reportCount = freezed,
     Object? isTester = freezed,
+    Object? likedPosts = freezed,
     Object? bio = freezed,
     Object? coverPhotoUrl = freezed,
     Object? email = freezed,
@@ -182,6 +187,10 @@ class _$FFStudentCopyWithImpl<$Res> implements $FFStudentCopyWith<$Res> {
           ? _value.isTester
           : isTester // ignore: cast_nullable_to_non_nullable
               as bool,
+      likedPosts: likedPosts == freezed
+          ? _value.likedPosts
+          : likedPosts // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       bio: bio == freezed
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
@@ -228,6 +237,7 @@ abstract class _$StudentCopyWith<$Res> implements $FFStudentCopyWith<$Res> {
       bool notificationsEnabled,
       int reportCount,
       bool isTester,
+      List<String> likedPosts,
       String? bio,
       String? coverPhotoUrl,
       String? email,
@@ -258,6 +268,7 @@ class __$StudentCopyWithImpl<$Res> extends _$FFStudentCopyWithImpl<$Res>
     Object? notificationsEnabled = freezed,
     Object? reportCount = freezed,
     Object? isTester = freezed,
+    Object? likedPosts = freezed,
     Object? bio = freezed,
     Object? coverPhotoUrl = freezed,
     Object? email = freezed,
@@ -299,6 +310,10 @@ class __$StudentCopyWithImpl<$Res> extends _$FFStudentCopyWithImpl<$Res>
           ? _value.isTester
           : isTester // ignore: cast_nullable_to_non_nullable
               as bool,
+      likedPosts: likedPosts == freezed
+          ? _value.likedPosts
+          : likedPosts // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       bio: bio == freezed
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
@@ -345,6 +360,7 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
       this.notificationsEnabled = false,
       this.reportCount = 0,
       this.isTester = false,
+      this.likedPosts = const [],
       this.bio,
       this.coverPhotoUrl,
       this.email,
@@ -378,6 +394,9 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
   @JsonKey(defaultValue: false)
   @override
   final bool isTester;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<String> likedPosts;
   @override
   final String? bio;
   @override
@@ -405,7 +424,7 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FFStudent(id: $id, fullName: $fullName, firstName: $firstName, lastName: $lastName, channels: $channels, notificationsEnabled: $notificationsEnabled, reportCount: $reportCount, isTester: $isTester, bio: $bio, coverPhotoUrl: $coverPhotoUrl, email: $email, avatarUrl: $avatarUrl, authType: $authType, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
+    return 'FFStudent(id: $id, fullName: $fullName, firstName: $firstName, lastName: $lastName, channels: $channels, notificationsEnabled: $notificationsEnabled, reportCount: $reportCount, isTester: $isTester, likedPosts: $likedPosts, bio: $bio, coverPhotoUrl: $coverPhotoUrl, email: $email, avatarUrl: $avatarUrl, authType: $authType, creationDate: $creationDate, lastOpenDate: $lastOpenDate)';
   }
 
   @override
@@ -421,6 +440,7 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
       ..add(DiagnosticsProperty('notificationsEnabled', notificationsEnabled))
       ..add(DiagnosticsProperty('reportCount', reportCount))
       ..add(DiagnosticsProperty('isTester', isTester))
+      ..add(DiagnosticsProperty('likedPosts', likedPosts))
       ..add(DiagnosticsProperty('bio', bio))
       ..add(DiagnosticsProperty('coverPhotoUrl', coverPhotoUrl))
       ..add(DiagnosticsProperty('email', email))
@@ -457,6 +477,9 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
             (identical(other.isTester, isTester) ||
                 const DeepCollectionEquality()
                     .equals(other.isTester, isTester)) &&
+            (identical(other.likedPosts, likedPosts) ||
+                const DeepCollectionEquality()
+                    .equals(other.likedPosts, likedPosts)) &&
             (identical(other.bio, bio) ||
                 const DeepCollectionEquality().equals(other.bio, bio)) &&
             (identical(other.coverPhotoUrl, coverPhotoUrl) ||
@@ -489,6 +512,7 @@ class _$_Student with DiagnosticableTreeMixin implements _Student {
       const DeepCollectionEquality().hash(notificationsEnabled) ^
       const DeepCollectionEquality().hash(reportCount) ^
       const DeepCollectionEquality().hash(isTester) ^
+      const DeepCollectionEquality().hash(likedPosts) ^
       const DeepCollectionEquality().hash(bio) ^
       const DeepCollectionEquality().hash(coverPhotoUrl) ^
       const DeepCollectionEquality().hash(email) ^
@@ -518,6 +542,7 @@ abstract class _Student implements FFStudent, AvatarUser {
       bool notificationsEnabled,
       int reportCount,
       bool isTester,
+      List<String> likedPosts,
       String? bio,
       String? coverPhotoUrl,
       String? email,
@@ -546,6 +571,8 @@ abstract class _Student implements FFStudent, AvatarUser {
   int get reportCount => throw _privateConstructorUsedError;
   @override
   bool get isTester => throw _privateConstructorUsedError;
+  @override
+  List<String> get likedPosts => throw _privateConstructorUsedError;
   @override
   String? get bio => throw _privateConstructorUsedError;
   @override

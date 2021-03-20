@@ -28,6 +28,7 @@ class FFStudent with _$FFStudent implements AvatarUser {
     @Default(false) bool notificationsEnabled,
     @Default(0) int reportCount,
     @Default(false) bool isTester,
+    @Default([]) List<String> likedPosts,
     String? bio,
     String? coverPhotoUrl,
     String? email,

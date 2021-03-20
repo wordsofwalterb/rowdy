@@ -19,6 +19,10 @@ _$_Student _$_$_StudentFromJson(Map<String, dynamic> json) {
     notificationsEnabled: json['notificationsEnabled'] as bool? ?? false,
     reportCount: json['reportCount'] as int? ?? 0,
     isTester: json['isTester'] as bool? ?? false,
+    likedPosts: (json['likedPosts'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ??
+        [],
     bio: json['bio'] as String?,
     coverPhotoUrl: json['coverPhotoUrl'] as String?,
     email: json['email'] as String?,
@@ -41,6 +45,7 @@ Map<String, dynamic> _$_$_StudentToJson(_$_Student instance) =>
       'notificationsEnabled': instance.notificationsEnabled,
       'reportCount': instance.reportCount,
       'isTester': instance.isTester,
+      'likedPosts': instance.likedPosts,
       'bio': instance.bio,
       'coverPhotoUrl': instance.coverPhotoUrl,
       'email': instance.email,

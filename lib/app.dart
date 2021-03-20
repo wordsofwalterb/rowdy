@@ -6,6 +6,7 @@ import 'package:rowdy/l10n/l10n.dart';
 
 import 'package:rowdy/services/firebase_service/firebase_service.dart';
 import 'package:rowdy/services/user/user_cubit/user_repository.dart';
+import 'package:rowdy/util/router.dart';
 
 import 'package:rowdy/util/theme.dart';
 
@@ -34,6 +35,7 @@ class App extends StatelessWidget {
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
         ],
+        onGenerateRoute: FFRouter.generateRoute,
         supportedLocales: AppLocalizations.supportedLocales,
         home: const NavigatorBridge(),
       ),

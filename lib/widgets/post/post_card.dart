@@ -2,14 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
-import 'package:like_button/like_button.dart';
+
 import 'package:rowdy/models/post.dart';
+
 import 'package:rowdy/services/firebase_service/feed_steam_cubit/feed_stream_cubit.dart';
-import 'package:rowdy/services/repositories/post_repository.dart';
+
 import 'package:rowdy/util/functions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../profile_avatar.dart';
+import 'image_widget.dart';
+import 'like_button.dart';
 
 typedef PostChevronCallback = void Function(bool byCurrentUser, FFPost post);
 
@@ -27,8 +30,12 @@ class PostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final body = context
         .select((FeedStreamCubit<FFPost> r) => r.state.itemIds[id]?.body);
-    final imageUrl = context.select(
-        (FeedStreamCubit<FFPost> r) => r.state.itemIds[id]?.imageUrls[0]);
+
+    final imageUrl = context.select((FeedStreamCubit<FFPost> r) {
+      final images = r.state.itemIds[id]?.imageUrls;
+      return (images != null && images.isNotEmpty) ? images.first : null;
+    });
+
     final commentsCount = context.select(
         (FeedStreamCubit<FFPost> r) => r.state.itemIds[id]?.commentCount);
 
@@ -54,20 +61,20 @@ class PostCard extends StatelessWidget {
               color: const Color(0xff9b9b9b),
             ),
           ]),
-          if (body != null) ...{
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-              child: SelectableText(
-                body,
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
+          // if (body != null) ...{
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+            child: SelectableText(
+              body ?? 'test',
+              style: Theme.of(context).textTheme.bodyText1,
             ),
+          ),
+
+          const SizedBox(height: 6),
+          if (imageUrl != null) ...{
+            FFImageWidget(imageUrl),
           },
-          // const SizedBox(height: 6),
-          // if (imageUrl != null) ...{
-          //   FFImageWidget(imageUrl),
-          // },
-          FFLikeButton(),
+          FFLikeButton<FFPost>(id),
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
             child:
@@ -81,7 +88,7 @@ class PostCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                child: Text(commentsCount?.toString() ?? '',
+                child: Text(commentsCount?.toString() ?? '0',
                     style: Theme.of(context).textTheme.overline),
               ),
               const Spacer(
@@ -98,28 +105,6 @@ class PostCard extends StatelessWidget {
   }
 }
 
-// class FFImageWidget extends StatelessWidget {
-//   const FFImageWidget(this.imageUrl, {Key? key}) : super(key: key);
-
-//   final String imageUrl;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 6.0),
-//       child: Container(
-//         height: MediaQuery.of(context).size.width,
-//         decoration: BoxDecoration(
-//           image: DecorationImage(
-//             image: CachedNetworkImageProvider(imageUrl),
-//             fit: BoxFit.cover,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class CardAuthorProfile extends StatelessWidget {
   const CardAuthorProfile({Key? key}) : super(key: key);
 
@@ -132,7 +117,7 @@ class CardAuthorProfile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
             child: Text(
-              'widget._post.authorName',
+              'Brandon Walter',
               style: Theme.of(context).textTheme.subtitle2,
               textAlign: TextAlign.left,
             ),
@@ -146,37 +131,6 @@ class CardAuthorProfile extends StatelessWidget {
           ),
         ]),
       ],
-    );
-  }
-}
-
-class FFLikeButton extends StatelessWidget {
-  const FFLikeButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return LikeButton(
-      size: 20,
-      likeCount: 0,
-      animationDuration: const Duration(milliseconds: 500),
-      isLiked: true,
-      onTap: (result) async => !result,
-      likeCountAnimationDuration: const Duration(milliseconds: 200),
-      countBuilder: (int? count, bool isLiked, String text) {
-        Widget result;
-        if (count == 0) {
-          result = const Text(
-            '',
-            style: TextStyle(color: Colors.grey),
-          );
-        } else {
-          result = Text(
-            text,
-            style: const TextStyle(color: Colors.grey),
-          );
-        }
-        return result;
-      },
     );
   }
 }

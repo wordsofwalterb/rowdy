@@ -8,6 +8,7 @@ import 'package:rowdy/services/firebase_service/feed_steam_cubit/feed_stream_cub
 import 'package:rowdy/services/firebase_service/firebase_service.dart';
 
 import 'package:rowdy/util/global.dart';
+import 'package:rowdy/util/router.dart';
 import 'package:rowdy/widgets/bottom_loader.dart';
 
 import '../widgets/main_app_bar.dart';
@@ -151,7 +152,7 @@ class _FeedScreenState extends State<FeedScreen>
     return Scaffold(
       appBar: mainAppBar(context),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => Navigator.of(context).pushNamed(FFRoutes.createPost),
         backgroundColor: Theme.of(context).backgroundColor,
         child: const Icon(Icons.add, color: Colors.white),
       ),
@@ -246,9 +247,7 @@ class _FeedScreenState extends State<FeedScreen>
         return SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              if (index >= state.length) {
-                return BottomLoader();
-              } else {
+              if (state.length > index) {
                 return PostCard(
                   key: ValueKey(keys[index]),
                   id: keys[index],
