@@ -4,6 +4,7 @@ import 'package:rowdy/screens/create_post_screen.dart';
 import 'package:rowdy/screens/feed_screen.dart';
 import 'package:rowdy/screens/home_screen.dart';
 import 'package:rowdy/screens/lost_password_screen.dart';
+import 'package:rowdy/screens/profile_screen.dart';
 import 'package:rowdy/screens/settings_overview_screen.dart';
 
 /// Static Namespace for routes
@@ -42,7 +43,8 @@ class FFRouter {
         throw Exception('Invalid arguments for ${settings.name}');
 
       case FFRoutes.profile:
-        throw Exception('Invalid arguments for ${settings.name}');
+        return MaterialPageRoute(
+            builder: (_) => ProfileWrapper(studentId: args as String));
 
       case FFRoutes.createPost:
         return MaterialPageRoute(builder: (_) => CreatePostScreen());

@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rowdy/models/post.dart';
+import 'package:rowdy/models/student.dart';
+import 'package:rowdy/services/feed_steam_cubit/feed_stream_cubit.dart';
 
-import 'package:rowdy/services/firebase_service/feed_steam_cubit/feed_stream_cubit.dart';
 import 'package:rowdy/services/firebase_service/firebase_service.dart';
 
 import 'package:rowdy/util/global.dart';
@@ -21,11 +22,21 @@ class PostFeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FeedStreamCubit<FFPost>(
-          repository: FirebaseService<FFPost>(),
-          query: FFGlobal.collectionMapper[FFPost]!.limit(20))
-        ..setupFeed(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<FeedStreamCubit<FFPost>>(
+            create: (_) => FeedStreamCubit<FFPost>(
+                repository: FirebaseService<FFPost>(),
+                query: FFGlobal.collectionMapper[FFPost]!
+                    .orderBy('postTime', descending: true)
+                    .limit(20))
+              ..setupFeed()),
+        BlocProvider<FeedStreamCubit<FFStudent>>(
+            create: (_) => FeedStreamCubit<FFStudent>(
+                repository: FirebaseService<FFStudent>(),
+                query: FFGlobal.collectionMapper[FFStudent]!.limit(20))
+              ..setupFeed()),
+      ],
       child: FeedScreen(feedController: feedController),
     );
   }
@@ -227,34 +238,47 @@ class _FeedScreenState extends State<FeedScreen>
         );
       },
       loaded: (state) {
-        return SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              if (index >= state.length) {
-                return BottomLoader();
-              } else {
-                return PostCard(
-                  key: ValueKey(keys[index]),
-                  id: keys[index],
-                );
-              }
-            },
-            childCount: state.length + 1,
+        return BlocProvider<FeedStreamCubit<FFStudent>>(
+          create: (_) => FeedStreamCubit(
+              repository: FirebaseService<FFStudent>(),
+              query: FFGlobal.collectionMapper[FFStudent]!.limit(20))
+            ..setupFeed(),
+          child: SliverFixedExtentList(
+            itemExtent: double.infinity,
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                if (index >= state.length) {
+                  return BottomLoader();
+                } else {
+                  return PostCard(
+                    key: ValueKey(keys[index]),
+                    id: keys[index],
+                  );
+                }
+              },
+              childCount: state.length + 1,
+            ),
           ),
         );
       },
       reachedMax: (state) {
-        return SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              if (state.length > index) {
-                return PostCard(
-                  key: ValueKey(keys[index]),
-                  id: keys[index],
-                );
-              }
-            },
-            childCount: state.length + 1,
+        return BlocProvider<FeedStreamCubit<FFStudent>>(
+          create: (_) => FeedStreamCubit(
+              repository: FirebaseService<FFStudent>(),
+              query: FFGlobal.collectionMapper[FFStudent]!.limit(20))
+            ..setupFeed(),
+          child: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                if (state.length > index) {
+                  return PostCard(
+                    key: ValueKey(keys[index]),
+                    id: keys[index],
+                  );
+                }
+              },
+              childCount: state.length + 1,
+            ),
           ),
         );
       },

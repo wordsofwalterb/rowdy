@@ -52,6 +52,11 @@ class UserRepository extends Cubit<UserState<FFStudent>>
     }
   }
 
+  Future<void> signOut() async {
+    await service.signOut();
+    emit(const UserState.unauthenticated());
+  }
+
   Future<void> autoLogin() async {
     emit(const UserState.authenticating());
 

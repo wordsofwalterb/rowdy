@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:rowdy/models/post.dart';
 import 'package:rowdy/models/student.dart';
-import 'package:rowdy/services/firebase_service/feed_steam_cubit/feed_stream_cubit.dart';
+import 'package:rowdy/services/feed_steam_cubit/feed_stream_cubit.dart';
 import 'package:rowdy/services/firebase_service/firebase_service.dart';
 import 'package:rowdy/services/likable/likable.dart';
 import 'package:rowdy/services/user/user_cubit/user_repository.dart';

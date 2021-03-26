@@ -40,6 +40,11 @@ class FFGlobal {
     FFPost: (Map<String, dynamic> data) => FFPost.fromJson(data),
     FFStudent: (Map<String, dynamic> data) => FFStudent.fromJson(data),
   };
+
+  static final copyMapper = {
+    FFPost: (Map<String, dynamic> data) => FFPost.fromJson(data),
+    FFStudent: (Map<String, dynamic> data) => FFStudent.fromJson(data),
+  };
 }
 
 T parseJson<T extends Model>(Map<String, dynamic> data) {

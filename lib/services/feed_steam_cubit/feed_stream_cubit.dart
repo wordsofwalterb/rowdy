@@ -18,7 +18,7 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
     query = query.limit(limit);
   }
 
-  final FirebaseService repository;
+  final FirebaseService<T> repository;
   Query query;
   final int limit;
 

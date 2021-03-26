@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 
 import 'package:rowdy/models/post.dart';
-
-import 'package:rowdy/services/firebase_service/feed_steam_cubit/feed_stream_cubit.dart';
+import 'package:rowdy/models/student.dart';
+import 'package:rowdy/services/feed_steam_cubit/feed_stream_cubit.dart';
 
 import 'package:rowdy/util/functions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rowdy/util/router.dart';
 
 import '../profile_avatar.dart';
 import 'image_widget.dart';
@@ -48,37 +49,38 @@ class PostCard extends StatelessWidget {
             Radius.circular(4),
           ),
         ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            CardAuthorProfile(),
-            const Spacer(),
-            IconButton(
-              onPressed: () => {},
-              icon: const Icon(
-                SFSymbols.chevron_down,
-                size: 20,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              CardAuthorProfile(id),
+              const Spacer(),
+              IconButton(
+                onPressed: () => {},
+                visualDensity: VisualDensity.compact,
+                icon: const Icon(
+                  SFSymbols.chevron_down,
+                  size: 20,
+                ),
+                color: const Color(0xff9b9b9b),
               ),
-              color: const Color(0xff9b9b9b),
+            ]),
+            const SizedBox(
+              height: 12,
             ),
-          ]),
-          // if (body != null) ...{
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-            child: SelectableText(
+            SelectableText(
               body ?? 'test',
               style: Theme.of(context).textTheme.bodyText1,
             ),
-          ),
 
-          const SizedBox(height: 6),
-          if (imageUrl != null) ...{
-            FFImageWidget(imageUrl),
-          },
-          FFLikeButton<FFPost>(id),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
-            child:
-                Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            const SizedBox(height: 12),
+            if (imageUrl != null) ...{
+              FFImageWidget(imageUrl),
+            },
+
+            // Bottom Row
+            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
               GestureDetector(
                 onTap: (commentsDisabled ?? false) ? () => {} : () => {},
                 child: const Icon(
@@ -94,40 +96,66 @@ class PostCard extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
+              FFLikeButton<FFPost>(id),
               const Spacer(
                 flex: 12,
               ),
             ]),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }
 }
 
 class CardAuthorProfile extends StatelessWidget {
-  const CardAuthorProfile({Key? key}) : super(key: key);
+  const CardAuthorProfile(this._parentId, {Key? key}) : super(key: key);
+
+  final String _parentId;
 
   @override
   Widget build(BuildContext context) {
+    final authorId = context
+        .read<FeedStreamCubit<FFPost>>()
+        .state
+        .itemIds[_parentId]!
+        .authorId;
+
+    final _postTime = context
+        .read<FeedStreamCubit<FFPost>>()
+        .state
+        .itemIds[_parentId]!
+        .postTime;
+
+    final _authorName = context.select(
+        (FeedStreamCubit<FFStudent> r) => r.state.itemIds[authorId]?.fullName);
+
+    final _avatarUrl = context.select(
+        (FeedStreamCubit<FFStudent> r) => r.state.itemIds[authorId]?.avatarUrl);
+
     return Row(
       children: [
-        const ProfileAvatar(padding: EdgeInsets.fromLTRB(12, 12, 12, 0)),
+        ProfileAvatar(
+            avatarUrl: _avatarUrl,
+            onPressed: () => Navigator.of(context).pushNamed(
+                  FFRoutes.profile,
+                  arguments: authorId,
+                )),
+        const SizedBox(
+          width: 6,
+        ),
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-            child: Text(
-              'Brandon Walter',
-              style: Theme.of(context).textTheme.subtitle2,
-              textAlign: TextAlign.left,
-            ),
+          Text(
+            _authorName ?? 'Not Found',
+            style: Theme.of(context).textTheme.subtitle2,
+            textAlign: TextAlign.left,
           ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(0, 3, 0, 0),
-            child: Text(
-              FFFunctions.convertTime(DateTime.now()),
-              style: Theme.of(context).textTheme.caption,
-            ),
+          const SizedBox(
+            height: 3,
+          ),
+          Text(
+            FFFunctions.convertTime(_postTime),
+            style: Theme.of(context).textTheme.caption,
           ),
         ]),
       ],

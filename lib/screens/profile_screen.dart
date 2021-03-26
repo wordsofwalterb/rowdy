@@ -1,124 +1,89 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:ut_social/blocs/profile_info_bloc/profile_info_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rowdy/models/student.dart';
+import 'package:rowdy/services/firebase_service/firebase_service.dart';
+import 'package:rowdy/services/single_stream_cubit/single_stream_cubit.dart';
+import 'package:rowdy/services/user/user_cubit/user_repository.dart';
+import 'package:rowdy/util/router.dart';
+import 'package:rowdy/widgets/top_profile_section.dart';
 
-// import 'package:ut_social/models/student.dart';
-// import 'package:ut_social/services/student_repository.dart';
-// import 'package:ut_social/util/router.dart';
-// import 'package:ut_social/widgets/top_profile_section.dart';
+class ProfileWrapper extends StatelessWidget {
+  ProfileWrapper({required this.studentId});
 
-// class ProfileScreen extends StatefulWidget {
-//   final bool isCurrentUser;
+  final String studentId;
 
-//   const ProfileScreen({this.isCurrentUser = false});
+  @override
+  Widget build(BuildContext context) {
+    final userId = context.read<UserRepository>().state.maybeWhen(
+          authenticated: (user) => user.id,
+          orElse: () => null,
+        );
 
-//   @override
-//   _ProfileScreenState createState() => _ProfileScreenState();
-// }
+    if (userId != null) {
+      return BlocProvider(
+        create: (context) => SingleStreamCubit<FFStudent>(
+            repository: FirebaseService<FFStudent>(), itemId: studentId)
+          ..setupItem(),
+        child: ProfilePage(
+          isCurrentUser: (userId == studentId),
+        ),
+      );
+    } else {
+      return const Scaffold(
+        body: Text('error'),
+      );
+    }
+  }
+}
 
-// class _ProfileScreenState extends State<ProfileScreen> {
-//   Student student;
-//   FirebaseStudentRepository repository = FirebaseStudentRepository();
-//   ProfileInfoBloc bloc;
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({required this.isCurrentUser});
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     bloc = BlocProvider.of<ProfileInfoBloc>(context);
-//   }
+  final bool isCurrentUser;
 
-//   Future<void> _onRefresh() async {
-//     //BlocProvider.of<ProfileInfoBloc>(context).add(const LoadProfile());
-//     bloc.add(const LoadProfile());
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return RefreshIndicator(
-//       onRefresh: _onRefresh,
-//       child: BlocBuilder<ProfileInfoBloc, ProfileInfoState>(
-//           builder: (BuildContext context, ProfileInfoState state) {
-//         if (state is ProfileInfoInitial || state is ProfileInfoLoading) {
-//           return const Center(
-//             child: CircularProgressIndicator(),
-//           );
-//         }
-//         if (state is ProfileInfoFailure) {
-//           return const Center(
-//             child: Text('Failed to fetch profile'),
-//           );
-//         }
-//         if (state is ProfileInfoLoaded) {
-//           return Scaffold(
-//             appBar: AppBar(
-//               centerTitle: true,
-//               backgroundColor: Theme.of(context).backgroundColor,
-//               title: Text(
-//                 (widget.isCurrentUser)
-//                     ? 'Your Profile'
-//                     : state.student.fullName,
-//               ),
-//               actions: <Widget>[
-//                 if (widget.isCurrentUser)
-//                   IconButton(
-//                     icon: const Icon(Icons.settings),
-//                     onPressed: () => Navigator.of(context)
-//                         .pushNamed(Routes.settingsOverview),
-//                   )
-//                 else
-//                   Container(),
-//               ],
-//             ),
-//             body: CustomScrollView(
-//               physics: const AlwaysScrollableScrollPhysics(),
-//               slivers: [
-//                 _topSection(),
-//               ],
-//             ),
-//           );
-//         }
-//         return const Scaffold();
-//       }),
-//     );
-//   }
-
-//   Widget _topSection() {
-//     return BlocBuilder<ProfileInfoBloc, ProfileInfoState>(
-//       builder: (BuildContext context, ProfileInfoState state) {
-//         if (state is ProfileInfoInitial || state is ProfileInfoLoading) {
-//           return SliverList(
-//             delegate: SliverChildListDelegate(
-//               [
-//                 const Center(
-//                   child: CircularProgressIndicator(),
-//                 ),
-//               ],
-//             ),
-//           );
-//         }
-//         if (state is ProfileInfoFailure) {
-//           return SliverList(
-//               delegate: SliverChildListDelegate([
-//             const Center(
-//               child: Text('Failed to fetch profile'),
-//             ),
-//           ]));
-//         }
-//         if (state is ProfileInfoLoaded) {
-//           return SliverList(
-//             delegate: SliverChildListDelegate([
-//               TopProfileSection(
-//                 avatarUrl: state.student.avatarUrl,
-//                 coverPhotoUrl: state.student.coverPhotoUrl,
-//                 isCurrentUser: widget.isCurrentUser,
-//                 name: state.student.fullName,
-//                 bio: state.student.bio,
-//               ),
-//             ]),
-//           );
-//         }
-//         return const SliverPadding(padding: EdgeInsets.all(0));
-//       },
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    final fullName = context.select(
+      (SingleStreamCubit<FFStudent> r) => r.state.maybeWhen(
+        loaded: (student) => student.fullName,
+        failure: () => 'An error occured...',
+        orElse: () => null,
+      ),
+    );
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Theme.of(context).backgroundColor,
+        title: Text(
+          (isCurrentUser)
+              ? 'Your Profile'
+              : (fullName != null)
+                  ? fullName
+                  : 'Loading...',
+        ),
+        actions: <Widget>[
+          if (isCurrentUser)
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(FFRoutes.settingsOverview),
+            )
+          else
+            Container(),
+        ],
+      ),
+      body: CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: [
+          SliverList(
+            delegate: SliverChildListDelegate([
+              TopProfileSection(
+                isCurrentUser: isCurrentUser,
+              ),
+            ]),
+          ),
+        ],
+      ),
+    );
+  }
+}

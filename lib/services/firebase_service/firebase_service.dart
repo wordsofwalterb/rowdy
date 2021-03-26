@@ -84,6 +84,54 @@ class FirebaseService<T extends Model>
     });
   }
 
+  Stream<FFResult<T>> getStreamfromId(String id) {
+    return FFGlobal.collectionMapper[T]!.doc(id).snapshots().map((doc) {
+      final fun = FFGlobal.jsonMapper[T];
+      final data = doc.data();
+
+      if (fun != null && data != null) {
+        final conv = fun(data) as T;
+        return FFResult<T>.success(conv);
+      } else {
+        throw FFResult<T>.failure(errorCode: 'Error', errorMessage: 'error');
+        ;
+      }
+    });
+  }
+
+  Stream<List<T>> getStreamFromIds(List<String> ids) {
+    final ref = FFGlobal.collectionMapper[T]!;
+    Stream<List<T>> s;
+    for (final id in ids) {
+      ref.doc(id).snapshots().map((doc) {
+        final fun = FFGlobal.jsonMapper[T];
+        final data = doc.data();
+
+        if (fun != null && data != null) {
+          final conv = fun(data) as T;
+          return conv;
+        } else {
+          throw Exception();
+        }
+      });
+    }
+
+    return ref.snapshots().map((list) {
+      final newList = list.docs.map((doc) {
+        final fun = FFGlobal.jsonMapper[T];
+        final data = doc.data();
+
+        if (fun != null && data != null) {
+          final conv = fun(data) as T;
+          return conv;
+        } else {
+          throw Exception();
+        }
+      });
+      return newList.toList();
+    });
+  }
+
   Future<void> updateItem(T item) async {
     try {
       final ref = FFGlobal.collectionMapper[T];
