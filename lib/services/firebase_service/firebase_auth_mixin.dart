@@ -97,6 +97,37 @@ mixin FirebaseAuthMixin<T extends Model> {
     }
   }
 
+  /// Returns a [T] object from Firestore based on the ID of the currently
+  /// signed in [FirebaseAuth] user uid.
+  Stream<FFResult<T>> getUserStream() {
+    assert(auth.currentUser != null,
+        'There must be a currently signed in user in the firebase instance.');
+
+    final firebaseUser = auth.currentUser;
+    if (firebaseUser == null) {
+      throw Exception();
+    }
+
+    FFGlobal.userRef
+        .doc(firebaseUser.uid)
+        .update({'lastOpenDate': Timestamp.now()});
+
+    return FFGlobal.collectionMapper[T]!
+        .doc(firebaseUser.uid)
+        .snapshots()
+        .map((doc) {
+      final fun = FFGlobal.jsonMapper[T];
+      final data = doc.data();
+
+      if (fun != null && data != null) {
+        final conv = fun(data) as T;
+        return FFResult<T>.success(conv);
+      } else {
+        throw Exception('Problem getting userStream');
+      }
+    });
+  }
+
   /// Signs the current user out
   Future<void> signOut() async {
     await Future.wait([

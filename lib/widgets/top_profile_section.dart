@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rowdy/models/student.dart';
 import 'package:rowdy/services/single_stream_cubit/single_stream_cubit.dart';
 
+import 'package:rowdy/util/router.dart';
+
 import 'cover_photo.dart';
 import 'profile_avatar.dart';
 
@@ -101,7 +103,8 @@ class TopProfileSection extends StatelessWidget {
           const SizedBox(height: 8),
           if (isCurrentUser)
             GestureDetector(
-              onTap: () => {},
+              onTap: () =>
+                  Navigator.of(context).pushNamed(FFRoutes.editProfile),
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(6),

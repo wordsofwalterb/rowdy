@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 // TODO: Implement compression
 class StorageService {
   static Future<String> uploadUserProfileImage(
-      String photoId, String url, File imageFile) async {
+      String photoId, File imageFile) async {
     // final image = await compressImage(photoId, imageFile);
     // TODO: FIX AND MAKE SURE STORAGE DOESN't FILL UP UNNECESARILLY
 
@@ -23,14 +23,14 @@ class StorageService {
   }
 
   static Future<String> uploadUserCoverPhotoImage(
-      String photoId, String url, File imageFile) async {
+      String photoId, File imageFile) async {
     // final image = await compressImage(photoId, imageFile);
 
-    if (url.isNotEmpty) {
-      // Updating user profile image
-      final exp = RegExp(r'userCoverPhoto_(.*).jpg');
-      photoId = exp.firstMatch(url)![1]!;
-    }
+    // if (url.isNotEmpty) {
+    //   // Updating user profile image
+    //   final exp = RegExp(r'userCoverPhoto_(.*).jpg');
+    //   photoId = exp.firstMatch(url)![1]!;
+    // }
 
     final uploadTask = FirebaseStorage.instance
         .ref()

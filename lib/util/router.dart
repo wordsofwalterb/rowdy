@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rowdy/screens/create_post_screen.dart';
+import 'package:rowdy/screens/edit_profile_screen.dart';
 import 'package:rowdy/screens/feed_screen.dart';
 import 'package:rowdy/screens/home_screen.dart';
 import 'package:rowdy/screens/lost_password_screen.dart';
@@ -49,11 +50,11 @@ class FFRouter {
       case FFRoutes.createPost:
         return MaterialPageRoute(builder: (_) => CreatePostScreen());
 
-      // case FFRoutes.editProfile:
-      //   return MaterialPageRoute(
-      //     builder: (_) => EditProfileScreen(),
-      //   );
-      //   break;
+      case FFRoutes.editProfile:
+        return MaterialPageRoute(
+          builder: (_) => EditProfileScreen(),
+        );
+
       // case FFRoutes.chatDetail:
       //   return MaterialPageRoute(
       //     builder: (_) => ChatDetailScreen(),

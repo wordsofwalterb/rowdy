@@ -186,7 +186,7 @@ class _FeedScreenState extends State<FeedScreen>
     return SliverList(
       delegate: SliverChildListDelegate([
         GestureDetector(
-          onTap: () => {},
+          onTap: () => Navigator.of(context).pushNamed(FFRoutes.createPost),
           child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).backgroundColor,

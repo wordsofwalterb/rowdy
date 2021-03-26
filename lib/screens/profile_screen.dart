@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rowdy/models/student.dart';
+
 import 'package:rowdy/services/firebase_service/firebase_service.dart';
 import 'package:rowdy/services/single_stream_cubit/single_stream_cubit.dart';
+
 import 'package:rowdy/services/user/user_cubit/user_repository.dart';
 import 'package:rowdy/util/router.dart';
 import 'package:rowdy/widgets/top_profile_section.dart';

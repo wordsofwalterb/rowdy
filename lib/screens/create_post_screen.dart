@@ -126,7 +126,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       List<String> imageUrls = [];
       // Create post
       if (_image != null) {
-        imageUrls[0] = await StorageService.uploadPost(postId, _image!);
+        imageUrls.add(await StorageService.uploadPost(postId, _image!));
       }
       await FirebaseService<FFPost>().addItem(FFPost(
         id: postId,

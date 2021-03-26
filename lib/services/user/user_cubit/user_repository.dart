@@ -22,6 +22,23 @@ class UserRepository extends Cubit<UserState<FFStudent>>
 
   @override
   FirebaseService<FFStudent> service;
+  Stream? userStream;
+
+  @override
+  Future<void> close() async {
+    await super.close();
+  }
+
+  void _getUserStream() {
+    service.getUserStream()
+      ..listen((userResult) {
+        if (userResult.hasData) {
+          emit(UserState.authenticated(user: userResult.data!));
+        } else if (userResult.hasError) {
+          emit(UserState.authenticationFailed(userResult.errorMessage!));
+        }
+      });
+  }
 
   Future<void> signUpWithCredential(
     String email,
@@ -31,7 +48,7 @@ class UserRepository extends Cubit<UserState<FFStudent>>
     final result = await service.createEmailUser(email, password, props: props);
 
     (result.hasData)
-        ? emit(UserState.authenticated(user: result.data!))
+        ? _getUserStream()
         : emit(UserState.authenticationFailed(result.errorMessage!));
   }
 
@@ -41,15 +58,9 @@ class UserRepository extends Cubit<UserState<FFStudent>>
   }) async {
     final authResult = await service.signInWithCredentials(email, password);
 
-    if (authResult.hasData) {
-      final userResult = await service.getUser();
-
-      (userResult.hasData)
-          ? emit(UserState.authenticated(user: userResult.data!))
-          : emit(UserState.authenticationFailed(userResult.errorMessage!));
-    } else {
-      emit(UserState.authenticationFailed(authResult.errorMessage!));
-    }
+    (authResult.hasData)
+        ? _getUserStream()
+        : emit(UserState.authenticationFailed(authResult.errorMessage!));
   }
 
   Future<void> signOut() async {
@@ -61,17 +72,9 @@ class UserRepository extends Cubit<UserState<FFStudent>>
     emit(const UserState.authenticating());
 
     final authResult = service.isSignedIn()
-        ? await service.getUser()
+        ? _getUserStream()
         : FFResult<FFStudent>.failure(
             errorCode: 'AUTH_NOT_SIGNED_IN',
             errorMessage: 'Error retrieving user data');
-
-    // if (authResult.data.isTester ?? false) {
-    //   FFGlobal.analytics.setAnalyticsCollectionEnabled(false);
-    // }
-
-    (authResult.hasData)
-        ? emit(UserState.authenticated(user: authResult.data!))
-        : emit(UserState.authenticationFailed(authResult.errorMessage!));
   }
 }
