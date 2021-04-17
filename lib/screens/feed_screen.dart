@@ -26,16 +26,15 @@ class PostFeedScreen extends StatelessWidget {
       providers: [
         BlocProvider<FeedStreamCubit<FFPost>>(
             create: (_) => FeedStreamCubit<FFPost>(
-                repository: FirebaseService<FFPost>(),
-                query: FFGlobal.collectionMapper[FFPost]!
-                    .orderBy('postTime', descending: true)
-                    .limit(20))
-              ..setupFeed()),
+                  repository: FirebaseService<FFPost>(),
+                  orderByField: 'postTime',
+                  desc: true,
+                )..setupFeed()),
         BlocProvider<FeedStreamCubit<FFStudent>>(
             create: (_) => FeedStreamCubit<FFStudent>(
-                repository: FirebaseService<FFStudent>(),
-                query: FFGlobal.collectionMapper[FFStudent]!.limit(20))
-              ..setupFeed()),
+                  repository: FirebaseService<FFStudent>(),
+                  orderByField: 'id',
+                )..setupFeed()),
       ],
       child: FeedScreen(feedController: feedController),
     );
@@ -70,7 +69,7 @@ class _FeedScreenState extends State<FeedScreen>
     final maxScroll = _feedController.position.maxScrollExtent;
     final currentScroll = _feedController.position.pixels;
     if (maxScroll - currentScroll <= _scrollThreshold) {
-      // context.read();
+      context.read<FeedStreamCubit<FFPost>>().fetchPage();
     }
   }
 
@@ -78,13 +77,13 @@ class _FeedScreenState extends State<FeedScreen>
     // _postBloc.add(RefreshPosts());
   }
 
-  void _showPostDialog(bool byCurrentUser, String post) {
+  Widget? _showPostDialog(bool byCurrentUser, String post) {
     return Platform.isIOS
         ? _iosBottomSheet(byCurrentUser, post)
         : _androidDialog(byCurrentUser, post);
   }
 
-  void _iosBottomSheet(bool byCurrentUser, String post) {
+  Widget? _iosBottomSheet(bool byCurrentUser, String post) {
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) {
@@ -112,7 +111,7 @@ class _FeedScreenState extends State<FeedScreen>
     );
   }
 
-  void _androidDialog(bool byCurrentUser, String post) {
+  Widget? _androidDialog(bool byCurrentUser, String post) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -238,47 +237,31 @@ class _FeedScreenState extends State<FeedScreen>
         );
       },
       loaded: (state) {
-        return BlocProvider<FeedStreamCubit<FFStudent>>(
-          create: (_) => FeedStreamCubit(
-              repository: FirebaseService<FFStudent>(),
-              query: FFGlobal.collectionMapper[FFStudent]!.limit(20))
-            ..setupFeed(),
-          child: SliverFixedExtentList(
-            itemExtent: double.infinity,
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                if (index >= state.length) {
-                  return BottomLoader();
-                } else {
-                  return PostCard(
-                    key: ValueKey(keys[index]),
-                    id: keys[index],
-                  );
-                }
-              },
-              childCount: state.length + 1,
-            ),
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              // if (index >= state.length) {
+              //   return BottomLoader();
+              // } else {
+              return PostCard(
+                key: ValueKey(keys[index]),
+                id: keys[index],
+              );
+            },
+            childCount: state.length,
           ),
         );
       },
       reachedMax: (state) {
-        return BlocProvider<FeedStreamCubit<FFStudent>>(
-          create: (_) => FeedStreamCubit(
-              repository: FirebaseService<FFStudent>(),
-              query: FFGlobal.collectionMapper[FFStudent]!.limit(20))
-            ..setupFeed(),
-          child: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                if (state.length > index) {
-                  return PostCard(
-                    key: ValueKey(keys[index]),
-                    id: keys[index],
-                  );
-                }
-              },
-              childCount: state.length + 1,
-            ),
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return PostCard(
+                key: ValueKey(keys[index]),
+                id: keys[index],
+              );
+            },
+            childCount: state.length,
           ),
         );
       },

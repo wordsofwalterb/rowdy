@@ -2,18 +2,38 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:ut_social/blocs/comment_bloc/comment_bloc.dart';
-// import 'package:ut_social/blocs/post_bloc/post_bloc.dart';
-// import 'package:ut_social/blocs/user_bloc/user_bloc.dart';
 
-// import 'package:ut_social/models/comment.dart';
+// class CommentPageWrapper extends StatelessWidget {
+//   const CommentPageWrapper(this.postId);
 
-// import 'package:ut_social/util/globals.dart';
-// import 'package:ut_social/widgets/bottom_loader.dart';
+//   final String postId;
 
-// import '../models/post.dart';
-// import '../widgets/comment_card.dart';
-// import '../widgets/post_card.dart';
+//   @override
+//   Widget build(BuildContext context) {
+//     return CommentPage();
+//   }
+// }
+
+// class CommentPage extends StatefulWidget {
+//   CommentPage({Key? key}) : super(key: key);
+
+//   @override
+//   _CommentPageState createState() => _CommentPageState();
+// }
+
+// class _CommentPageState extends State<CommentPage> {
+//   final TextEditingController _commentController = TextEditingController();
+//   final _feedController = ScrollController();
+//   final _scrollThreshold = 200.0;
+//   bool _isCommenting = false;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: child,
+//     );
+//   }
+// }
 
 // class CommentScreen extends StatefulWidget {
 //   final Post _post;
@@ -32,15 +52,10 @@
 //   final _feedController = ScrollController();
 //   final _scrollThreshold = 200.0;
 //   bool _isCommenting = false;
-//   PostsBloc _postBloc;
-//   CommentsBloc _commentsBloc;
 
 //   @override
 //   void initState() {
-//     _commentsBloc = BlocProvider.of(context);
-//     _commentsBloc.add(const SetupComments());
 //     _feedController.addListener(_onScroll);
-//     _postBloc = BlocProvider.of(context);
 //     super.initState();
 //   }
 
@@ -49,7 +64,6 @@
 //     super.dispose();
 //     _commentController.dispose();
 //     _feedController.dispose();
-//     _commentsBloc.close();
 //   }
 
 //   void _onScroll() {

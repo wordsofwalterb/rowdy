@@ -28,11 +28,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     super.dispose();
   }
 
-  dynamic _showSelectImageDialog() {
+  Widget? _showSelectImageDialog() {
     return Platform.isIOS ? _iosBottomSheet() : _androidDialog();
   }
 
-  dynamic _iosBottomSheet() {
+  Widget? _iosBottomSheet() {
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) {
@@ -57,7 +57,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     );
   }
 
-  dynamic _androidDialog() {
+  Widget? _androidDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
