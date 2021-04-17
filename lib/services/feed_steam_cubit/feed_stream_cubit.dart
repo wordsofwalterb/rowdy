@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -50,32 +51,9 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
 
     final streamResult = repository.getStreamFromQuery(query);
 
-    streamResult.listen((itemList) {
-      if (itemList.isEmpty) {
-        emit(const FeedStreamState.empty({}));
-      } else if (itemList.length == limit) {
-        // ignore: omit_local_variable_types
-        Map<String, T> map = {};
-
-        for (final item in itemList) {
-          map.addAll({item.id: item});
-        }
-        if (state.itemIds.isNotEmpty) {
-          map.addAll(state.itemIds);
-        }
-        emit(FeedStreamState.reachedMax(map));
-      } else {
-        // ignore: omit_local_variable_types
-        Map<String, T> map = {};
-        for (final item in itemList) {
-          map.addAll({item.id: item});
-        }
-        if (state.itemIds.isNotEmpty) {
-          map.addAll(state.itemIds);
-        }
-        emit(FeedStreamState.loaded(map));
-      }
-    }).onError((error) => emit(const FeedStreamState.failure({})));
+    streamResult
+        .listen(streamListFunc)
+        .onError((error) => emit(const FeedStreamState.failure({})));
   }
 
   Future<void> fetchPage() async {
@@ -92,30 +70,35 @@ class FeedStreamCubit<T extends Model> extends Cubit<FeedStreamState<T>> {
 
         final streamResult = repository.getStreamFromQuery(query);
 
-        streamResult.listen((itemList) {
-          if (itemList.isEmpty) {
-            emit(const FeedStreamState.empty({}));
-          } else if (itemList.length == limit) {
-            // ignore: omit_local_variable_types
-            Map<String, T> map = {};
-            for (final item in itemList) {
-              map.addAll({item.id: item});
-            }
-            emit(FeedStreamState.reachedMax(map));
-          } else {
-            // ignore: omit_local_variable_types
-            Map<String, T> map = {};
-            if (state.itemIds.isNotEmpty) {
-              map.addAll(state.itemIds);
-            }
-            for (final item in itemList) {
-              map.addAll({item.id: item});
-            }
-            emit(FeedStreamState.loaded(map));
-          }
-        }).onError((error) => emit(const FeedStreamState.failure({})));
+        streamResult
+            .listen(streamListFunc)
+            .onError((error) => emit(const FeedStreamState.failure({})));
       },
       orElse: () => {},
     );
+  }
+
+  void streamListFunc(List<T> itemList) {
+    if (itemList.isEmpty) {
+      emit(const FeedStreamState.empty({}));
+    } else {
+      final end = Map<String, T>.from(state.itemIds);
+
+      Map<String, T> front = {};
+
+      for (final item in itemList) {
+        if (!state.itemIds.containsKey(item.id)) {
+          front.addAll({item.id: item});
+        } else {
+          end.addAll({item.id: item});
+        }
+      }
+
+      front.addAll(end);
+
+      (itemList.length == limit)
+          ? emit(FeedStreamState.reachedMax(front))
+          : emit(FeedStreamState.loaded(front));
+    }
   }
 }
